@@ -42,11 +42,11 @@ const emit = defineEmits<{
       <p v-if="deck.description" class="decks-grid__description">{{ deck.description }}</p>
 
       <div class="decks-grid__counts">
-        <Tag :value="`new ${deck.counts.new}`" severity="info" />
-        <Tag :value="`learning ${deck.counts.learning}`" severity="warn" />
-        <Tag :value="`review ${deck.counts.review}`" severity="success" />
+        <Tag :value="`Новые ${deck.counts.new}`" severity="info" />
+        <Tag :value="`Изучаются ${deck.counts.learning}`" severity="warn" />
+        <Tag :value="`Повторение ${deck.counts.review}`" severity="success" />
         <Tag
-          :value="`due ${deck.counts.due}`"
+          :value="`К показу ${deck.counts.due}`"
           :severity="deck.counts.due > 0 ? 'danger' : 'secondary'"
           class="decks-grid__due"
         />
