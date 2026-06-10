@@ -6,6 +6,7 @@ import type { Note } from '../domain/note.entity'
 import { mergeDeckConfig } from '../srs'
 
 import analysisCards from './interview/analysis.json'
+import blitzCards from './interview/blitz.json'
 import cssCards from './interview/css.json'
 import infraCards from './interview/infra.json'
 import jsCards from './interview/js.json'
@@ -36,6 +37,7 @@ const SPRINT_CONFIG = { newCardsPerDay: 30, maxReviewsPerDay: 300 }
 
 /** Колоды «Собеседование». UUID фиксированы и совпадают с supabase/seed-interview.sql. */
 const INTERVIEW_DECKS: InterviewDeck[] = [
+  { slug: 'blitz', id: '55555555-5555-5555-5555-555555550009', name: 'Блиц · Короткие факты', description: 'Короткие вопросы для разминки-блица (варианты + таймер) перед глубокими колодами', cards: blitzCards },
   { slug: 'js', id: '55555555-5555-5555-5555-555555550001', name: 'Собеседование · JavaScript', description: 'Подготовка к собеседованию: JavaScript', cards: jsCards },
   { slug: 'ts', id: '55555555-5555-5555-5555-555555550002', name: 'Собеседование · TypeScript', description: 'Подготовка к собеседованию: TypeScript', cards: tsCards },
   { slug: 'css', id: '55555555-5555-5555-5555-555555550003', name: 'Собеседование · HTML / CSS', description: 'Подготовка к собеседованию: вёрстка, CSS, браузер', cards: cssCards },

@@ -21,6 +21,10 @@ function onStudy(deckId: string): void {
   void router.push({ name: 'study', params: { deckId } })
 }
 
+function onQuiz(deckId: string): void {
+  void router.push({ name: 'quiz', params: { deckId } })
+}
+
 function onBrowse(deckId: string): void {
   void router.push({ name: 'browse', params: { deckId } })
 }
@@ -59,6 +63,7 @@ function onDelete(deck: DeckWithCounts): void {
       v-else
       :decks="store.decks"
       @study="onStudy"
+      @quiz="onQuiz"
       @browse="onBrowse"
       @edit="onEdit"
       @delete="onDelete"

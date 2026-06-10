@@ -8,6 +8,7 @@ defineProps<{ decks: DeckWithCounts[] }>()
 
 const emit = defineEmits<{
   study: [deckId: string]
+  quiz: [deckId: string]
   browse: [deckId: string]
   edit: [deck: DeckWithCounts]
   delete: [deck: DeckWithCounts]
@@ -20,6 +21,14 @@ const emit = defineEmits<{
       <header class="decks-grid__head">
         <h2 class="decks-grid__name">{{ deck.name }}</h2>
         <div class="decks-grid__tools">
+          <Button
+            icon="pi pi-bolt"
+            severity="secondary"
+            text
+            rounded
+            aria-label="Блиц"
+            @click="emit('quiz', deck.id)"
+          />
           <Button
             icon="pi pi-pencil"
             severity="secondary"
