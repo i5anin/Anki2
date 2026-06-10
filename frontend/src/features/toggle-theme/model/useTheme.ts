@@ -1,5 +1,5 @@
-import { useStorage } from '@vueuse/core'
-import { computed, watchEffect } from 'vue'
+import { useStorage, type RemovableRef } from '@vueuse/core'
+import { computed, watchEffect, type ComputedRef } from 'vue'
 
 const DARK_CLASS = 'app-dark'
 const STORAGE_KEY = 'anki2:theme'
@@ -16,7 +16,11 @@ if (typeof document !== 'undefined') {
 }
 
 /** Доступ к текущей теме и её переключению. По умолчанию — тёмная. */
-export function useTheme() {
+export function useTheme(): {
+  theme: RemovableRef<ThemeMode>
+  isDark: ComputedRef<boolean>
+  toggle: () => void
+} {
   const isDark = computed(() => theme.value === 'dark')
 
   function toggle(): void {

@@ -50,7 +50,9 @@ const deckName = computed(
 function frontField(note: Note): string {
   const type = noteTypeMap.value.get(note.noteTypeId)
   const firstField = type?.fields[0]
-  if (firstField && note.fields[firstField] !== undefined) return note.fields[firstField]
+  if (firstField !== undefined && note.fields[firstField] !== undefined) {
+    return note.fields[firstField]
+  }
   return Object.values(note.fields)[0] ?? ''
 }
 
@@ -69,9 +71,10 @@ const rows = computed<NoteRow[]>(() =>
   })),
 )
 
-const filters = computed(() => ({
-  global: { value: search.value.trim() || null, matchMode: 'contains' as const },
-}))
+const filters = computed(() => {
+  const term = search.value.trim()
+  return { global: { value: term.length > 0 ? term : null, matchMode: 'contains' as const } }
+})
 
 onMounted(() => {
   void Promise.all([

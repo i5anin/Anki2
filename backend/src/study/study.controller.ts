@@ -8,17 +8,20 @@ export class StudyController {
   constructor(private readonly study: StudyService) {}
 
   @Get(':deckId/queue')
-  queue(@Param('deckId') deckId: string) {
+  queue(@Param('deckId') deckId: string): ReturnType<StudyService['queue']> {
     return this.study.queue(deckId)
   }
 
   @Get(':deckId/preview/:cardId')
-  preview(@Param('deckId') deckId: string, @Param('cardId') cardId: string) {
+  preview(
+    @Param('deckId') deckId: string,
+    @Param('cardId') cardId: string,
+  ): ReturnType<StudyService['preview']> {
     return this.study.preview(deckId, cardId)
   }
 
   @Post('review')
-  review(@Body() dto: ReviewDto) {
+  review(@Body() dto: ReviewDto): ReturnType<StudyService['review']> {
     return this.study.review(dto)
   }
 }

@@ -4,7 +4,7 @@ import { useToast } from 'primevue/usetoast'
 import { useDecksStore, type DeckWithCounts } from '@/entities/deck'
 
 /** Подтверждение и выполнение удаления колоды. */
-export function useDeleteDeck() {
+export function useDeleteDeck(): { confirmDelete: (deck: DeckWithCounts) => void } {
   const confirm = useConfirm()
   const toast = useToast()
   const store = useDecksStore()

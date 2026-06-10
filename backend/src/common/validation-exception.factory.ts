@@ -6,7 +6,7 @@ import type { ValidationError } from '@nestjs/common'
  * HTTP 422 + тело { errors: [{ field, message }] }.
  */
 export function validationExceptionFactory(errors: ValidationError[]): HttpException {
-  const flat: Array<{ field: string; message: string }> = []
+  const flat: { field: string; message: string }[] = []
 
   const walk = (items: ValidationError[], prefix = ''): void => {
     for (const item of items) {

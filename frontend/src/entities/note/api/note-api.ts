@@ -8,7 +8,7 @@ const RESOURCE = '/api/notes'
 export const noteApi = {
   async getList(deckId?: string): Promise<Note[]> {
     const { data } = await http.get<Note[]>(RESOURCE, {
-      params: deckId ? { deckId } : undefined,
+      params: deckId !== undefined && deckId.length > 0 ? { deckId } : undefined,
     })
     return data
   },

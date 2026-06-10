@@ -87,24 +87,33 @@ watch(
 
 const previewSource = computed(() => {
   const names = fieldNames.value
-  if (names.length === 0) return ''
+  if (names.length === 0) {
+    return ''
+  }
   return names
     .map((name) => {
-      const value = form.fields[name]?.trim()
-      return value ? `**${name}**\n\n${value}` : ''
+      const value = form.fields[name]?.trim() ?? ''
+      return value !== '' ? `**${name}**\n\n${value}` : ''
     })
-    .filter(Boolean)
+    .filter((chunk) => chunk !== '')
     .join('\n\n---\n\n')
 })
 
 function validate(): boolean {
   const map: Record<string, string> = {}
-  if (!form.noteTypeId) map.noteTypeId = 'Выберите модель заметки'
-  if (!form.deckId) map.deckId = 'Выберите колоду'
+  if (form.noteTypeId === '') {
+    map.noteTypeId = 'Выберите модель заметки'
+  }
+  if (form.deckId === '') {
+    map.deckId = 'Выберите колоду'
+  }
 
   const firstField = fieldNames.value[0]
-  if (firstField && !form.fields[firstField]?.trim()) {
-    map.fields = `Поле «${firstField}» не должно быть пустым`
+  if (firstField !== undefined) {
+    const value = form.fields[firstField]?.trim() ?? ''
+    if (value === '') {
+      map.fields = `Поле «${firstField}» не должно быть пустым`
+    }
   }
 
   errors.value = map

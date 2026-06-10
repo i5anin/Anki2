@@ -4,32 +4,32 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'decks',
-    component: () => import('@/pages/decks'),
+    component: async () => import('@/pages/decks'),
   },
   {
     path: '/study/:deckId',
     name: 'study',
-    component: () => import('@/pages/study'),
+    component: async () => import('@/pages/study'),
   },
   {
     path: '/decks/:deckId/cards',
     name: 'browse',
-    component: () => import('@/pages/browse'),
+    component: async () => import('@/pages/browse'),
   },
   {
     path: '/stats',
     name: 'stats',
-    component: () => import('@/pages/stats'),
+    component: async () => import('@/pages/stats'),
   },
   {
     path: '/note-types',
     name: 'note-types',
-    component: () => import('@/pages/note-types'),
+    component: async () => import('@/pages/note-types'),
   },
   {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
-    component: () => import('@/pages/not-found'),
+    component: async () => import('@/pages/not-found'),
   },
 ]
 

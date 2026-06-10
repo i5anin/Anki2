@@ -112,7 +112,12 @@ const reviewsOptions = {
   plugins: { legend: { display: false } },
 }
 
-function buildForecast(list: ForecastPoint[]) {
+interface ChartPayload {
+  labels: string[]
+  datasets: Record<string, unknown>[]
+}
+
+function buildForecast(list: ForecastPoint[]): ChartPayload {
   return {
     labels: list.map((point) => formatDate(point.date)),
     datasets: [
@@ -126,7 +131,7 @@ function buildForecast(list: ForecastPoint[]) {
   }
 }
 
-function buildRetention(r: RetentionStats | null) {
+function buildRetention(r: RetentionStats | null): ChartPayload {
   return {
     labels: ['Снова', 'Трудно', 'Хорошо', 'Легко'],
     datasets: [
@@ -138,7 +143,7 @@ function buildRetention(r: RetentionStats | null) {
   }
 }
 
-function buildReviews(list: ReviewsByDayPoint[]) {
+function buildReviews(list: ReviewsByDayPoint[]): ChartPayload {
   return {
     labels: list.map((point) => formatDate(point.date)),
     datasets: [

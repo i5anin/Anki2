@@ -1,4 +1,4 @@
-import { computed, ref } from 'vue'
+import { computed, ref, type ComputedRef, type Ref } from 'vue'
 
 import type { RenderedCard } from '@/entities/card'
 import type { DeckCounts } from '@/entities/deck'
@@ -13,13 +13,34 @@ interface SessionStats {
   easy: number
 }
 
+interface StudySession {
+  deckName: Ref<string>
+  counts: Ref<DeckCounts>
+  queue: Ref<RenderedCard[]>
+  index: Ref<number>
+  current: ComputedRef<RenderedCard | null>
+  revealed: Ref<boolean>
+  previews: Ref<IntervalPreview[]>
+  isLoading: Ref<boolean>
+  isGrading: Ref<boolean>
+  error: Ref<string | null>
+  stats: Ref<SessionStats>
+  remaining: ComputedRef<number>
+  finished: ComputedRef<boolean>
+  progress: ComputedRef<number>
+  start: (id: string) => Promise<void>
+  reveal: () => void
+  grade: (rating: Rating) => Promise<void>
+  restart: () => Promise<void>
+}
+
 const emptyCounts: DeckCounts = { new: 0, learning: 0, review: 0, due: 0, total: 0 }
 
 /**
  * Стейт-машина учебной сессии: загрузка очереди, показ ответа, оценка
  * карточки (с замером времени) и переход к следующей. Один экземпляр на страницу.
  */
-export function useStudySession() {
+export function useStudySession(): StudySession {
   const deckId = ref('')
   const deckName = ref('')
   const counts = ref<DeckCounts>({ ...emptyCounts })
@@ -116,7 +137,7 @@ export function useStudySession() {
     }
   }
 
-  function restart(): Promise<void> {
+  async function restart(): Promise<void> {
     return start(deckId.value)
   }
 

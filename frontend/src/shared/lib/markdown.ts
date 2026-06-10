@@ -113,7 +113,7 @@ function mathBlock(state: BlockState, start: number, end: number, silent: boolea
   if (silent) return true
 
   let found = false
-  if (firstLine.trim().slice(-2) === '$$') {
+  if (firstLine.trim().endsWith('$$')) {
     firstLine = firstLine.trim().slice(0, -2)
     found = true
   }
@@ -126,7 +126,7 @@ function mathBlock(state: BlockState, start: number, end: number, silent: boolea
     pos = state.bMarks[next] + state.tShift[next]
     max = state.eMarks[next]
     if (pos < max && state.tShift[next] < state.blkIndent) break
-    if (state.src.slice(pos, max).trim().slice(-2) === '$$') {
+    if (state.src.slice(pos, max).trim().endsWith('$$')) {
       const lastPos = state.src.slice(0, max).lastIndexOf('$$')
       lastLine = state.src.slice(pos, lastPos)
       found = true
@@ -137,9 +137,9 @@ function mathBlock(state: BlockState, start: number, end: number, silent: boolea
   const token = state.push('math_block', 'math', 0)
   token.block = true
   token.content =
-    (firstLine.trim() ? `${firstLine}\n` : '') +
+    (firstLine.trim() !== '' ? `${firstLine}\n` : '') +
     state.getLines(start + 1, next, state.tShift[start], true) +
-    (lastLine.trim() ? lastLine : '')
+    (lastLine.trim() !== '' ? lastLine : '')
   token.markup = '$$'
   token.map = [start, state.line]
   return true
@@ -151,7 +151,7 @@ const md = new MarkdownIt({
   breaks: true,
   langPrefix: 'language-',
   highlight(code, lang) {
-    if (lang && hljs.getLanguage(lang)) {
+    if (lang.length > 0 && hljs.getLanguage(lang) !== undefined) {
       try {
         return hljs.highlight(code, { language: lang }).value
       } catch {

@@ -4,7 +4,7 @@ import { useToast } from 'primevue/usetoast'
 import { useNotesStore, type Note } from '@/entities/note'
 
 /** Подтверждение и выполнение удаления заметки. */
-export function useDeleteNote() {
+export function useDeleteNote(): { confirmDelete: (note: Note) => void } {
   const confirm = useConfirm()
   const toast = useToast()
   const store = useNotesStore()

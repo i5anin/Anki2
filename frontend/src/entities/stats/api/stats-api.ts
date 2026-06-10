@@ -11,8 +11,12 @@ const RESOURCE = '/api/stats'
 
 function params(deckId?: string, days?: number): Record<string, string | number> {
   const out: Record<string, string | number> = {}
-  if (deckId) out.deckId = deckId
-  if (days) out.days = days
+  if (deckId !== undefined && deckId.length > 0) {
+    out.deckId = deckId
+  }
+  if (days !== undefined && days > 0) {
+    out.days = days
+  }
   return out
 }
 
