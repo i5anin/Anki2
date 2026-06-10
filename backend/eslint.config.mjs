@@ -58,6 +58,7 @@ export default tseslint.config(
       complexity: ['error', 15],
       'max-depth': ['error', 4],
       'max-params': ['error', 5],
+      'max-lines': ['error', { max: 250, skipBlankLines: true, skipComments: true }],
 
       // --- TypeScript ---------------------------------------------------------
       '@typescript-eslint/no-explicit-any': 'error',
@@ -107,6 +108,15 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-argument': 'off',
       '@typescript-eslint/no-unsafe-return': 'off',
       '@typescript-eslint/no-unnecessary-type-assertion': 'off',
+    },
+  },
+
+  // Обёртки результата supabase — намеренные дженерики типизированного «распаковщика».
+  {
+    name: 'app/supabase-helpers',
+    files: ['src/store/supabase.helpers.ts'],
+    rules: {
+      '@typescript-eslint/no-unnecessary-type-parameters': 'off',
     },
   },
 

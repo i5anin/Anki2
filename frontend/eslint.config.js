@@ -61,6 +61,7 @@ export default defineConfigWithVueTs(
       'max-depth': ['error', 4],
       'max-params': ['error', 5],
       'max-nested-callbacks': ['error', 4],
+      'max-lines': ['error', { max: 250, skipBlankLines: true, skipComments: true }],
 
       // --- TypeScript ---------------------------------------------------------
       '@typescript-eslint/no-explicit-any': 'error',
