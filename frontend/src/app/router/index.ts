@@ -17,6 +17,16 @@ const routes: RouteRecordRaw[] = [
     component: async () => import('@/pages/browse'),
   },
   {
+    path: '/trainers',
+    name: 'trainers',
+    component: async () => import('@/pages/trainers'),
+  },
+  {
+    path: '/trainers/:trainerId',
+    name: 'trainer-play',
+    component: async () => import('@/pages/trainer-play'),
+  },
+  {
     path: '/stats',
     name: 'stats',
     component: async () => import('@/pages/stats'),

@@ -4,6 +4,7 @@ import type { CardTemplate, NoteType } from '../domain/note-type.entity'
 import type { Note, NoteFields } from '../domain/note.entity'
 import type { Card } from '../domain/card.entity'
 import type { ReviewLog } from '../domain/review-log.entity'
+import type { TrainerResult, TrainerSkill } from '../domain/trainer-result.entity'
 import type { CardState, Rating } from '../srs'
 
 // --- Входные типы (camelCase) ------------------------------------------------
@@ -93,6 +94,21 @@ export interface ReviewLogFilter {
   since?: string
 }
 
+export interface NewTrainerResult {
+  trainerId: string
+  skill: TrainerSkill
+  level: number
+  score: number
+  accuracy: number
+  durationMs: number
+}
+
+export interface TrainerResultFilter {
+  trainerId?: string
+  /** ISO-дата: вернуть результаты начиная с этого момента. */
+  since?: string
+}
+
 /**
  * Абстракция доступа к данным. Две реализации: `SupabaseDataStore` (боевая)
  * и `MemoryDataStore` (демо/офлайн, без ключей). Сервисы зависят только от
@@ -131,4 +147,8 @@ export abstract class DataStore {
   // Журнал повторений
   abstract createReviewLog(input: NewReviewLog): Promise<ReviewLog>
   abstract listReviewLogs(filter?: ReviewLogFilter): Promise<ReviewLog[]>
+
+  // Результаты тренажёров
+  abstract createTrainerResult(input: NewTrainerResult): Promise<TrainerResult>
+  abstract listTrainerResults(filter?: TrainerResultFilter): Promise<TrainerResult[]>
 }

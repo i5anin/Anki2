@@ -8,6 +8,7 @@ import { NoteTypesModule } from './note-types/note-types.module'
 import { StatsModule } from './stats/stats.module'
 import { StoreModule } from './store/store.module'
 import { StudyModule } from './study/study.module'
+import { TrainersModule } from './trainers/trainers.module'
 
 @Module({
   imports: [
@@ -19,6 +20,7 @@ import { StudyModule } from './study/study.module'
     CardsModule,
     StudyModule,
     StatsModule,
+    TrainersModule,
   ],
 })
 export class AppModule {}

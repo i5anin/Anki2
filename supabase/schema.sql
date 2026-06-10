@@ -91,6 +91,19 @@ create table if not exists anki.review_logs (
   reviewed_at     timestamptz not null default now()
 );
 
+-- Результаты когнитивных тренажёров --------------------------------------------
+create table if not exists anki.trainer_results (
+  id          uuid primary key default gen_random_uuid(),
+  trainer_id  text not null,
+  skill       text not null
+                check (skill in ('attention','memory','speed','logic')),
+  level       int  not null default 1,
+  score       int  not null default 0,
+  accuracy    real not null default 0,
+  duration_ms int  not null default 0,
+  played_at   timestamptz not null default now()
+);
+
 -- Индексы ---------------------------------------------------------------------
 create index if not exists idx_cards_deck  on anki.cards (deck_id);
 create index if not exists idx_cards_note  on anki.cards (note_id);
@@ -99,6 +112,7 @@ create index if not exists idx_cards_queue on anki.cards (deck_id, state, due)
 create index if not exists idx_notes_deck  on anki.notes (deck_id);
 create index if not exists idx_logs_card   on anki.review_logs (card_id, reviewed_at desc);
 create index if not exists idx_logs_time   on anki.review_logs (reviewed_at);
+create index if not exists idx_trainer_results on anki.trainer_results (trainer_id, played_at);
 
 -- Триггеры updated_at ---------------------------------------------------------
 drop trigger if exists trg_note_types_updated on anki.note_types;
@@ -128,8 +142,9 @@ alter default privileges in schema anki grant all on tables    to service_role;
 alter default privileges in schema anki grant all on sequences to service_role;
 
 -- RLS: включаем; политик для anon нет → доступ закрыт (defense in depth).
-alter table anki.note_types  enable row level security;
-alter table anki.decks       enable row level security;
-alter table anki.notes       enable row level security;
-alter table anki.cards       enable row level security;
-alter table anki.review_logs enable row level security;
+alter table anki.note_types      enable row level security;
+alter table anki.decks           enable row level security;
+alter table anki.notes           enable row level security;
+alter table anki.cards           enable row level security;
+alter table anki.review_logs     enable row level security;
+alter table anki.trainer_results enable row level security;

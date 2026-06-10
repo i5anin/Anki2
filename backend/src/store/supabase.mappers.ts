@@ -3,6 +3,7 @@ import type { Deck, DeckRow } from '../domain/deck.entity'
 import type { Note, NoteRow } from '../domain/note.entity'
 import type { NoteType, NoteTypeRow } from '../domain/note-type.entity'
 import type { ReviewLog, ReviewLogRow } from '../domain/review-log.entity'
+import type { TrainerResult, TrainerResultRow } from '../domain/trainer-result.entity'
 import { mergeDeckConfig } from '../srs'
 
 /** Мапперы строк БД (snake_case) в доменные сущности (camelCase). */
@@ -77,5 +78,18 @@ export function rowToReviewLog(row: ReviewLogRow): ReviewLog {
     elapsedDays: row.elapsed_days,
     timeTakenMs: row.time_taken_ms,
     reviewedAt: row.reviewed_at,
+  }
+}
+
+export function rowToTrainerResult(row: TrainerResultRow): TrainerResult {
+  return {
+    id: row.id,
+    trainerId: row.trainer_id,
+    skill: row.skill,
+    level: row.level,
+    score: row.score,
+    accuracy: row.accuracy,
+    durationMs: row.duration_ms,
+    playedAt: row.played_at,
   }
 }

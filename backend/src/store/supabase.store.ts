@@ -5,6 +5,7 @@ import type { Deck, DeckRow } from '../domain/deck.entity'
 import type { Note, NoteRow } from '../domain/note.entity'
 import type { NoteType, NoteTypeRow } from '../domain/note-type.entity'
 import type { ReviewLog, ReviewLogRow } from '../domain/review-log.entity'
+import type { TrainerResult, TrainerResultRow } from '../domain/trainer-result.entity'
 import { mergeDeckConfig } from '../srs'
 import { DataStore } from './data-store'
 import type {
@@ -14,11 +15,13 @@ import type {
   DeckPatch,
   NewCard,
   NewReviewLog,
+  NewTrainerResult,
   NoteInput,
   NotePatch,
   NoteTypeInput,
   NoteTypePatch,
   ReviewLogFilter,
+  TrainerResultFilter,
 } from './data-store'
 import { affected, maybe, one, rows } from './supabase.helpers'
 import {
@@ -27,7 +30,20 @@ import {
   rowToNote,
   rowToNoteType,
   rowToReviewLog,
+  rowToTrainerResult,
 } from './supabase.mappers'
+import {
+  cardPatchRow,
+  deckInsertRow,
+  deckPatchRow,
+  newCardRows,
+  noteInsertRow,
+  notePatchRow,
+  noteTypeInsertRow,
+  noteTypePatchRow,
+  reviewLogInsertRow,
+  trainerResultInsertRow,
+} from './supabase.payloads'
 import { SupabaseService } from './supabase.service'
 
 const DECKS = 'decks'
@@ -35,6 +51,7 @@ const NOTE_TYPES = 'note_types'
 const NOTES = 'notes'
 const CARDS = 'cards'
 const REVIEW_LOGS = 'review_logs'
+const TRAINER_RESULTS = 'trainer_results'
 
 const now = (): string => new Date().toISOString()
 
@@ -61,22 +78,12 @@ export class SupabaseDataStore extends DataStore {
   }
 
   async createDeck(input: DeckInput): Promise<Deck> {
-    const stamp = now()
-    const payload = {
-      name: input.name,
-      description: input.description ?? '',
-      config: mergeDeckConfig(input.config),
-      created_at: stamp,
-      updated_at: stamp,
-    }
+    const payload = deckInsertRow(input, now())
     return rowToDeck(one<DeckRow>(await this.db.from(DECKS).insert(payload).select('*').single()))
   }
 
   async updateDeck(id: string, patch: DeckPatch): Promise<Deck | null> {
-    const row: Record<string, unknown> = { updated_at: now() }
-    if (patch.name !== undefined) row.name = patch.name
-    if (patch.description !== undefined) row.description = patch.description
-    if (patch.config !== undefined) row.config = mergeDeckConfig(patch.config)
+    const row = deckPatchRow(patch, now())
     const updated = maybe<DeckRow>(
       await this.db.from(DECKS).update(row).eq('id', id).select('*').maybeSingle(),
     )
@@ -102,27 +109,14 @@ export class SupabaseDataStore extends DataStore {
   }
 
   async createNoteType(input: NoteTypeInput): Promise<NoteType> {
-    const stamp = now()
-    const payload = {
-      name: input.name,
-      fields: input.fields,
-      templates: input.templates,
-      is_cloze: input.isCloze ?? false,
-      is_builtin: false,
-      created_at: stamp,
-      updated_at: stamp,
-    }
+    const payload = noteTypeInsertRow(input, now())
     return rowToNoteType(
       one<NoteTypeRow>(await this.db.from(NOTE_TYPES).insert(payload).select('*').single()),
     )
   }
 
   async updateNoteType(id: string, patch: NoteTypePatch): Promise<NoteType | null> {
-    const row: Record<string, unknown> = { updated_at: now() }
-    if (patch.name !== undefined) row.name = patch.name
-    if (patch.fields !== undefined) row.fields = patch.fields
-    if (patch.templates !== undefined) row.templates = patch.templates
-    if (patch.isCloze !== undefined) row.is_cloze = patch.isCloze
+    const row = noteTypePatchRow(patch, now())
     const updated = maybe<NoteTypeRow>(
       await this.db.from(NOTE_TYPES).update(row).eq('id', id).select('*').maybeSingle(),
     )
@@ -147,23 +141,12 @@ export class SupabaseDataStore extends DataStore {
   }
 
   async createNote(input: NoteInput): Promise<Note> {
-    const stamp = now()
-    const payload = {
-      note_type_id: input.noteTypeId,
-      deck_id: input.deckId,
-      fields: input.fields,
-      tags: input.tags ?? [],
-      created_at: stamp,
-      updated_at: stamp,
-    }
+    const payload = noteInsertRow(input, now())
     return rowToNote(one<NoteRow>(await this.db.from(NOTES).insert(payload).select('*').single()))
   }
 
   async updateNote(id: string, patch: NotePatch): Promise<Note | null> {
-    const row: Record<string, unknown> = { updated_at: now() }
-    if (patch.deckId !== undefined) row.deck_id = patch.deckId
-    if (patch.fields !== undefined) row.fields = patch.fields
-    if (patch.tags !== undefined) row.tags = patch.tags
+    const row = notePatchRow(patch, now())
     const updated = maybe<NoteRow>(
       await this.db.from(NOTES).update(row).eq('id', id).select('*').maybeSingle(),
     )
@@ -194,40 +177,12 @@ export class SupabaseDataStore extends DataStore {
     if (cards.length === 0) {
       return []
     }
-    const stamp = now()
-    const startingEase = mergeDeckConfig().startingEase
-    const payload = cards.map((card) => ({
-      note_id: card.noteId,
-      deck_id: card.deckId,
-      template_index: card.templateIndex,
-      state: 'new',
-      due: stamp,
-      interval_days: 0,
-      ease_factor: startingEase,
-      reps: 0,
-      lapses: 0,
-      learning_step: 0,
-      is_suspended: false,
-      last_reviewed_at: null,
-      created_at: stamp,
-      updated_at: stamp,
-    }))
+    const payload = newCardRows(cards, now(), mergeDeckConfig().startingEase)
     return rows<CardRow>(await this.db.from(CARDS).insert(payload).select('*')).map(rowToCard)
   }
 
   async updateCard(id: string, patch: CardPatch): Promise<Card | null> {
-    const row: Record<string, unknown> = { updated_at: now() }
-    if (patch.deckId !== undefined) row.deck_id = patch.deckId
-    if (patch.templateIndex !== undefined) row.template_index = patch.templateIndex
-    if (patch.state !== undefined) row.state = patch.state
-    if (patch.due !== undefined) row.due = patch.due
-    if (patch.intervalDays !== undefined) row.interval_days = patch.intervalDays
-    if (patch.easeFactor !== undefined) row.ease_factor = patch.easeFactor
-    if (patch.reps !== undefined) row.reps = patch.reps
-    if (patch.lapses !== undefined) row.lapses = patch.lapses
-    if (patch.learningStep !== undefined) row.learning_step = patch.learningStep
-    if (patch.isSuspended !== undefined) row.is_suspended = patch.isSuspended
-    if (patch.lastReviewedAt !== undefined) row.last_reviewed_at = patch.lastReviewedAt
+    const row = cardPatchRow(patch, now())
     const updated = maybe<CardRow>(
       await this.db.from(CARDS).update(row).eq('id', id).select('*').maybeSingle(),
     )
@@ -248,19 +203,7 @@ export class SupabaseDataStore extends DataStore {
   // --- Журнал повторений -----------------------------------------------------
 
   async createReviewLog(input: NewReviewLog): Promise<ReviewLog> {
-    const payload = {
-      card_id: input.cardId,
-      rating: input.rating,
-      state_before: input.stateBefore,
-      state_after: input.stateAfter,
-      interval_before: input.intervalBefore,
-      interval_after: input.intervalAfter,
-      ease_before: input.easeBefore,
-      ease_after: input.easeAfter,
-      elapsed_days: input.elapsedDays,
-      time_taken_ms: input.timeTakenMs,
-      reviewed_at: now(),
-    }
+    const payload = reviewLogInsertRow(input, now())
     return rowToReviewLog(
       one<ReviewLogRow>(await this.db.from(REVIEW_LOGS).insert(payload).select('*').single()),
     )
@@ -286,5 +229,23 @@ export class SupabaseDataStore extends DataStore {
     if (filter?.since !== undefined) query = query.gte('reviewed_at', filter.since)
 
     return rows<ReviewLogRow>(await query).map(rowToReviewLog)
+  }
+
+  // --- Результаты тренажёров ---------------------------------------------------
+
+  async createTrainerResult(input: NewTrainerResult): Promise<TrainerResult> {
+    const payload = trainerResultInsertRow(input, now())
+    return rowToTrainerResult(
+      one<TrainerResultRow>(
+        await this.db.from(TRAINER_RESULTS).insert(payload).select('*').single(),
+      ),
+    )
+  }
+
+  async listTrainerResults(filter?: TrainerResultFilter): Promise<TrainerResult[]> {
+    let query = this.db.from(TRAINER_RESULTS).select('*').order('played_at', { ascending: true })
+    if (filter?.trainerId !== undefined) query = query.eq('trainer_id', filter.trainerId)
+    if (filter?.since !== undefined) query = query.gte('played_at', filter.since)
+    return rows<TrainerResultRow>(await query).map(rowToTrainerResult)
   }
 }

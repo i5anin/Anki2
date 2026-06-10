@@ -1,11 +1,9 @@
-import { randomUUID } from 'node:crypto'
-
-import type { Deck } from '../domain/deck.entity'
-import type { NoteType } from '../domain/note-type.entity'
-import type { Note } from '../domain/note.entity'
 import type { Card } from '../domain/card.entity'
+import type { Deck } from '../domain/deck.entity'
+import type { Note } from '../domain/note.entity'
+import type { NoteType } from '../domain/note-type.entity'
 import type { ReviewLog } from '../domain/review-log.entity'
-import { DEFAULT_DECK_CONFIG, mergeDeckConfig } from '../srs'
+import type { TrainerResult } from '../domain/trainer-result.entity'
 import { DataStore } from './data-store'
 import type {
   CardFilter,
@@ -14,12 +12,26 @@ import type {
   DeckPatch,
   NewCard,
   NewReviewLog,
+  NewTrainerResult,
   NoteInput,
   NotePatch,
   NoteTypeInput,
   NoteTypePatch,
   ReviewLogFilter,
+  TrainerResultFilter,
 } from './data-store'
+import {
+  applyCardPatch,
+  applyDeckPatch,
+  applyNotePatch,
+  applyNoteTypePatch,
+  makeCards,
+  makeDeck,
+  makeNote,
+  makeNoteType,
+  makeReviewLog,
+  makeTrainerResult,
+} from './memory.factory'
 import { createSeedData } from './seed'
 
 /**
@@ -33,6 +45,7 @@ export class MemoryDataStore extends DataStore {
   private readonly notes: Note[]
   private readonly cards: Card[]
   private readonly reviewLogs: ReviewLog[]
+  private readonly trainerResults: TrainerResult[]
 
   constructor() {
     super()
@@ -42,6 +55,7 @@ export class MemoryDataStore extends DataStore {
     this.notes = seed.notes
     this.cards = seed.cards
     this.reviewLogs = []
+    this.trainerResults = []
   }
 
   // Колоды
@@ -55,15 +69,7 @@ export class MemoryDataStore extends DataStore {
   }
 
   async createDeck(input: DeckInput): Promise<Deck> {
-    const now = new Date().toISOString()
-    const deck: Deck = {
-      id: randomUUID(),
-      name: input.name,
-      description: input.description ?? '',
-      config: mergeDeckConfig(input.config),
-      createdAt: now,
-      updatedAt: now,
-    }
+    const deck = makeDeck(input)
     this.decks.push(deck)
     return deck
   }
@@ -71,11 +77,7 @@ export class MemoryDataStore extends DataStore {
   async updateDeck(id: string, patch: DeckPatch): Promise<Deck | null> {
     const deck = this.decks.find((item) => item.id === id)
     if (!deck) return null
-    if (patch.name !== undefined) deck.name = patch.name
-    if (patch.description !== undefined) deck.description = patch.description
-    if (patch.config !== undefined)
-      deck.config = mergeDeckConfig({ ...deck.config, ...patch.config })
-    deck.updatedAt = new Date().toISOString()
+    applyDeckPatch(deck, patch)
     return deck
   }
 
@@ -97,17 +99,7 @@ export class MemoryDataStore extends DataStore {
   }
 
   async createNoteType(input: NoteTypeInput): Promise<NoteType> {
-    const now = new Date().toISOString()
-    const noteType: NoteType = {
-      id: randomUUID(),
-      name: input.name,
-      fields: input.fields,
-      templates: input.templates,
-      isCloze: input.isCloze ?? false,
-      isBuiltin: false,
-      createdAt: now,
-      updatedAt: now,
-    }
+    const noteType = makeNoteType(input)
     this.noteTypes.push(noteType)
     return noteType
   }
@@ -115,11 +107,7 @@ export class MemoryDataStore extends DataStore {
   async updateNoteType(id: string, patch: NoteTypePatch): Promise<NoteType | null> {
     const noteType = this.noteTypes.find((item) => item.id === id)
     if (!noteType) return null
-    if (patch.name !== undefined) noteType.name = patch.name
-    if (patch.fields !== undefined) noteType.fields = patch.fields
-    if (patch.templates !== undefined) noteType.templates = patch.templates
-    if (patch.isCloze !== undefined) noteType.isCloze = patch.isCloze
-    noteType.updatedAt = new Date().toISOString()
+    applyNoteTypePatch(noteType, patch)
     return noteType
   }
 
@@ -142,16 +130,7 @@ export class MemoryDataStore extends DataStore {
   }
 
   async createNote(input: NoteInput): Promise<Note> {
-    const now = new Date().toISOString()
-    const note: Note = {
-      id: randomUUID(),
-      noteTypeId: input.noteTypeId,
-      deckId: input.deckId,
-      fields: input.fields,
-      tags: input.tags ?? [],
-      createdAt: now,
-      updatedAt: now,
-    }
+    const note = makeNote(input)
     this.notes.push(note)
     return note
   }
@@ -159,10 +138,7 @@ export class MemoryDataStore extends DataStore {
   async updateNote(id: string, patch: NotePatch): Promise<Note | null> {
     const note = this.notes.find((item) => item.id === id)
     if (!note) return null
-    if (patch.deckId !== undefined) note.deckId = patch.deckId
-    if (patch.fields !== undefined) note.fields = patch.fields
-    if (patch.tags !== undefined) note.tags = patch.tags
-    note.updatedAt = new Date().toISOString()
+    applyNotePatch(note, patch)
     return note
   }
 
@@ -190,24 +166,7 @@ export class MemoryDataStore extends DataStore {
   }
 
   async createCards(cards: NewCard[]): Promise<Card[]> {
-    const now = new Date().toISOString()
-    const created = cards.map<Card>((input) => ({
-      id: randomUUID(),
-      noteId: input.noteId,
-      deckId: input.deckId,
-      templateIndex: input.templateIndex,
-      state: 'new',
-      due: now,
-      intervalDays: 0,
-      easeFactor: DEFAULT_DECK_CONFIG.startingEase,
-      reps: 0,
-      lapses: 0,
-      learningStep: 0,
-      isSuspended: false,
-      lastReviewedAt: null,
-      createdAt: now,
-      updatedAt: now,
-    }))
+    const created = makeCards(cards)
     this.cards.push(...created)
     return created
   }
@@ -215,18 +174,7 @@ export class MemoryDataStore extends DataStore {
   async updateCard(id: string, patch: CardPatch): Promise<Card | null> {
     const card = this.cards.find((item) => item.id === id)
     if (!card) return null
-    if (patch.deckId !== undefined) card.deckId = patch.deckId
-    if (patch.templateIndex !== undefined) card.templateIndex = patch.templateIndex
-    if (patch.state !== undefined) card.state = patch.state
-    if (patch.due !== undefined) card.due = patch.due
-    if (patch.intervalDays !== undefined) card.intervalDays = patch.intervalDays
-    if (patch.easeFactor !== undefined) card.easeFactor = patch.easeFactor
-    if (patch.reps !== undefined) card.reps = patch.reps
-    if (patch.lapses !== undefined) card.lapses = patch.lapses
-    if (patch.learningStep !== undefined) card.learningStep = patch.learningStep
-    if (patch.isSuspended !== undefined) card.isSuspended = patch.isSuspended
-    if (patch.lastReviewedAt !== undefined) card.lastReviewedAt = patch.lastReviewedAt
-    card.updatedAt = new Date().toISOString()
+    applyCardPatch(card, patch)
     return card
   }
 
@@ -252,20 +200,7 @@ export class MemoryDataStore extends DataStore {
   // Журнал повторений
 
   async createReviewLog(input: NewReviewLog): Promise<ReviewLog> {
-    const log: ReviewLog = {
-      id: randomUUID(),
-      cardId: input.cardId,
-      rating: input.rating,
-      stateBefore: input.stateBefore,
-      stateAfter: input.stateAfter,
-      intervalBefore: input.intervalBefore,
-      intervalAfter: input.intervalAfter,
-      easeBefore: input.easeBefore,
-      easeAfter: input.easeAfter,
-      elapsedDays: input.elapsedDays,
-      timeTakenMs: input.timeTakenMs,
-      reviewedAt: new Date().toISOString(),
-    }
+    const log = makeReviewLog(input)
     this.reviewLogs.push(log)
     return log
   }
@@ -279,6 +214,22 @@ export class MemoryDataStore extends DataStore {
       if (filter?.cardId !== undefined && log.cardId !== filter.cardId) return false
       if (deckCardIds && !deckCardIds.has(log.cardId)) return false
       if (filter?.since !== undefined && log.reviewedAt < filter.since) return false
+      return true
+    })
+  }
+
+  // Результаты тренажёров
+
+  async createTrainerResult(input: NewTrainerResult): Promise<TrainerResult> {
+    const result = makeTrainerResult(input)
+    this.trainerResults.push(result)
+    return result
+  }
+
+  async listTrainerResults(filter?: TrainerResultFilter): Promise<TrainerResult[]> {
+    return this.trainerResults.filter((result) => {
+      if (filter?.trainerId !== undefined && result.trainerId !== filter.trainerId) return false
+      if (filter?.since !== undefined && result.playedAt < filter.since) return false
       return true
     })
   }

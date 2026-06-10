@@ -10,6 +10,7 @@ interface NavLink {
 
 const links: NavLink[] = [
   { to: '/', label: 'Колоды', icon: 'pi pi-clone' },
+  { to: '/trainers', label: 'Тренажёры', icon: 'pi pi-bullseye' },
   { to: '/stats', label: 'Статистика', icon: 'pi pi-chart-bar' },
   { to: '/note-types', label: 'Модели', icon: 'pi pi-table' },
 ]
