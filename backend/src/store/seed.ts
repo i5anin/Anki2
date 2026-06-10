@@ -3,6 +3,7 @@ import type { NoteType } from '../domain/note-type.entity'
 import type { Note } from '../domain/note.entity'
 import type { Card } from '../domain/card.entity'
 import { DEFAULT_DECK_CONFIG } from '../srs'
+import { createInterviewSeedData } from './interview.seed'
 
 /**
  * Демонстрационные данные для офлайн-режима (MemoryDataStore). Совпадают с
@@ -135,7 +136,13 @@ export interface SeedData {
   cards: Card[]
 }
 
-/** Свежая глубокая копия демо-данных. */
+/** Свежая глубокая копия демо-данных (включая колоды «Собеседование»). */
 export function createSeedData(): SeedData {
-  return structuredClone({ noteTypes: NOTE_TYPES, decks: DECKS, notes: NOTES, cards: CARDS })
+  const interview = createInterviewSeedData()
+  return structuredClone({
+    noteTypes: NOTE_TYPES,
+    decks: [...DECKS, ...interview.decks],
+    notes: [...NOTES, ...interview.notes],
+    cards: [...CARDS, ...interview.cards],
+  })
 }
