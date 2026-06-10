@@ -1,0 +1,25 @@
+# Dependencies
+node_modules
+
+# Build output
+/dist
+/dist-ssr
+*.local
+
+# Test / coverage
+/coverage
+
+# TypeScript incremental build cache
+*.tsbuildinfo
+
+# Env files — НЕ коммитим (шаблон лежит в .env.example)
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+
+# OS / editor
+.DS_Store
+.idea
