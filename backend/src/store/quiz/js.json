@@ -1,45 +1,1212 @@
 [
-  { "question": "Что вернёт typeof null?", "answer": "object", "distractors": ["null", "undefined", "boolean"], "difficulty": 1 },
-  { "question": "Что вернёт typeof NaN?", "answer": "number", "distractors": ["NaN", "undefined", "object"], "difficulty": 1 },
-  { "question": "Что вернёт typeof undefined?", "answer": "undefined", "distractors": ["object", "null", "string"], "difficulty": 1 },
-  { "question": "Что вернёт typeof function(){}?", "answer": "function", "distractors": ["object", "Function", "undefined"], "difficulty": 1 },
-  { "question": "Сколько примитивных типов в JS?", "answer": "7", "distractors": ["6", "8", "5"], "difficulty": 2 },
-  { "question": "Чему равно NaN === NaN?", "answer": "false", "distractors": ["true", "NaN", "undefined"], "difficulty": 1 },
-  { "question": "Как корректно проверить, что значение — NaN?", "answer": "Number.isNaN(x)", "distractors": ["x === NaN", "isNaN(x)", "typeof x === 'NaN'"], "difficulty": 2 },
-  { "question": "Что вернёт '5' + 3?", "answer": "'53'", "distractors": ["8", "'8'", "53"], "difficulty": 1 },
-  { "question": "Что вернёт '5' - 3?", "answer": "2", "distractors": ["'2'", "'53'", "NaN"], "difficulty": 1 },
-  { "question": "Что вернёт 1 + '2' + 3?", "answer": "'123'", "distractors": ["6", "'33'", "'15'"], "difficulty": 2 },
-  { "question": "Что вернёт [] + []?", "answer": "'' (пустая строка)", "distractors": ["[]", "0", "'[]'"], "difficulty": 2 },
-  { "question": "Что вернёт [] + {}?", "answer": "'[object Object]'", "distractors": ["'{}'", "0", "'[][object Object]'"], "difficulty": 3 },
-  { "question": "Что вернёт 0.1 + 0.2 === 0.3?", "answer": "false", "distractors": ["true", "0.3", "NaN"], "difficulty": 2 },
-  { "question": "Что вернёт null == undefined?", "answer": "true", "distractors": ["false", "null", "undefined"], "difficulty": 1 },
-  { "question": "Что вернёт null === undefined?", "answer": "false", "distractors": ["true", "null", "undefined"], "difficulty": 1 },
-  { "question": "Что вернёт [1,2,3].map(x => x * 2)[0]?", "answer": "2", "distractors": ["1", "[2,4,6]", "4"], "difficulty": 1 },
-  { "question": "Что вернёт ['1','2','3'].map(Number)?", "answer": "[1, 2, 3]", "distractors": ["['1','2','3']", "[1, NaN, NaN]", "[NaN, NaN, NaN]"], "difficulty": 3 },
-  { "question": "Что вернёт [1,2,3].reduce((a,b) => a + b)?", "answer": "6", "distractors": ["[6]", "'123'", "5"], "difficulty": 1 },
-  { "question": "Какой метод массива НЕ мутирует исходный массив?", "answer": "slice", "distractors": ["splice", "sort", "reverse"], "difficulty": 2 },
-  { "question": "Что вернёт 'abc'.charAt(10)?", "answer": "'' (пустая строка)", "distractors": ["undefined", "null", "NaN"], "difficulty": 2 },
-  { "question": "Что выведется первым: setTimeout(()=>{}, 0) или Promise.then?", "answer": "Promise.then", "distractors": ["setTimeout", "одновременно", "зависит от движка"], "difficulty": 2 },
-  { "question": "К какой очереди относится Promise.then-колбэк?", "answer": "микрозадачи", "distractors": ["макрозадачи", "render queue", "call stack"], "difficulty": 2 },
-  { "question": "К какой очереди относится setTimeout-колбэк?", "answer": "макрозадачи", "distractors": ["микрозадачи", "animation frame", "main thread"], "difficulty": 2 },
-  { "question": "Что вернёт queueMicrotask относительно текущего стека?", "answer": "выполнится после стека, до макрозадач", "distractors": ["сразу синхронно", "после макрозадач", "в следующем кадре render"], "difficulty": 3 },
-  { "question": "Сколько раз можно зарезолвить один Promise?", "answer": "1", "distractors": ["2", "бесконечно", "0"], "difficulty": 2 },
-  { "question": "Что возвращает async-функция всегда?", "answer": "Promise", "distractors": ["значение", "undefined", "Generator"], "difficulty": 1 },
-  { "question": "Что делает Promise.all при первом reject?", "answer": "сразу реджектится", "distractors": ["ждёт остальные", "возвращает массив", "игнорирует ошибку"], "difficulty": 2 },
-  { "question": "Какой метод ждёт ВСЕ промисы и не падает на reject?", "answer": "Promise.allSettled", "distractors": ["Promise.all", "Promise.race", "Promise.any"], "difficulty": 2 },
-  { "question": "Что вернёт Promise.race?", "answer": "первый завершившийся промис", "distractors": ["первый успешный", "массив результатов", "последний промис"], "difficulty": 2 },
-  { "question": "На что указывает this в обычной функции при простом вызове (strict mode)?", "answer": "undefined", "distractors": ["window", "globalThis", "сама функция"], "difficulty": 2 },
-  { "question": "Что определяет this у стрелочной функции?", "answer": "лексическое окружение", "distractors": ["объект вызова", "globalThis", "аргумент call"], "difficulty": 2 },
-  { "question": "Какой метод вызывает функцию, передавая аргументы массивом?", "answer": "apply", "distractors": ["call", "bind", "spread"], "difficulty": 2 },
-  { "question": "Что делает bind?", "answer": "возвращает новую функцию с привязанным this", "distractors": ["вызывает функцию сразу", "меняет this навсегда у оригинала", "копирует функцию без this"], "difficulty": 2 },
-  { "question": "Через какое свойство объект ссылается на свой прототип (стандарт)?", "answer": "Object.getPrototypeOf", "distractors": ["obj.prototype", "obj.constructor", "obj.__class__"], "difficulty": 3 },
-  { "question": "Что вернёт let x; console.log(x) до присваивания?", "answer": "undefined", "distractors": ["ReferenceError", "null", "TypeError"], "difficulty": 1 },
-  { "question": "Что произойдёт при доступе к let-переменной до объявления (TDZ)?", "answer": "ReferenceError", "distractors": ["undefined", "null", "SyntaxError"], "difficulty": 2 },
-  { "question": "Поднимается ли (hoisting) объявление var?", "answer": "да, со значением undefined", "distractors": ["нет", "да, с присвоенным значением", "только в strict mode"], "difficulty": 2 },
-  { "question": "Что ловит трап get у Proxy?", "answer": "чтение свойства", "distractors": ["запись свойства", "удаление свойства", "вызов функции"], "difficulty": 2 },
-  { "question": "Каким должен быть ключ свойства, чтобы быть полностью уникальным?", "answer": "Symbol", "distractors": ["строка", "число", "BigInt"], "difficulty": 2 },
-  { "question": "Какое поле дескриптора отвечает за возможность изменения значения?", "answer": "writable", "distractors": ["configurable", "enumerable", "value"], "difficulty": 3 },
-  { "question": "Какой алгоритм лежит в основе сборщика мусора в V8?", "answer": "mark-and-sweep", "distractors": ["reference counting", "stop-and-copy only", "manual free"], "difficulty": 3 },
-  { "question": "Какая структура хранит ключи-объекты и не мешает их сборке мусора?", "answer": "WeakMap", "distractors": ["Map", "Object", "Set"], "difficulty": 3 },
-  { "question": "Что вернёт [1,2,3].includes(NaN) для массива [NaN]?", "answer": "true", "distractors": ["false", "NaN", "undefined"], "difficulty": 3 }
+  {
+    "question": "Что вернёт typeof null?",
+    "answer": "object",
+    "distractors": [
+      "null",
+      "undefined",
+      "boolean"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Что вернёт typeof NaN?",
+    "answer": "number",
+    "distractors": [
+      "NaN",
+      "undefined",
+      "object"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Что вернёт typeof undefined?",
+    "answer": "undefined",
+    "distractors": [
+      "object",
+      "null",
+      "string"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Что вернёт typeof function(){}?",
+    "answer": "function",
+    "distractors": [
+      "object",
+      "Function",
+      "undefined"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Сколько примитивных типов в JS?",
+    "answer": "7",
+    "distractors": [
+      "6",
+      "8",
+      "5"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Чему равно NaN === NaN?",
+    "answer": "false",
+    "distractors": [
+      "true",
+      "NaN",
+      "undefined"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Как корректно проверить, что значение — NaN?",
+    "answer": "Number.isNaN(x)",
+    "distractors": [
+      "x === NaN",
+      "isNaN(x)",
+      "typeof x === 'NaN'"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что вернёт '5' + 3?",
+    "answer": "'53'",
+    "distractors": [
+      "8",
+      "'8'",
+      "53"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Что вернёт '5' - 3?",
+    "answer": "2",
+    "distractors": [
+      "'2'",
+      "'53'",
+      "NaN"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Что вернёт 1 + '2' + 3?",
+    "answer": "'123'",
+    "distractors": [
+      "6",
+      "'33'",
+      "'15'"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что вернёт [] + []?",
+    "answer": "'' (пустая строка)",
+    "distractors": [
+      "[]",
+      "0",
+      "'[]'"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что вернёт [] + {}?",
+    "answer": "'[object Object]'",
+    "distractors": [
+      "'{}'",
+      "0",
+      "'[][object Object]'"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что вернёт 0.1 + 0.2 === 0.3?",
+    "answer": "false",
+    "distractors": [
+      "true",
+      "0.3",
+      "NaN"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что вернёт null == undefined?",
+    "answer": "true",
+    "distractors": [
+      "false",
+      "null",
+      "undefined"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Что вернёт null === undefined?",
+    "answer": "false",
+    "distractors": [
+      "true",
+      "null",
+      "undefined"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Что вернёт [1,2,3].map(x => x * 2)[0]?",
+    "answer": "2",
+    "distractors": [
+      "1",
+      "[2,4,6]",
+      "4"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Что вернёт ['1','2','3'].map(Number)?",
+    "answer": "[1, 2, 3]",
+    "distractors": [
+      "['1','2','3']",
+      "[1, NaN, NaN]",
+      "[NaN, NaN, NaN]"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что вернёт [1,2,3].reduce((a,b) => a + b)?",
+    "answer": "6",
+    "distractors": [
+      "[6]",
+      "'123'",
+      "5"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какой метод массива НЕ мутирует исходный массив?",
+    "answer": "slice",
+    "distractors": [
+      "splice",
+      "sort",
+      "reverse"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что вернёт 'abc'.charAt(10)?",
+    "answer": "'' (пустая строка)",
+    "distractors": [
+      "undefined",
+      "null",
+      "NaN"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что выведется первым: setTimeout(()=>{}, 0) или Promise.then?",
+    "answer": "Promise.then",
+    "distractors": [
+      "setTimeout",
+      "одновременно",
+      "зависит от движка"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "К какой очереди относится Promise.then-колбэк?",
+    "answer": "микрозадачи",
+    "distractors": [
+      "макрозадачи",
+      "render queue",
+      "call stack"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "К какой очереди относится setTimeout-колбэк?",
+    "answer": "макрозадачи",
+    "distractors": [
+      "микрозадачи",
+      "animation frame",
+      "main thread"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что вернёт queueMicrotask относительно текущего стека?",
+    "answer": "выполнится после стека, до макрозадач",
+    "distractors": [
+      "сразу синхронно",
+      "после макрозадач",
+      "в следующем кадре render"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Сколько раз можно зарезолвить один Promise?",
+    "answer": "1",
+    "distractors": [
+      "2",
+      "бесконечно",
+      "0"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что возвращает async-функция всегда?",
+    "answer": "Promise",
+    "distractors": [
+      "значение",
+      "undefined",
+      "Generator"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Что делает Promise.all при первом reject?",
+    "answer": "сразу реджектится",
+    "distractors": [
+      "ждёт остальные",
+      "возвращает массив",
+      "игнорирует ошибку"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой метод ждёт ВСЕ промисы и не падает на reject?",
+    "answer": "Promise.allSettled",
+    "distractors": [
+      "Promise.all",
+      "Promise.race",
+      "Promise.any"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что вернёт Promise.race?",
+    "answer": "первый завершившийся промис",
+    "distractors": [
+      "первый успешный",
+      "массив результатов",
+      "последний промис"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "На что указывает this в обычной функции при простом вызове (strict mode)?",
+    "answer": "undefined",
+    "distractors": [
+      "window",
+      "globalThis",
+      "сама функция"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что определяет this у стрелочной функции?",
+    "answer": "лексическое окружение",
+    "distractors": [
+      "объект вызова",
+      "globalThis",
+      "аргумент call"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой метод вызывает функцию, передавая аргументы массивом?",
+    "answer": "apply",
+    "distractors": [
+      "call",
+      "bind",
+      "spread"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что делает bind?",
+    "answer": "возвращает новую функцию с привязанным this",
+    "distractors": [
+      "вызывает функцию сразу",
+      "меняет this навсегда у оригинала",
+      "копирует функцию без this"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Через какое свойство объект ссылается на свой прототип (стандарт)?",
+    "answer": "Object.getPrototypeOf",
+    "distractors": [
+      "obj.prototype",
+      "obj.constructor",
+      "obj.__class__"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что вернёт let x; console.log(x) до присваивания?",
+    "answer": "undefined",
+    "distractors": [
+      "ReferenceError",
+      "null",
+      "TypeError"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Что произойдёт при доступе к let-переменной до объявления (TDZ)?",
+    "answer": "ReferenceError",
+    "distractors": [
+      "undefined",
+      "null",
+      "SyntaxError"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Поднимается ли (hoisting) объявление var?",
+    "answer": "да, со значением undefined",
+    "distractors": [
+      "нет",
+      "да, с присвоенным значением",
+      "только в strict mode"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что ловит трап get у Proxy?",
+    "answer": "чтение свойства",
+    "distractors": [
+      "запись свойства",
+      "удаление свойства",
+      "вызов функции"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Каким должен быть ключ свойства, чтобы быть полностью уникальным?",
+    "answer": "Symbol",
+    "distractors": [
+      "строка",
+      "число",
+      "BigInt"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какое поле дескриптора отвечает за возможность изменения значения?",
+    "answer": "writable",
+    "distractors": [
+      "configurable",
+      "enumerable",
+      "value"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой алгоритм лежит в основе сборщика мусора в V8?",
+    "answer": "mark-and-sweep",
+    "distractors": [
+      "reference counting",
+      "stop-and-copy only",
+      "manual free"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какая структура хранит ключи-объекты и не мешает их сборке мусора?",
+    "answer": "WeakMap",
+    "distractors": [
+      "Map",
+      "Object",
+      "Set"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что вернёт [1,2,3].includes(NaN) для массива [NaN]?",
+    "answer": "true",
+    "distractors": [
+      "false",
+      "NaN",
+      "undefined"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что вернёт typeof Symbol()?",
+    "answer": "symbol",
+    "distractors": [
+      "object",
+      "Symbol",
+      "undefined"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что вернёт typeof 10n (BigInt)?",
+    "answer": "bigint",
+    "distractors": [
+      "number",
+      "object",
+      "BigInt"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что вернёт String(null)?",
+    "answer": "'null'",
+    "distractors": [
+      "''",
+      "'undefined'",
+      "null"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что вернёт Number('')?",
+    "answer": "0",
+    "distractors": [
+      "NaN",
+      "undefined",
+      "null"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что вернёт Number('  12  ')?",
+    "answer": "12",
+    "distractors": [
+      "NaN",
+      "'12'",
+      "undefined"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что вернёт Boolean('0')?",
+    "answer": "true",
+    "distractors": [
+      "false",
+      "0",
+      "NaN"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что вернёт parseInt('08px', 10)?",
+    "answer": "8",
+    "distractors": [
+      "NaN",
+      "'8'",
+      "8px"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что вернёт [1,2] == '1,2'?",
+    "answer": "true",
+    "distractors": [
+      "false",
+      "NaN",
+      "'1,2'"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что вернёт null + 1?",
+    "answer": "1",
+    "distractors": [
+      "NaN",
+      "'null1'",
+      "null"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что вернёт undefined + 1?",
+    "answer": "NaN",
+    "distractors": [
+      "1",
+      "'undefined1'",
+      "undefined"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой оператор копирует объект поверхностно (shallow)?",
+    "answer": "{ ...obj }",
+    "distractors": [
+      "JSON.parse(JSON.stringify(obj))",
+      "structuredClone(obj)",
+      "Object.freeze(obj)"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какая функция делает глубокую копию с поддержкой Map/Date/циклов?",
+    "answer": "structuredClone",
+    "distractors": [
+      "Object.assign",
+      "JSON.parse(JSON.stringify())",
+      "{ ...obj }"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что произойдёт с undefined-полем при JSON.stringify({a: undefined})?",
+    "answer": "ключ пропадёт: '{}'",
+    "distractors": [
+      "'{\"a\":undefined}'",
+      "'{\"a\":null}'",
+      "ошибка"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что вернёт Object.is(NaN, NaN)?",
+    "answer": "true",
+    "distractors": [
+      "false",
+      "NaN",
+      "undefined"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что вернёт Object.is(-0, 0)?",
+    "answer": "false",
+    "distractors": [
+      "true",
+      "0",
+      "NaN"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "В каком порядке очередь микрозадач опустошается относительно макрозадач?",
+    "answer": "вся микроочередь между каждой макрозадачей",
+    "distractors": [
+      "одна микро на одну макро",
+      "после всех макрозадач",
+      "произвольно"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что вернёт await вне async-функции на верхнем уровне ES-модуля?",
+    "answer": "работает (top-level await)",
+    "distractors": [
+      "SyntaxError всегда",
+      "undefined",
+      "блокирует поток"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой метод Promise завершается первым УСПЕШНЫМ результатом?",
+    "answer": "Promise.any",
+    "distractors": [
+      "Promise.race",
+      "Promise.all",
+      "Promise.allSettled"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Чем реджектится Promise.any, если все промисы упали?",
+    "answer": "AggregateError",
+    "distractors": [
+      "первой ошибкой",
+      "массивом ошибок",
+      "TypeError"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что отменяет fetch через AbortController?",
+    "answer": "controller.abort()",
+    "distractors": [
+      "controller.cancel()",
+      "signal.stop()",
+      "fetch.abort()"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой объект передают в fetch для возможности отмены?",
+    "answer": "signal",
+    "distractors": [
+      "controller",
+      "token",
+      "abort"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой ошибкой реджектится промис при срабатывании AbortController?",
+    "answer": "AbortError (DOMException)",
+    "distractors": [
+      "TypeError",
+      "CancelError",
+      "TimeoutError"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что вернёт async function f(){ return 5 } — typeof f()?",
+    "answer": "object",
+    "distractors": [
+      "number",
+      "function",
+      "promise"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что делает await в цикле for..of по массиву промисов?",
+    "answer": "ждёт каждый последовательно",
+    "distractors": [
+      "ждёт все параллельно",
+      "игнорирует промисы",
+      "ошибка"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что вернёт Promise.resolve().then(()=>1).then(v=>v+1) в итоге?",
+    "answer": "Promise со значением 2",
+    "distractors": [
+      "2 синхронно",
+      "Promise со значением 1",
+      "undefined"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой трап Proxy перехватывает оператор delete?",
+    "answer": "deleteProperty",
+    "distractors": [
+      "delete",
+      "deleteProp",
+      "removeProperty"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой трап Proxy перехватывает new (вызов как конструктора)?",
+    "answer": "construct",
+    "distractors": [
+      "apply",
+      "new",
+      "constructor"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что возвращает Reflect.ownKeys(obj) в отличие от Object.keys?",
+    "answer": "все ключи, включая Symbol и неперечислимые",
+    "distractors": [
+      "только строковые перечислимые",
+      "только Symbol-ключи",
+      "только унаследованные"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что делает Object.freeze с вложенными объектами?",
+    "answer": "не замораживает их (поверхностно)",
+    "distractors": [
+      "замораживает рекурсивно",
+      "удаляет вложенные",
+      "делает их writable"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Чем seal отличается от freeze?",
+    "answer": "seal запрещает добавление/удаление, но разрешает менять значения",
+    "distractors": [
+      "seal полностью замораживает",
+      "seal только запрещает удаление",
+      "разницы нет"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какое поле дескриптора управляет видимостью в for..in?",
+    "answer": "enumerable",
+    "distractors": [
+      "writable",
+      "configurable",
+      "visible"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Можно ли изменить значение свойства с геттером, но без сеттера?",
+    "answer": "нет (молча игнорируется или TypeError в strict)",
+    "distractors": [
+      "да, всегда",
+      "да, но только раз",
+      "значение станет undefined"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что вернёт Symbol('x') === Symbol('x')?",
+    "answer": "false",
+    "distractors": [
+      "true",
+      "Symbol(x)",
+      "undefined"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Как получить ОБЩИЙ Symbol из глобального реестра?",
+    "answer": "Symbol.for('key')",
+    "distractors": [
+      "Symbol('key')",
+      "new Symbol('key')",
+      "Symbol.get('key')"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой Symbol управляет приведением объекта к примитиву?",
+    "answer": "Symbol.toPrimitive",
+    "distractors": [
+      "Symbol.iterator",
+      "Symbol.toString",
+      "Symbol.valueOf"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что вернёт class A{}; typeof A?",
+    "answer": "function",
+    "distractors": [
+      "object",
+      "class",
+      "A"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Поднимается ли (hoisting) объявление класса?",
+    "answer": "поднимается, но в TDZ (нельзя использовать до объявления)",
+    "distractors": [
+      "да, доступен до объявления",
+      "нет, как обычная переменная",
+      "только методы поднимаются"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Как вызвать конструктор родителя из дочернего класса?",
+    "answer": "super()",
+    "distractors": [
+      "parent()",
+      "this.super()",
+      "Super.call(this)"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Что произойдёт, если в конструкторе наследника обратиться к this до super()?",
+    "answer": "ReferenceError",
+    "distractors": [
+      "undefined",
+      "null",
+      "работает нормально"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какое свойство хранит объект-прототип для new у функции-конструктора?",
+    "answer": "prototype",
+    "distractors": [
+      "__proto__",
+      "constructor",
+      "[[Prototype]]"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какие поля класса по умолчанию приватны при префиксе #?",
+    "answer": "да, # — настоящие приватные поля",
+    "distractors": [
+      "нет, это соглашение",
+      "приватны только в strict",
+      "доступны через obj['#x']"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что выведет: const f = () => () => x; — это пример чего?",
+    "answer": "замыкания",
+    "distractors": [
+      "каррирования",
+      "мемоизации",
+      "хойстинга"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что характеризует чистую функцию?",
+    "answer": "нет побочных эффектов и тот же результат на тех же входах",
+    "distractors": [
+      "всегда возвращает Promise",
+      "не принимает аргументов",
+      "мутирует входные данные"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что такое каррирование?",
+    "answer": "преобразование f(a,b,c) в f(a)(b)(c)",
+    "distractors": [
+      "вызов с разным this",
+      "кэширование результата",
+      "композиция функций"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что делает compose(f, g)(x)?",
+    "answer": "f(g(x))",
+    "distractors": [
+      "g(f(x))",
+      "f(x) + g(x)",
+      "f(x); g(x)"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какова основная цель мемоизации?",
+    "answer": "кэшировать результат по аргументам",
+    "distractors": [
+      "сделать функцию чистой",
+      "привязать this",
+      "отложить выполнение"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой структурой удобно реализовать кэш мемоизации с объектными ключами?",
+    "answer": "Map",
+    "distractors": [
+      "обычный объект {}",
+      "массив",
+      "Set"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что выведет цикл с var i и setTimeout без замыкания (после ES5)?",
+    "answer": "последнее значение i много раз",
+    "distractors": [
+      "0,1,2...",
+      "undefined",
+      "ReferenceError"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Почему let в цикле for исправляет проблему замыкания в setTimeout?",
+    "answer": "создаёт новую привязку на каждой итерации",
+    "distractors": [
+      "let не поднимается",
+      "let синхронен",
+      "let делает i глобальным"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой паттерн событий позволяет одному обработчику на родителе ловить клики детей?",
+    "answer": "делегирование событий",
+    "distractors": [
+      "всплытие отмены",
+      "захват цели",
+      "debounce"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какое свойство события указывает реальный элемент, на котором произошёл клик?",
+    "answer": "event.target",
+    "distractors": [
+      "event.currentTarget",
+      "event.srcElement only",
+      "event.this"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Чем event.currentTarget отличается от event.target?",
+    "answer": "currentTarget — элемент с обработчиком, target — источник",
+    "distractors": [
+      "они идентичны",
+      "target — родитель",
+      "currentTarget всегда document"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой метод останавливает всплытие события?",
+    "answer": "stopPropagation()",
+    "distractors": [
+      "preventDefault()",
+      "stopDefault()",
+      "cancelBubble()"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что делает preventDefault()?",
+    "answer": "отменяет действие браузера по умолчанию",
+    "distractors": [
+      "останавливает всплытие",
+      "удаляет обработчик",
+      "отменяет событие у всех"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "В какой фазе по умолчанию срабатывает addEventListener без третьего аргумента?",
+    "answer": "всплытие (bubbling)",
+    "distractors": [
+      "захват (capturing)",
+      "цель только",
+      "обе фазы"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой заголовок ответа сервера разрешает CORS-запрос с домена?",
+    "answer": "Access-Control-Allow-Origin",
+    "distractors": [
+      "Origin",
+      "Access-Control-Request-Method",
+      "Cross-Origin-Resource-Policy"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой HTTP-запрос браузер шлёт перед сложным CORS-запросом?",
+    "answer": "preflight (OPTIONS)",
+    "distractors": [
+      "HEAD",
+      "CONNECT",
+      "TRACE"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Реджектится ли fetch при ответе со статусом 404?",
+    "answer": "нет, промис резолвится (res.ok === false)",
+    "distractors": [
+      "да, реджектится",
+      "выбрасывает синхронно",
+      "возвращает null"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Чем localStorage отличается от sessionStorage по времени жизни?",
+    "answer": "localStorage переживает закрытие вкладки, sessionStorage — нет",
+    "distractors": [
+      "они идентичны",
+      "localStorage чистится при перезагрузке",
+      "sessionStorage переживает закрытие"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой тип данных хранят значения в localStorage?",
+    "answer": "строки",
+    "distractors": [
+      "любые объекты",
+      "JSON автоматически",
+      "числа и строки"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой API синхронизирует анимацию с частотой обновления экрана?",
+    "answer": "requestAnimationFrame",
+    "distractors": [
+      "setInterval",
+      "setTimeout",
+      "queueMicrotask"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Когда обычно вызывается колбэк requestAnimationFrame?",
+    "answer": "перед следующей перерисовкой кадра",
+    "distractors": [
+      "сразу синхронно",
+      "через 16мс ровно",
+      "после микрозадач немедленно"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой API сообщает о появлении элемента во вьюпорте без скролл-обработчиков?",
+    "answer": "IntersectionObserver",
+    "distractors": [
+      "MutationObserver",
+      "ResizeObserver",
+      "PerformanceObserver"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой API отслеживает изменения DOM-дерева?",
+    "answer": "MutationObserver",
+    "distractors": [
+      "IntersectionObserver",
+      "ResizeObserver",
+      "DOMObserver"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что такое hidden classes в V8?",
+    "answer": "внутренняя оптимизация формы объектов для быстрого доступа",
+    "distractors": [
+      "скрытые приватные классы JS",
+      "WeakMap для прототипов",
+      "кэш регулярных выражений"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что ломает hidden-class-оптимизацию V8?",
+    "answer": "добавление свойств в разном порядке/динамически",
+    "distractors": [
+      "использование const",
+      "стрелочные функции",
+      "Object.freeze"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что делает JIT-компилятор V8?",
+    "answer": "компилирует горячий код в машинный во время выполнения",
+    "distractors": [
+      "минифицирует исходник",
+      "собирает мусор",
+      "парсит AST один раз"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что такое деоптимизация (deopt) в V8?",
+    "answer": "откат от оптимизированного кода к интерпретатору",
+    "distractors": [
+      "сборка мусора",
+      "удаление hidden class",
+      "минификация"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какая частая причина утечки памяти при работе с DOM?",
+    "answer": "необработанные слушатели на удалённых узлах / висящие ссылки",
+    "distractors": [
+      "использование const",
+      "много стрелочных функций",
+      "JSON.parse"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Почему замыкание может вызвать утечку памяти?",
+    "answer": "удерживает ссылку на внешние переменные дольше нужного",
+    "distractors": [
+      "замыкания не освобождают стек",
+      "оно дублирует объекты",
+      "оно блокирует GC всего движка"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что вернёт console.log(a); var a = 5; (hoisting)?",
+    "answer": "undefined",
+    "distractors": [
+      "5",
+      "ReferenceError",
+      "null"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Поднимается ли function declaration целиком (с телом)?",
+    "answer": "да, можно вызвать до объявления",
+    "distractors": [
+      "нет, только имя",
+      "только в strict mode",
+      "поднимается как undefined"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что произойдёт с function expression при вызове до объявления через var?",
+    "answer": "TypeError (x не функция)",
+    "distractors": [
+      "вызовется нормально",
+      "ReferenceError",
+      "undefined вернётся"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что такое лексическая область видимости?",
+    "answer": "определяется местом написания кода, а не вызова",
+    "distractors": [
+      "определяется местом вызова",
+      "это глобальный объект",
+      "это область this"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Сколько раз можно вызвать .then у уже зарезолвленного промиса?",
+    "answer": "сколько угодно, каждый получит значение",
+    "distractors": [
+      "только один раз",
+      "ноль, он завершён",
+      "два раза"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что вернёт ({}).hasOwnProperty.call(obj, 'k') в сравнении с obj.hasOwnProperty?",
+    "answer": "безопаснее, работает при Object.create(null)",
+    "distractors": [
+      "идентично всегда",
+      "медленнее и менее надёжно",
+      "вернёт прототипные ключи"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что вернёт Array.from('abc')?",
+    "answer": "['a','b','c']",
+    "distractors": [
+      "['abc']",
+      "'abc'",
+      "[97,98,99]"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Чем отличается Set от массива при добавлении дубликатов?",
+    "answer": "Set хранит только уникальные значения",
+    "distractors": [
+      "Set сортирует",
+      "Set хранит дубли как массив",
+      "разницы нет"
+    ],
+    "difficulty": 1
+  }
 ]

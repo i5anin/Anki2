@@ -41,6 +41,9 @@ export function useQuizSource(): QuizSource {
 
   const deckParam = route.params.deckId
   const categoryParam = route.params.category
+  const topicsParam = route.query.topics
+  const topics =
+    typeof topicsParam === 'string' ? topicsParam.split(',').filter((slug) => slug.length > 0) : []
 
   async function loadDeck(deckId: string): Promise<QuizQuestion[]> {
     const [deck, cards] = await Promise.all([
@@ -59,9 +62,24 @@ export function useQuizSource(): QuizSource {
     return itemsToQuestions(await quizApi.getQuestions(category))
   }
 
+  /** Сборный тест из нескольких тем: вопросы банка объединяются и тасуются. */
+  async function loadTopics(slugs: string[]): Promise<QuizQuestion[]> {
+    title.value = `Микс · ${slugs.map(categoryLabel).join(' + ')}`
+    studyTarget.value = null
+    const selected = new Set(slugs)
+    const all = await quizApi.getQuestions()
+    return itemsToQuestions(
+      all.filter((item) => selected.has(item.category)),
+      20,
+    )
+  }
+
   async function load(): Promise<QuizQuestion[]> {
     if (typeof deckParam === 'string' && deckParam.length > 0) {
       return loadDeck(deckParam)
+    }
+    if (topics.length > 0) {
+      return loadTopics(topics)
     }
     if (typeof categoryParam === 'string' && categoryParam.length > 0) {
       return loadTopic(categoryParam)

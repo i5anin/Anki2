@@ -1,38 +1,832 @@
 [
-  { "question": "Какое значение position выводит элемент из потока и позиционирует относительно ближайшего позиционированного предка?", "answer": "absolute", "distractors": ["relative", "fixed", "sticky"], "difficulty": 1 },
-  { "question": "Относительно чего позиционируется position: fixed (без transform-предков)?", "answer": "вьюпорт", "distractors": ["ближайший relative-предок", "родитель", "корень документа html"], "difficulty": 2 },
-  { "question": "Какое свойство задаёт порядок наложения элементов по оси Z?", "answer": "z-index", "distractors": ["stacking-order", "layer", "order"], "difficulty": 1 },
-  { "question": "z-index работает только если у элемента position отличен от...", "answer": "static", "distractors": ["relative", "absolute", "fixed"], "difficulty": 2 },
-  { "question": "Какое свойство (кроме position+z-index) НЕ создаёт новый контекст наложения (stacking context)?", "answer": "overflow: hidden", "distractors": ["opacity < 1", "transform: scale(1)", "will-change: opacity"], "difficulty": 3 },
-  { "question": "Какой селектор сильнее по специфичности: #id, .class или тег?", "answer": "#id", "distractors": [".class", "тег", "у всех одинаково"], "difficulty": 1 },
-  { "question": "Специфичность инлайн-стиля (атрибут style) в виде кортежа (a,b,c,d)?", "answer": "1,0,0,0", "distractors": ["0,1,0,0", "0,0,1,0", "1,1,1,1"], "difficulty": 2 },
-  { "question": "Что перебивает любую специфичность в CSS?", "answer": "!important", "distractors": ["инлайн-стиль", "#id", "all: unset"], "difficulty": 1 },
-  { "question": "Какова специфичность псевдокласса :hover в группе (классы/атрибуты/псевдоклассы)?", "answer": "как класс", "distractors": ["как id", "как тег", "нулевая"], "difficulty": 2 },
-  { "question": "Какая единица относится к размеру шрифта РОДИТЕЛЯ элемента?", "answer": "em", "distractors": ["rem", "px", "%"], "difficulty": 1 },
-  { "question": "Какая единица всегда относится к размеру шрифта корневого html?", "answer": "rem", "distractors": ["em", "ex", "ch"], "difficulty": 1 },
-  { "question": "Сколько процентов высоты вьюпорта составляет 100vh?", "answer": "100%", "distractors": ["50%", "75%", "зависит от контента"], "difficulty": 1 },
-  { "question": "Какая единица используется ТОЛЬКО внутри grid и означает долю свободного места?", "answer": "fr", "distractors": ["fx", "gr", "part"], "difficulty": 2 },
-  { "question": "Какая viewport-единица учитывает динамическое скрытие адресной строки мобильного браузера?", "answer": "dvh", "distractors": ["vh", "svh", "lvh"], "difficulty": 3 },
-  { "question": "Какое свойство flex задаёт направление главной оси?", "answer": "flex-direction", "distractors": ["flex-flow", "align-items", "justify-content"], "difficulty": 1 },
-  { "question": "Какое свойство выравнивает flex-элементы вдоль ГЛАВНОЙ оси?", "answer": "justify-content", "distractors": ["align-items", "align-content", "place-items"], "difficulty": 2 },
-  { "question": "Какое свойство выравнивает flex-элементы вдоль ПОПЕРЕЧНОЙ оси?", "answer": "align-items", "distractors": ["justify-content", "justify-items", "align-self"], "difficulty": 2 },
-  { "question": "Чему по спецификации равно дефолтное значение flex-basis?", "answer": "auto", "distractors": ["0", "100%", "content"], "difficulty": 3 },
-  { "question": "Какое свойство grid именует прямоугольные области шаблона?", "answer": "grid-template-areas", "distractors": ["grid-area", "grid-template-rows", "grid-areas"], "difficulty": 2 },
-  { "question": "Какое значение repeat() создаёт столько колонок, сколько влезет, без пустых треков?", "answer": "auto-fit", "distractors": ["auto-fill", "auto", "fit-content"], "difficulty": 3 },
-  { "question": "Какая grid-функция задаёт диапазон размера трека от минимума до максимума?", "answer": "minmax()", "distractors": ["clamp()", "fit-content()", "minmax-range()"], "difficulty": 2 },
-  { "question": "Что из перечисленного — псевдоЭЛЕМЕНТ, а не псевдокласс?", "answer": "::before", "distractors": [":hover", ":first-child", ":not()"], "difficulty": 1 },
-  { "question": "Сколько двоеточий по современному синтаксису у псевдоэлемента?", "answer": "два (::)", "distractors": ["одно (:)", "три (:::)", "зависит от браузера"], "difficulty": 2 },
-  { "question": "Какой псевдокласс выберет элемент, НЕ совпадающий с указанным селектором?", "answer": ":not()", "distractors": [":is()", ":where()", ":has()"], "difficulty": 2 },
-  { "question": "Какое значение box-sizing включает padding и border в заданную width?", "answer": "border-box", "distractors": ["content-box", "padding-box", "margin-box"], "difficulty": 1 },
-  { "question": "Какие два значения box model схлопываются (collapse) у соседних блоков?", "answer": "вертикальные margin", "distractors": ["горизонтальные margin", "padding", "border"], "difficulty": 2 },
-  { "question": "Какое свойство (отлично от auto) у дочернего блока ОТМЕНЯЕТ схлопывание его margin с родителем?", "answer": "overflow: hidden", "distractors": ["display: block", "position: static", "margin: 0"], "difficulty": 3 },
-  { "question": "Какое значение display убирает элемент из дерева отображения полностью?", "answer": "none", "distractors": ["hidden", "invisible", "collapse"], "difficulty": 1 },
-  { "question": "Какое display даёт строчный элемент, которому можно задать width/height?", "answer": "inline-block", "distractors": ["inline", "block", "flex"], "difficulty": 2 },
-  { "question": "Что в HTML по умолчанию БЛОКИРУЕТ рендеринг страницы (render-blocking)?", "answer": "CSS (link rel=stylesheet)", "distractors": ["img без lazy", "async script", "favicon"], "difficulty": 2 },
-  { "question": "Какой атрибут у тега script снимает блокировку парсинга и выполняет скрипт сразу при загрузке?", "answer": "async", "distractors": ["defer", "module", "lazy"], "difficulty": 3 },
-  { "question": "Какой разделитель используется в БЭМ между блоком и элементом?", "answer": "__", "distractors": ["--", "-", "_"], "difficulty": 1 },
-  { "question": "Какой разделитель в БЭМ обозначает модификатор?", "answer": "--", "distractors": ["__", "::", "-"], "difficulty": 2 },
-  { "question": "Какой комбинатор выбирает ТОЛЬКО прямых потомков (детей)?", "answer": ">", "distractors": ["(пробел)", "+", "~"], "difficulty": 2 },
-  { "question": "Какой комбинатор выбирает СЛЕДУЮЩИЙ соседний элемент (один)?", "answer": "+", "distractors": ["~", ">", "(пробел)"], "difficulty": 2 },
-  { "question": "Какой комбинатор выбирает все последующие соседние элементы?", "answer": "~", "distractors": ["+", ">", "(пробел)"], "difficulty": 3 }
+  {
+    "question": "Какое значение position выводит элемент из потока и позиционирует относительно ближайшего позиционированного предка?",
+    "answer": "absolute",
+    "distractors": [
+      "relative",
+      "fixed",
+      "sticky"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Относительно чего позиционируется position: fixed (без transform-предков)?",
+    "answer": "вьюпорт",
+    "distractors": [
+      "ближайший relative-предок",
+      "родитель",
+      "корень документа html"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какое свойство задаёт порядок наложения элементов по оси Z?",
+    "answer": "z-index",
+    "distractors": [
+      "stacking-order",
+      "layer",
+      "order"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "z-index работает только если у элемента position отличен от...",
+    "answer": "static",
+    "distractors": [
+      "relative",
+      "absolute",
+      "fixed"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какое свойство (кроме position+z-index) НЕ создаёт новый контекст наложения (stacking context)?",
+    "answer": "overflow: hidden",
+    "distractors": [
+      "opacity < 1",
+      "transform: scale(1)",
+      "will-change: opacity"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой селектор сильнее по специфичности: #id, .class или тег?",
+    "answer": "#id",
+    "distractors": [
+      ".class",
+      "тег",
+      "у всех одинаково"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Специфичность инлайн-стиля (атрибут style) в виде кортежа (a,b,c,d)?",
+    "answer": "1,0,0,0",
+    "distractors": [
+      "0,1,0,0",
+      "0,0,1,0",
+      "1,1,1,1"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что перебивает любую специфичность в CSS?",
+    "answer": "!important",
+    "distractors": [
+      "инлайн-стиль",
+      "#id",
+      "all: unset"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какова специфичность псевдокласса :hover в группе (классы/атрибуты/псевдоклассы)?",
+    "answer": "как класс",
+    "distractors": [
+      "как id",
+      "как тег",
+      "нулевая"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какая единица относится к размеру шрифта РОДИТЕЛЯ элемента?",
+    "answer": "em",
+    "distractors": [
+      "rem",
+      "px",
+      "%"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какая единица всегда относится к размеру шрифта корневого html?",
+    "answer": "rem",
+    "distractors": [
+      "em",
+      "ex",
+      "ch"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Сколько процентов высоты вьюпорта составляет 100vh?",
+    "answer": "100%",
+    "distractors": [
+      "50%",
+      "75%",
+      "зависит от контента"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какая единица используется ТОЛЬКО внутри grid и означает долю свободного места?",
+    "answer": "fr",
+    "distractors": [
+      "fx",
+      "gr",
+      "part"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какая viewport-единица учитывает динамическое скрытие адресной строки мобильного браузера?",
+    "answer": "dvh",
+    "distractors": [
+      "vh",
+      "svh",
+      "lvh"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какое свойство flex задаёт направление главной оси?",
+    "answer": "flex-direction",
+    "distractors": [
+      "flex-flow",
+      "align-items",
+      "justify-content"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какое свойство выравнивает flex-элементы вдоль ГЛАВНОЙ оси?",
+    "answer": "justify-content",
+    "distractors": [
+      "align-items",
+      "align-content",
+      "place-items"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какое свойство выравнивает flex-элементы вдоль ПОПЕРЕЧНОЙ оси?",
+    "answer": "align-items",
+    "distractors": [
+      "justify-content",
+      "justify-items",
+      "align-self"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Чему по спецификации равно дефолтное значение flex-basis?",
+    "answer": "auto",
+    "distractors": [
+      "0",
+      "100%",
+      "content"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какое свойство grid именует прямоугольные области шаблона?",
+    "answer": "grid-template-areas",
+    "distractors": [
+      "grid-area",
+      "grid-template-rows",
+      "grid-areas"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какое значение repeat() создаёт столько колонок, сколько влезет, без пустых треков?",
+    "answer": "auto-fit",
+    "distractors": [
+      "auto-fill",
+      "auto",
+      "fit-content"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какая grid-функция задаёт диапазон размера трека от минимума до максимума?",
+    "answer": "minmax()",
+    "distractors": [
+      "clamp()",
+      "fit-content()",
+      "minmax-range()"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что из перечисленного — псевдоЭЛЕМЕНТ, а не псевдокласс?",
+    "answer": "::before",
+    "distractors": [
+      ":hover",
+      ":first-child",
+      ":not()"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Сколько двоеточий по современному синтаксису у псевдоэлемента?",
+    "answer": "два (::)",
+    "distractors": [
+      "одно (:)",
+      "три (:::)",
+      "зависит от браузера"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой псевдокласс выберет элемент, НЕ совпадающий с указанным селектором?",
+    "answer": ":not()",
+    "distractors": [
+      ":is()",
+      ":where()",
+      ":has()"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какое значение box-sizing включает padding и border в заданную width?",
+    "answer": "border-box",
+    "distractors": [
+      "content-box",
+      "padding-box",
+      "margin-box"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какие два значения box model схлопываются (collapse) у соседних блоков?",
+    "answer": "вертикальные margin",
+    "distractors": [
+      "горизонтальные margin",
+      "padding",
+      "border"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какое свойство (отлично от auto) у дочернего блока ОТМЕНЯЕТ схлопывание его margin с родителем?",
+    "answer": "overflow: hidden",
+    "distractors": [
+      "display: block",
+      "position: static",
+      "margin: 0"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какое значение display убирает элемент из дерева отображения полностью?",
+    "answer": "none",
+    "distractors": [
+      "hidden",
+      "invisible",
+      "collapse"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какое display даёт строчный элемент, которому можно задать width/height?",
+    "answer": "inline-block",
+    "distractors": [
+      "inline",
+      "block",
+      "flex"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что в HTML по умолчанию БЛОКИРУЕТ рендеринг страницы (render-blocking)?",
+    "answer": "CSS (link rel=stylesheet)",
+    "distractors": [
+      "img без lazy",
+      "async script",
+      "favicon"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой атрибут у тега script снимает блокировку парсинга и выполняет скрипт сразу при загрузке?",
+    "answer": "async",
+    "distractors": [
+      "defer",
+      "module",
+      "lazy"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой разделитель используется в БЭМ между блоком и элементом?",
+    "answer": "__",
+    "distractors": [
+      "--",
+      "-",
+      "_"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какой разделитель в БЭМ обозначает модификатор?",
+    "answer": "--",
+    "distractors": [
+      "__",
+      "::",
+      "-"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой комбинатор выбирает ТОЛЬКО прямых потомков (детей)?",
+    "answer": ">",
+    "distractors": [
+      "(пробел)",
+      "+",
+      "~"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой комбинатор выбирает СЛЕДУЮЩИЙ соседний элемент (один)?",
+    "answer": "+",
+    "distractors": [
+      "~",
+      ">",
+      "(пробел)"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой комбинатор выбирает все последующие соседние элементы?",
+    "answer": "~",
+    "distractors": [
+      "+",
+      ">",
+      "(пробел)"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какое значение position позиционирует элемент относительно ближайшего scroll-контейнера, переключаясь между relative и fixed?",
+    "answer": "sticky",
+    "distractors": [
+      "fixed",
+      "absolute",
+      "relative"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какое свойство, применённое к предку, ломает position: fixed, делая его относительным к этому предку?",
+    "answer": "transform",
+    "distractors": [
+      "overflow",
+      "z-index",
+      "display: flex"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Создаёт ли свойство opacity: 0.99 новый stacking context?",
+    "answer": "да",
+    "distractors": [
+      "нет",
+      "только с position",
+      "только в Firefox"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Сравниваются ли z-index элементов из РАЗНЫХ stacking context напрямую?",
+    "answer": "нет, сравнивается z-index их контекстов",
+    "distractors": [
+      "да, всегда напрямую",
+      "да, по большему значению",
+      "только при одинаковом position"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Как задать запасное значение переменной: var(--c, ???)?",
+    "answer": "var(--c, red)",
+    "distractors": [
+      "var(--c | red)",
+      "var(--c default red)",
+      "var(--c) ?? red"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Каков scope кастомного свойства, объявленного в :root?",
+    "answer": "весь документ (наследуется)",
+    "distractors": [
+      "только :root",
+      "только html и body",
+      "не наследуется"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Каким правилом регистрируют типизированную CSS-переменную с syntax и initial-value?",
+    "answer": "@property",
+    "distractors": [
+      "@custom",
+      "@var",
+      "@register"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Относительно чего оценивается псевдокласс :has()?",
+    "answer": "родителя (родительский селектор)",
+    "distractors": [
+      "потомка",
+      "соседа слева",
+      "корня"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Чему равна специфичность псевдокласса :where()?",
+    "answer": "ноль",
+    "distractors": [
+      "как класс",
+      "как id",
+      "как :is()"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какую специфичность принимает :is()?",
+    "answer": "самого специфичного аргумента",
+    "distractors": [
+      "ноль",
+      "сумму аргументов",
+      "как один класс"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что выберет li:nth-child(2n)?",
+    "answer": "чётные элементы",
+    "distractors": [
+      "нечётные элементы",
+      "каждый третий",
+      "только второй"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Чем :nth-of-type(2) отличается от :nth-child(2)?",
+    "answer": "считает только элементы того же тега",
+    "distractors": [
+      "считает с конца",
+      "то же самое",
+      "игнорирует первый элемент"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что обязательно нужно у ::before, чтобы он отрисовался?",
+    "answer": "свойство content",
+    "distractors": [
+      "display: block",
+      "position: absolute",
+      "width"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой псевдоэлемент стилизует маркер/номер элемента списка li?",
+    "answer": "::marker",
+    "distractors": [
+      "::before",
+      "::list",
+      "::bullet"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой псевдокласс срабатывает на невалидном поле формы по constraint validation?",
+    "answer": ":invalid",
+    "distractors": [
+      ":error",
+      ":invalid-input",
+      ":wrong"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой псевдокласс выберет поле, которое уже трогал пользователь (отложенная валидация)?",
+    "answer": ":user-invalid",
+    "distractors": [
+      ":invalid",
+      ":touched",
+      ":dirty"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой атрибут input включает встроенную проверку по регулярному выражению?",
+    "answer": "pattern",
+    "distractors": [
+      "regex",
+      "match",
+      "validate"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой атрибут picture/img задаёт набор источников с дескрипторами ширины (w)?",
+    "answer": "srcset",
+    "distractors": [
+      "sizes",
+      "media",
+      "src-list"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой атрибут img подсказывает браузеру отображаемую ширину для выбора из srcset?",
+    "answer": "sizes",
+    "distractors": [
+      "srcset",
+      "width",
+      "media"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой тег-обёртка меняет источник по media-условию (art direction)?",
+    "answer": "picture",
+    "distractors": [
+      "figure",
+      "img srcset",
+      "object"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что у img лучше всего предотвращает скачок макета (CLS)?",
+    "answer": "указать width и height (или aspect-ratio)",
+    "distractors": [
+      "loading=lazy",
+      "decoding=async",
+      "object-fit: cover"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что произойдёт с flex-элементом при flex: 1 1 0?",
+    "answer": "растёт и сжимается от нулевой базы",
+    "distractors": [
+      "не растёт и не сжимается",
+      "только сжимается",
+      "фиксированная ширина"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какое flex-shorthand делает элемент негибким с фиксированным размером по содержимому?",
+    "answer": "flex: 0 0 auto",
+    "distractors": [
+      "flex: 1",
+      "flex: auto",
+      "flex: 1 1 0"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "При flex-grow: 2 у одного и flex-grow: 1 у другого как делится свободное место?",
+    "answer": "2 к 1",
+    "distractors": [
+      "поровну",
+      "1 к 2",
+      "первый занимает всё"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какое свойство меняет визуальный порядок отдельного flex/grid-элемента?",
+    "answer": "order",
+    "distractors": [
+      "z-index",
+      "sequence",
+      "index"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Чем auto-fill отличается от auto-fit при наличии свободного места?",
+    "answer": "auto-fill оставляет пустые треки, auto-fit их схлопывает",
+    "distractors": [
+      "они идентичны",
+      "auto-fill схлопывает треки",
+      "auto-fit добавляет пустые треки"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Как поместить grid-элемент на 2 колонки через span?",
+    "answer": "grid-column: span 2",
+    "distractors": [
+      "grid-column: 2",
+      "col-span: 2",
+      "grid-span: 2"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой инструмент изоляции переименовывает классы в уникальные хэши на сборке?",
+    "answer": "CSS Modules",
+    "distractors": [
+      "scoped (атрибуты)",
+      "Shadow DOM",
+      "@scope"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Как Vue реализует scoped-стили под капотом?",
+    "answer": "data-атрибут + атрибутный селектор",
+    "distractors": [
+      "Shadow DOM",
+      "хэш имён классов",
+      "inline-стили"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой at-rule применяет стили в зависимости от размеров РОДИТЕЛЬСКОГО контейнера?",
+    "answer": "@container",
+    "distractors": [
+      "@media",
+      "@supports",
+      "@parent"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какое свойство объявляет элемент контейнером для container queries?",
+    "answer": "container-type",
+    "distractors": [
+      "container-query",
+      "contain",
+      "container-name"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой at-rule проверяет поддержку CSS-свойства браузером?",
+    "answer": "@supports",
+    "distractors": [
+      "@media",
+      "@container",
+      "@if"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой тег семантически обозначает основной уникальный контент страницы?",
+    "answer": "main",
+    "distractors": [
+      "section",
+      "article",
+      "div"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Что предпочесть для рендера тысяч объектов в реальном времени (игры, графики)?",
+    "answer": "canvas",
+    "distractors": [
+      "SVG",
+      "много div",
+      "CSS-анимации"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Доступны ли нарисованные внутри canvas объекты дереву DOM и скринридерам?",
+    "answer": "нет (растровая картинка)",
+    "distractors": [
+      "да, как у SVG",
+      "да, через role",
+      "частично"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какие свойства анимируются «дёшево» только на композитном слое (без reflow/repaint)?",
+    "answer": "transform и opacity",
+    "distractors": [
+      "width и height",
+      "top и left",
+      "margin и padding"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Чем animation отличается от transition?",
+    "answer": "animation работает без триггера и с keyframes",
+    "distractors": [
+      "transition мощнее",
+      "это синонимы",
+      "animation нельзя зациклить"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Зачем нужно will-change?",
+    "answer": "заранее вынести элемент на отдельный слой композитинга",
+    "distractors": [
+      "ускорить reflow",
+      "отключить анимацию",
+      "повысить специфичность"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Как называется пересчёт геометрии (макета) браузером?",
+    "answer": "reflow (layout)",
+    "distractors": [
+      "repaint",
+      "composite",
+      "parse"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Изменение какого свойства вызовет repaint, но НЕ reflow?",
+    "answer": "color",
+    "distractors": [
+      "width",
+      "display",
+      "font-size"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что строит браузер из CSS параллельно с DOM для дерева рендеринга?",
+    "answer": "CSSOM",
+    "distractors": [
+      "BOM",
+      "AST",
+      "Shadow DOM"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой атрибут script выполняет скрипт после парсинга DOM, сохраняя порядок?",
+    "answer": "defer",
+    "distractors": [
+      "async",
+      "module",
+      "lazy"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что входит в «критический путь рендеринга» как блокирующие ресурсы?",
+    "answer": "HTML, CSS и синхронный JS",
+    "distractors": [
+      "только HTML",
+      "изображения",
+      "шрифты и фавикон"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что произойдёт при двух правилах с РАВНОЙ специфичностью?",
+    "answer": "победит объявленное позже в каскаде",
+    "distractors": [
+      "победит первое",
+      "оба игнорируются",
+      "победит более короткое"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой at-rule управляет приоритетом каскада именованными слоями?",
+    "answer": "@layer",
+    "distractors": [
+      "@cascade",
+      "@order",
+      "@priority"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Чья специфичность выше: один селектор по id или десять по классу?",
+    "answer": "по id",
+    "distractors": [
+      "десять классов",
+      "у них равно",
+      "зависит от порядка"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какое CSS-свойство резервирует место под медиа по соотношению сторон?",
+    "answer": "aspect-ratio",
+    "distractors": [
+      "object-fit",
+      "ratio",
+      "box-ratio"
+    ],
+    "difficulty": 2
+  }
 ]

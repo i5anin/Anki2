@@ -31,7 +31,10 @@ const {
   answer,
 } = useBlitzQuiz()
 
-onMounted(async () => {
+async function begin(): Promise<void> {
+  isLoading.value = true
+  error.value = null
+  noShort.value = false
   try {
     const questions = await load()
     if (questions.length === 0) {
@@ -44,12 +47,24 @@ onMounted(async () => {
   } finally {
     isLoading.value = false
   }
+}
+
+onMounted(() => {
+  void begin()
 })
+
+function replay(): void {
+  void begin()
+}
 
 function toStudy(): void {
   if (studyTarget.value !== null) {
     void router.push(studyTarget.value)
   }
+}
+
+function toHub(): void {
+  void router.push('/quiz')
 }
 
 function toDecks(): void {
@@ -120,12 +135,26 @@ function toDecks(): void {
         <p class="quiz-page__hint">Разминка окончена — теперь закрепи в повторении.</p>
 
         <div class="quiz-page__actions">
-          <Button v-if="studyTarget" label="К повторению" icon="pi pi-play" @click="toStudy" />
+          <Button label="Ещё раз" icon="pi pi-refresh" @click="replay" />
+          <Button
+            v-if="studyTarget"
+            label="К повторению"
+            icon="pi pi-play"
+            severity="secondary"
+            @click="toStudy"
+          />
+          <Button
+            label="К темам"
+            icon="pi pi-th-large"
+            severity="secondary"
+            outlined
+            @click="toHub"
+          />
           <Button
             label="К колодам"
             icon="pi pi-clone"
             severity="secondary"
-            outlined
+            text
             @click="toDecks"
           />
         </div>

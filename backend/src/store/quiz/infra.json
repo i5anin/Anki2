@@ -1,26 +1,612 @@
 [
-  { "question": "Какая команда переписывает историю, перенося коммиты поверх другой ветки?", "answer": "git rebase", "distractors": ["git merge", "git cherry-pick", "git reset"], "difficulty": 1 },
-  { "question": "Что создаёт merge при объединении веток (в отличие от rebase)?", "answer": "merge-коммит", "distractors": ["новый тег", "линейную историю", "stash"], "difficulty": 1 },
-  { "question": "Какая команда применяет ОДИН конкретный коммит из другой ветки?", "answer": "git cherry-pick", "distractors": ["git rebase", "git merge", "git revert"], "difficulty": 1 },
-  { "question": "Чем rebase опасен для уже запушенной общей ветки?", "answer": "переписывает историю (нужен force-push)", "distractors": ["удаляет remote", "ломает .gitignore", "сбрасывает теги"], "difficulty": 2 },
-  { "question": "От какой ветки обычно ответвляют hotfix в Git Flow?", "answer": "от main (production)", "distractors": ["от develop", "от release", "от feature"], "difficulty": 2 },
-  { "question": "Как называется единица группировки джобов в GitLab CI?", "answer": "stage", "distractors": ["job", "runner", "pipeline"], "difficulty": 1 },
-  { "question": "В каком файле описывается пайплайн GitLab CI?", "answer": ".gitlab-ci.yml", "distractors": [".gitlab.yml", "ci.config.js", ".github/workflows.yml"], "difficulty": 1 },
-  { "question": "Как ведут себя джобы внутри одного stage в GitLab CI по умолчанию?", "answer": "параллельно", "distractors": ["последовательно", "случайно", "по алфавиту"], "difficulty": 2 },
-  { "question": "Как называется удаление неиспользуемого кода из бандла?", "answer": "tree-shaking", "distractors": ["code splitting", "минификация", "hoisting"], "difficulty": 1 },
-  { "question": "Как называется разбиение бандла на части, грузимые по требованию?", "answer": "code splitting", "distractors": ["tree-shaking", "минификация", "транспиляция"], "difficulty": 1 },
-  { "question": "Что сопоставляет минифицированный код с исходником для отладки?", "answer": "source map", "distractors": ["dotfile", "manifest", "tsconfig"], "difficulty": 1 },
-  { "question": "Какой формат модулей нужен для tree-shaking?", "answer": "ESM (ES Modules)", "distractors": ["CommonJS", "AMD", "UMD"], "difficulty": 2 },
-  { "question": "Какой бандлер Vite использует для prod-сборки?", "answer": "Rollup", "distractors": ["webpack", "esbuild", "Parcel"], "difficulty": 2 },
-  { "question": "Чем Vite обеспечивает мгновенный dev-сервер без бандлинга?", "answer": "нативные ESM в браузере", "distractors": ["прекомпиляция в webpack", "AMD-загрузчик", "полный бандл при старте"], "difficulty": 2 },
-  { "question": "Какой инструмент Vite применяет для зависимостей dev-предбандла?", "answer": "esbuild", "distractors": ["Rollup", "Babel", "SWC"], "difficulty": 3 },
-  { "question": "Как называется обновление модулей без перезагрузки страницы?", "answer": "HMR (Hot Module Replacement)", "distractors": ["live reload", "SSR", "code splitting"], "difficulty": 1 },
-  { "question": "Где безопаснее всего хранить refresh-токен от XSS?", "answer": "httpOnly cookie", "distractors": ["localStorage", "sessionStorage", "переменная в JS"], "difficulty": 2 },
-  { "question": "Из скольких частей через точку состоит JWT?", "answer": "3 (header.payload.signature)", "distractors": ["2", "4", "1"], "difficulty": 2 },
-  { "question": "Какой протокол даёт делегированный доступ без передачи пароля?", "answer": "OAuth2", "distractors": ["JWT", "SAML-сессия", "Basic Auth"], "difficulty": 2 },
-  { "question": "Какой флаг cookie защищает от отправки в кросс-сайтовых запросах (CSRF)?", "answer": "SameSite", "distractors": ["httpOnly", "Secure", "Path"], "difficulty": 2 },
-  { "question": "Какая атака внедряет вредоносный скрипт на страницу?", "answer": "XSS", "distractors": ["CSRF", "CORS", "SQL-инъекция"], "difficulty": 1 },
-  { "question": "Какой механизм браузера регулирует кросс-доменные запросы заголовками?", "answer": "CORS", "distractors": ["CSP", "CSRF", "SameSite"], "difficulty": 1 },
-  { "question": "Какой заголовок ограничивает источники скриптов для защиты от XSS?", "answer": "Content-Security-Policy", "distractors": ["Access-Control-Allow-Origin", "Set-Cookie", "Strict-Transport-Security"], "difficulty": 3 },
-  { "question": "Чем JWT принципиально отличается от классической сессии?", "answer": "stateless (сервер не хранит состояние)", "distractors": ["хранится только на сервере", "не имеет срока жизни", "не подписывается"], "difficulty": 3 }
+  {
+    "question": "Какая команда переписывает историю, перенося коммиты поверх другой ветки?",
+    "answer": "git rebase",
+    "distractors": [
+      "git merge",
+      "git cherry-pick",
+      "git reset"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Что создаёт merge при объединении веток (в отличие от rebase)?",
+    "answer": "merge-коммит",
+    "distractors": [
+      "новый тег",
+      "линейную историю",
+      "stash"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какая команда применяет ОДИН конкретный коммит из другой ветки?",
+    "answer": "git cherry-pick",
+    "distractors": [
+      "git rebase",
+      "git merge",
+      "git revert"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Чем rebase опасен для уже запушенной общей ветки?",
+    "answer": "переписывает историю (нужен force-push)",
+    "distractors": [
+      "удаляет remote",
+      "ломает .gitignore",
+      "сбрасывает теги"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "От какой ветки обычно ответвляют hotfix в Git Flow?",
+    "answer": "от main (production)",
+    "distractors": [
+      "от develop",
+      "от release",
+      "от feature"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Как называется единица группировки джобов в GitLab CI?",
+    "answer": "stage",
+    "distractors": [
+      "job",
+      "runner",
+      "pipeline"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "В каком файле описывается пайплайн GitLab CI?",
+    "answer": ".gitlab-ci.yml",
+    "distractors": [
+      ".gitlab.yml",
+      "ci.config.js",
+      ".github/workflows.yml"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Как ведут себя джобы внутри одного stage в GitLab CI по умолчанию?",
+    "answer": "параллельно",
+    "distractors": [
+      "последовательно",
+      "случайно",
+      "по алфавиту"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Как называется удаление неиспользуемого кода из бандла?",
+    "answer": "tree-shaking",
+    "distractors": [
+      "code splitting",
+      "минификация",
+      "hoisting"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Как называется разбиение бандла на части, грузимые по требованию?",
+    "answer": "code splitting",
+    "distractors": [
+      "tree-shaking",
+      "минификация",
+      "транспиляция"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Что сопоставляет минифицированный код с исходником для отладки?",
+    "answer": "source map",
+    "distractors": [
+      "dotfile",
+      "manifest",
+      "tsconfig"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какой формат модулей нужен для tree-shaking?",
+    "answer": "ESM (ES Modules)",
+    "distractors": [
+      "CommonJS",
+      "AMD",
+      "UMD"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой бандлер Vite использует для prod-сборки?",
+    "answer": "Rollup",
+    "distractors": [
+      "webpack",
+      "esbuild",
+      "Parcel"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Чем Vite обеспечивает мгновенный dev-сервер без бандлинга?",
+    "answer": "нативные ESM в браузере",
+    "distractors": [
+      "прекомпиляция в webpack",
+      "AMD-загрузчик",
+      "полный бандл при старте"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой инструмент Vite применяет для зависимостей dev-предбандла?",
+    "answer": "esbuild",
+    "distractors": [
+      "Rollup",
+      "Babel",
+      "SWC"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Как называется обновление модулей без перезагрузки страницы?",
+    "answer": "HMR (Hot Module Replacement)",
+    "distractors": [
+      "live reload",
+      "SSR",
+      "code splitting"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Где безопаснее всего хранить refresh-токен от XSS?",
+    "answer": "httpOnly cookie",
+    "distractors": [
+      "localStorage",
+      "sessionStorage",
+      "переменная в JS"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Из скольких частей через точку состоит JWT?",
+    "answer": "3 (header.payload.signature)",
+    "distractors": [
+      "2",
+      "4",
+      "1"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой протокол даёт делегированный доступ без передачи пароля?",
+    "answer": "OAuth2",
+    "distractors": [
+      "JWT",
+      "SAML-сессия",
+      "Basic Auth"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой флаг cookie защищает от отправки в кросс-сайтовых запросах (CSRF)?",
+    "answer": "SameSite",
+    "distractors": [
+      "httpOnly",
+      "Secure",
+      "Path"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какая атака внедряет вредоносный скрипт на страницу?",
+    "answer": "XSS",
+    "distractors": [
+      "CSRF",
+      "CORS",
+      "SQL-инъекция"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какой механизм браузера регулирует кросс-доменные запросы заголовками?",
+    "answer": "CORS",
+    "distractors": [
+      "CSP",
+      "CSRF",
+      "SameSite"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какой заголовок ограничивает источники скриптов для защиты от XSS?",
+    "answer": "Content-Security-Policy",
+    "distractors": [
+      "Access-Control-Allow-Origin",
+      "Set-Cookie",
+      "Strict-Transport-Security"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Чем JWT принципиально отличается от классической сессии?",
+    "answer": "stateless (сервер не хранит состояние)",
+    "distractors": [
+      "хранится только на сервере",
+      "не имеет срока жизни",
+      "не подписывается"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой ключ в .gitlab-ci.yml задаёт файлы/папки, передаваемые между джобами?",
+    "answer": "artifacts",
+    "distractors": [
+      "cache",
+      "dependencies",
+      "needs"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Чем cache отличается от artifacts в GitLab CI?",
+    "answer": "cache — для ускорения (не гарантирован), artifacts — результат сборки",
+    "distractors": [
+      "cache передаётся между проектами, artifacts — нет",
+      "они идентичны",
+      "artifacts только для логов"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой ключ создаёт DAG-зависимости между джобами разных stage в GitLab CI?",
+    "answer": "needs",
+    "distractors": [
+      "dependencies",
+      "stage",
+      "rules"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой современный ключ заменяет only/except для условий запуска джоба?",
+    "answer": "rules",
+    "distractors": [
+      "when",
+      "trigger",
+      "needs"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что выполняет джоб GitLab CI с тегами/настройками окружения?",
+    "answer": "runner",
+    "distractors": [
+      "stage",
+      "pipeline",
+      "artifact"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какое значение when запускает джоб только при падении предыдущих?",
+    "answer": "on_failure",
+    "distractors": [
+      "always",
+      "manual",
+      "on_success"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Как сделать джоб запускаемым только вручную по кнопке в GitLab?",
+    "answer": "when: manual",
+    "distractors": [
+      "when: delayed",
+      "rules: manual",
+      "allow_failure: true"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой ключ задаёт переменные окружения для всего пайплайна?",
+    "answer": "variables",
+    "distractors": [
+      "env",
+      "secrets",
+      "environment"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Как пометить джоб некритичным, чтобы его падение не валило пайплайн?",
+    "answer": "allow_failure: true",
+    "distractors": [
+      "when: on_failure",
+      "retry: 0",
+      "rules: optional"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что обычно используют как точку для hotfix-ветки в production?",
+    "answer": "тег релиза (например v1.4.0)",
+    "distractors": [
+      "HEAD ветки develop",
+      "последний коммит feature",
+      "merge-коммит"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Как называется перенос исправления из main обратно в develop/старые релизы?",
+    "answer": "backport",
+    "distractors": [
+      "forward-merge",
+      "rebase",
+      "fast-forward"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой флаг cherry-pick применяет коммит без автокоммита (оставляет в индексе)?",
+    "answer": "-n (--no-commit)",
+    "distractors": [
+      "-x",
+      "--edit",
+      "--continue"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что добавляет cherry-pick -x в сообщение коммита?",
+    "answer": "ссылку на исходный хеш коммита",
+    "distractors": [
+      "авторскую подпись GPG",
+      "номер MR",
+      "тег релиза"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой подход создаёт отдельный пакет для node_modules в Rollup/Vite?",
+    "answer": "manualChunks (vendor split)",
+    "distractors": [
+      "tree-shaking",
+      "minify",
+      "preload"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой минификатор по умолчанию использует Vite для prod-сборки?",
+    "answer": "esbuild",
+    "distractors": [
+      "Terser",
+      "UglifyJS",
+      "SWC"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой минификатор включают в Vite через build.minify для лучшего сжатия?",
+    "answer": "terser",
+    "distractors": [
+      "uglify",
+      "babel-minify",
+      "rollup-terser"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Как называется загрузка модуля только при обращении к нему (динамический import)?",
+    "answer": "lazy loading",
+    "distractors": [
+      "tree-shaking",
+      "hoisting",
+      "prefetch"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какой синтаксис создаёт точку разделения кода для отдельного чанка?",
+    "answer": "import() (динамический импорт)",
+    "distractors": [
+      "require()",
+      "import * as",
+      "System.import только"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Почему CommonJS плохо поддаётся tree-shaking?",
+    "answer": "динамические/runtime require, неанализируемые статически",
+    "distractors": [
+      "нет минификации",
+      "не поддерживает default export",
+      "слишком большой размер"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой префикс обязателен у переменной окружения, чтобы Vite отдал её в клиент?",
+    "answer": "VITE_",
+    "distractors": [
+      "VUE_APP_",
+      "REACT_APP_",
+      "ENV_"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Через какой объект в коде доступны env-переменные Vite?",
+    "answer": "import.meta.env",
+    "distractors": [
+      "process.env",
+      "globalThis.env",
+      "window.env"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какая секция Vite-конфига настраивает проксирование запросов dev-сервера?",
+    "answer": "server.proxy",
+    "distractors": [
+      "build.proxy",
+      "resolve.proxy",
+      "define.proxy"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Где в Vite задают alias путей (например @ -> /src)?",
+    "answer": "resolve.alias",
+    "distractors": [
+      "build.alias",
+      "server.alias",
+      "define.alias"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Зачем proxy в dev-сервере при разработке фронта с отдельным API?",
+    "answer": "обойти CORS, проксируя запросы на бэкенд",
+    "distractors": [
+      "ускорить HMR",
+      "минифицировать бандл",
+      "включить SSR"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой шаг OAuth2 PKCE защищает публичные клиенты (SPA) от перехвата кода?",
+    "answer": "code_verifier/code_challenge",
+    "distractors": [
+      "client_secret",
+      "state-параметр",
+      "nonce в JWT"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой grant type OAuth2 рекомендован для SPA сегодня?",
+    "answer": "Authorization Code + PKCE",
+    "distractors": [
+      "Implicit",
+      "Client Credentials",
+      "Password (ROPC)"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что делает access-токен короткоживущим безопаснее при компрометации?",
+    "answer": "малое время жизни (быстро протухает)",
+    "distractors": [
+      "хранение в localStorage",
+      "отсутствие подписи",
+      "большой payload"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Почему Implicit flow OAuth2 считается устаревшим для SPA?",
+    "answer": "токен попадает в URL/историю, уязвим к утечке",
+    "distractors": [
+      "не поддерживает refresh",
+      "требует client_secret",
+      "не работает с HTTPS"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какое значение SameSite полностью запрещает отправку cookie в кросс-сайт?",
+    "answer": "Strict",
+    "distractors": [
+      "Lax",
+      "None",
+      "Secure"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой флаг cookie обязателен вместе с SameSite=None?",
+    "answer": "Secure (только HTTPS)",
+    "distractors": [
+      "httpOnly",
+      "Path=/",
+      "Domain"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой типичный приём защиты от CSRF, кроме SameSite-cookie?",
+    "answer": "CSRF-токен (synchronizer token)",
+    "distractors": [
+      "CSP-заголовок",
+      "httpOnly cookie",
+      "CORS preflight"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой HTTP-метод браузер шлёт как preflight в CORS перед сложным запросом?",
+    "answer": "OPTIONS",
+    "distractors": [
+      "HEAD",
+      "GET",
+      "TRACE"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой заголовок ответа в CORS разрешает отправку cookie с кросс-доменным запросом?",
+    "answer": "Access-Control-Allow-Credentials: true",
+    "distractors": [
+      "Access-Control-Allow-Origin: *",
+      "Set-Cookie",
+      "Allow: credentials"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Почему Access-Control-Allow-Origin: * несовместим с credentials?",
+    "answer": "при credentials нужен конкретный origin, не wildcard",
+    "distractors": [
+      "wildcard отключает HTTPS",
+      "credentials требуют POST",
+      "это требование CSP"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Главная защита от хранимого XSS при выводе пользовательских данных?",
+    "answer": "экранирование/санитизация вывода",
+    "distractors": [
+      "httpOnly cookie",
+      "SameSite=Strict",
+      "CORS-заголовки"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какая директива CSP блокирует inline-скрипты по умолчанию?",
+    "answer": "script-src (без unsafe-inline)",
+    "distractors": [
+      "default-src *",
+      "frame-ancestors",
+      "connect-src"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что делает в Vue потенциально опасным к XSS вставку HTML?",
+    "answer": "v-html (рендерит сырой HTML)",
+    "distractors": [
+      "v-bind",
+      "v-text",
+      "интерполяция {{ }}"
+    ],
+    "difficulty": 2
+  }
 ]

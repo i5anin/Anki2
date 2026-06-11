@@ -1,18 +1,562 @@
 [
-  { "question": "Какая роль в Scrum отвечает за приоритеты и содержание бэклога продукта?", "answer": "Product Owner", "distractors": ["Scrum Master", "Tech Lead", "Команда разработки"], "difficulty": 1 },
-  { "question": "Что в Kanban ограничивает число задач в работе одновременно?", "answer": "WIP-лимит", "distractors": ["Velocity", "Спринт-капасити", "Burndown"], "difficulty": 1 },
-  { "question": "По закону Литтла среднее время прохождения = WIP делить на что?", "answer": "Throughput (пропускную способность)", "distractors": ["Velocity", "Длину спринта", "Lead time"], "difficulty": 3 },
-  { "question": "Есть ли в Kanban фиксированные по длине итерации (спринты)?", "answer": "Нет", "distractors": ["Да, 2 недели", "Да, 1 месяц", "Да, но гибкие"], "difficulty": 2 },
-  { "question": "Из каких множителей складывается RICE-скор (Reach, Impact, Confidence)?", "answer": "R×I×C / Effort", "distractors": ["R+I+C−Effort", "(R+I)×C×Effort", "R×I / (C×Effort)"], "difficulty": 2 },
-  { "question": "Что в WSJF делят на длительность работы (Job Duration)?", "answer": "Cost of Delay", "distractors": ["Business Value", "Reach", "Story Points"], "difficulty": 3 },
-  { "question": "Что означает буква M в MoSCoW (категория обязательного)?", "answer": "Must have", "distractors": ["May have", "Most valuable", "Minimum viable"], "difficulty": 1 },
-  { "question": "Какая модель структурирует обратную связь как Situation-Behavior-Impact?", "answer": "SBI", "distractors": ["STAR", "GROW", "SMART"], "difficulty": 2 },
-  { "question": "Какой набор из 4 метрик оценивает эффективность доставки ПО (DORA)?", "answer": "DORA", "distractors": ["Velocity", "SPACE", "OKR"], "difficulty": 2 },
-  { "question": "Можно ли сравнивать velocity (стори-поинты) разных команд между собой?", "answer": "Нет", "distractors": ["Да", "Да, после нормализации", "Только в одном спринте"], "difficulty": 2 },
-  { "question": "Сколько человек в команде по правилу «двух пицц» (примерно)?", "answer": "до ~8", "distractors": ["до ~15", "до ~20", "до ~4"], "difficulty": 2 },
-  { "question": "По формуле n(n−1)/2 сколько каналов связи в команде из 6 человек?", "answer": "15", "distractors": ["12", "30", "21"], "difficulty": 3 },
-  { "question": "Что гласит закон Брукса о добавлении людей в опаздывающий проект?", "answer": "Задерживает его ещё сильнее", "distractors": ["Ускоряет пропорционально", "Не влияет на сроки", "Линейно сокращает срок"], "difficulty": 2 },
-  { "question": "Какая модель управления изменениями описывается шагами Awareness-Desire-Knowledge-Ability-Reinforcement?", "answer": "ADKAR", "distractors": ["Kotter", "PDCA", "RACI"], "difficulty": 3 },
-  { "question": "Как называется риск из-за концентрации критичных знаний у одного человека?", "answer": "Bus factor", "distractors": ["Tech debt", "Single point of contact", "Knowledge silo"], "difficulty": 2 },
-  { "question": "Какое церемония Scrum служит для улучшения процесса по итогам спринта?", "answer": "Ретроспектива", "distractors": ["Daily Standup", "Sprint Review", "Планирование"], "difficulty": 1 }
+  {
+    "question": "Какая роль в Scrum отвечает за приоритеты и содержание бэклога продукта?",
+    "answer": "Product Owner",
+    "distractors": [
+      "Scrum Master",
+      "Tech Lead",
+      "Команда разработки"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Что в Kanban ограничивает число задач в работе одновременно?",
+    "answer": "WIP-лимит",
+    "distractors": [
+      "Velocity",
+      "Спринт-капасити",
+      "Burndown"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "По закону Литтла среднее время прохождения = WIP делить на что?",
+    "answer": "Throughput (пропускную способность)",
+    "distractors": [
+      "Velocity",
+      "Длину спринта",
+      "Lead time"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Есть ли в Kanban фиксированные по длине итерации (спринты)?",
+    "answer": "Нет",
+    "distractors": [
+      "Да, 2 недели",
+      "Да, 1 месяц",
+      "Да, но гибкие"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Из каких множителей складывается RICE-скор (Reach, Impact, Confidence)?",
+    "answer": "R×I×C / Effort",
+    "distractors": [
+      "R+I+C−Effort",
+      "(R+I)×C×Effort",
+      "R×I / (C×Effort)"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что в WSJF делят на длительность работы (Job Duration)?",
+    "answer": "Cost of Delay",
+    "distractors": [
+      "Business Value",
+      "Reach",
+      "Story Points"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что означает буква M в MoSCoW (категория обязательного)?",
+    "answer": "Must have",
+    "distractors": [
+      "May have",
+      "Most valuable",
+      "Minimum viable"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какая модель структурирует обратную связь как Situation-Behavior-Impact?",
+    "answer": "SBI",
+    "distractors": [
+      "STAR",
+      "GROW",
+      "SMART"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой набор из 4 метрик оценивает эффективность доставки ПО (DORA)?",
+    "answer": "DORA",
+    "distractors": [
+      "Velocity",
+      "SPACE",
+      "OKR"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Можно ли сравнивать velocity (стори-поинты) разных команд между собой?",
+    "answer": "Нет",
+    "distractors": [
+      "Да",
+      "Да, после нормализации",
+      "Только в одном спринте"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Сколько человек в команде по правилу «двух пицц» (примерно)?",
+    "answer": "до ~8",
+    "distractors": [
+      "до ~15",
+      "до ~20",
+      "до ~4"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "По формуле n(n−1)/2 сколько каналов связи в команде из 6 человек?",
+    "answer": "15",
+    "distractors": [
+      "12",
+      "30",
+      "21"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что гласит закон Брукса о добавлении людей в опаздывающий проект?",
+    "answer": "Задерживает его ещё сильнее",
+    "distractors": [
+      "Ускоряет пропорционально",
+      "Не влияет на сроки",
+      "Линейно сокращает срок"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какая модель управления изменениями описывается шагами Awareness-Desire-Knowledge-Ability-Reinforcement?",
+    "answer": "ADKAR",
+    "distractors": [
+      "Kotter",
+      "PDCA",
+      "RACI"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Как называется риск из-за концентрации критичных знаний у одного человека?",
+    "answer": "Bus factor",
+    "distractors": [
+      "Tech debt",
+      "Single point of contact",
+      "Knowledge silo"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какое церемония Scrum служит для улучшения процесса по итогам спринта?",
+    "answer": "Ретроспектива",
+    "distractors": [
+      "Daily Standup",
+      "Sprint Review",
+      "Планирование"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Кто в Scrum отвечает за устранение препятствий и соблюдение процесса, но НЕ управляет людьми?",
+    "answer": "Scrum Master",
+    "distractors": [
+      "Product Owner",
+      "Project Manager",
+      "Team Lead"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какова максимальная рекомендуемая длительность спринта в Scrum Guide?",
+    "answer": "1 месяц",
+    "distractors": [
+      "2 недели",
+      "1 неделя",
+      "6 недель"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что является основным артефактом обязательства (commitment) для Sprint Backlog?",
+    "answer": "Sprint Goal",
+    "distractors": [
+      "Definition of Done",
+      "Product Goal",
+      "Velocity"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Как называется поток-метрика Kanban: сколько задач завершается за единицу времени?",
+    "answer": "Throughput",
+    "distractors": [
+      "Lead time",
+      "Cycle time",
+      "WIP"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Чем cycle time отличается от lead time в Kanban?",
+    "answer": "Cycle — с начала работы, lead — с момента запроса",
+    "distractors": [
+      "Это одно и то же",
+      "Lead — с начала работы, cycle — с запроса",
+      "Cycle измеряется в поинтах"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какую кумулятивную диаграмму используют для анализа потока и узких мест в Kanban?",
+    "answer": "CFD (Cumulative Flow Diagram)",
+    "distractors": [
+      "Burndown",
+      "Burnup",
+      "Gantt"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "К чему по закону Литтла приводит рост WIP при неизменной пропускной способности?",
+    "answer": "Растёт время прохождения",
+    "distractors": [
+      "Падает время прохождения",
+      "Растёт throughput",
+      "Ничего не меняется"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что означает буква R в аббревиатуре RICE?",
+    "answer": "Reach (охват)",
+    "distractors": [
+      "Risk (риск)",
+      "Revenue (выручка)",
+      "Resource (ресурс)"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Из чего складывается Cost of Delay в WSJF (3 компонента)?",
+    "answer": "Business Value + Time Criticality + Risk/Opportunity",
+    "distractors": [
+      "Reach + Impact + Confidence",
+      "Value + Effort + Risk",
+      "Urgency + Severity + Scope"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какую категорию MoSCoW обычно жёстко ограничивают по объёму (~20% усилий)?",
+    "answer": "Could have",
+    "distractors": [
+      "Must have",
+      "Should have",
+      "Won't have"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что означает W в MoSCoW — «Won't have»?",
+    "answer": "Не сейчас (вне текущего скоупа)",
+    "distractors": [
+      "Никогда не будет реализовано",
+      "Желательно иметь",
+      "Обязательно к выпуску"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какая техника приоритизации сопоставляет ценность и усилия по матрице 2×2?",
+    "answer": "Value vs Effort (Impact/Effort)",
+    "distractors": [
+      "RICE",
+      "MoSCoW",
+      "Kano"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какая модель делит фичи на Basic, Performance и Delighters?",
+    "answer": "Модель Кано (Kano)",
+    "distractors": [
+      "MoSCoW",
+      "RICE",
+      "WSJF"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какова основная цель регулярных встреч 1-on-1 руководителя с сотрудником?",
+    "answer": "Это время сотрудника: рост, блокеры, фидбек",
+    "distractors": [
+      "Отчёт о статусе задач",
+      "Раздача поручений",
+      "Контроль присутствия"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "В модели SBI что означает буква I?",
+    "answer": "Impact (влияние/последствие)",
+    "distractors": [
+      "Intention (намерение)",
+      "Improvement (улучшение)",
+      "Issue (проблема)"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Почему в SBI важно описывать Behavior, а не личностные качества?",
+    "answer": "Поведение наблюдаемо и не вызывает защитную реакцию",
+    "distractors": [
+      "Так короче формулировка",
+      "Личность важнее поведения",
+      "Так требует Scrum"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Как расшифровывается аббревиатура IDP в развитии сотрудника?",
+    "answer": "Individual Development Plan",
+    "distractors": [
+      "Internal Delivery Process",
+      "Iterative Design Pattern",
+      "Incident Detection Plan"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какая модель коучингового диалога состоит из шагов Goal-Reality-Options-Will?",
+    "answer": "GROW",
+    "distractors": [
+      "SBI",
+      "ADKAR",
+      "STAR"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Чем менторство принципиально отличается от коучинга?",
+    "answer": "Ментор делится опытом/советами, коуч задаёт вопросы",
+    "distractors": [
+      "Это синонимы",
+      "Коуч даёт советы, ментор спрашивает",
+      "Менторство всегда платное"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какую структуру ответа кандидата на поведенческом интервью описывает STAR?",
+    "answer": "Situation, Task, Action, Result",
+    "distractors": [
+      "Skill, Talent, Attitude, Role",
+      "Story, Task, Answer, Review",
+      "Situation, Test, Analyze, Report"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что такое structured interview и зачем он нужен?",
+    "answer": "Одни вопросы/критерии всем — снижает bias",
+    "distractors": [
+      "Свободная беседа без плана",
+      "Только техническое задание",
+      "Интервью без участия HR"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Как называется искажение, когда первое впечатление о кандидате влияет на всю оценку?",
+    "answer": "Halo effect (эффект ореола)",
+    "distractors": [
+      "Confirmation bias",
+      "Recency bias",
+      "Anchoring"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какое искажение проявляется в найме «похожих на себя» кандидатов?",
+    "answer": "Affinity bias (similarity bias)",
+    "distractors": [
+      "Halo effect",
+      "Recency bias",
+      "Dunning-Kruger"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что обычно считают red flag на интервью сеньора?",
+    "answer": "Перекладывание всех провалов на других",
+    "distractors": [
+      "Признание ошибок",
+      "Уточняющие вопросы",
+      "Несогласие с интервьюером по сути"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Зачем на собеседовании задавать вопросы по реальному прошлому опыту, а не гипотетике?",
+    "answer": "Прошлое поведение лучше предсказывает будущее",
+    "distractors": [
+      "Так быстрее",
+      "Гипотетику нельзя проверить кодом",
+      "Это требование GDPR"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Сколько уникальных каналов связи в команде из 10 человек по n(n−1)/2?",
+    "answer": "45",
+    "distractors": [
+      "90",
+      "55",
+      "36"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что произойдёт с числом каналов связи при росте команды с 5 до 10 человек?",
+    "answer": "Вырастет с 10 до 45 (более чем в 4 раза)",
+    "distractors": [
+      "Удвоится (с 10 до 20)",
+      "Вырастет вдвое линейно",
+      "Останется примерно тем же"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какое минимальное значение bus factor считается тревожным сигналом?",
+    "answer": "1",
+    "distractors": [
+      "3",
+      "5",
+      "10"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какая практика напрямую повышает bus factor команды?",
+    "answer": "Шеринг знаний (pair/mob, ротация, документация)",
+    "distractors": [
+      "Закрепление модулей за одним владельцем",
+      "Сокращение онбординга",
+      "Запрет код-ревью"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Является ли velocity (стори-поинты) метрикой для KPI/премий разработчиков?",
+    "answer": "Нет, это инструмент планирования команды",
+    "distractors": [
+      "Да, идеальный KPI",
+      "Да, для сравнения людей",
+      "Да, для оценки качества"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какая из метрик DORA измеряет процент откатов/инцидентов после релиза?",
+    "answer": "Change Failure Rate",
+    "distractors": [
+      "Lead Time for Changes",
+      "Deployment Frequency",
+      "MTTR"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что измеряет метрика DORA «MTTR»?",
+    "answer": "Время восстановления после сбоя",
+    "distractors": [
+      "Частоту деплоев",
+      "Долю провальных изменений",
+      "Время написания кода"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой фреймворк метрик инженерной продуктивности предложил Google как альтернативу узким KPI?",
+    "answer": "SPACE",
+    "distractors": [
+      "DORA",
+      "OKR",
+      "RACI"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "С какого этапа ADKAR начинается успешное изменение?",
+    "answer": "Awareness (осознание необходимости)",
+    "distractors": [
+      "Ability (способность)",
+      "Desire (желание)",
+      "Reinforcement (закрепление)"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что обеспечивает шаг Reinforcement в модели ADKAR?",
+    "answer": "Закрепление, чтобы не было отката к старому",
+    "distractors": [
+      "Начальное осознание проблемы",
+      "Обучение новым навыкам",
+      "Желание меняться"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Сколько шагов в модели управления изменениями Коттера (Kotter)?",
+    "answer": "8",
+    "distractors": [
+      "5",
+      "4",
+      "6"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какая матрица распределяет роли как Responsible, Accountable, Consulted, Informed?",
+    "answer": "RACI",
+    "distractors": [
+      "ADKAR",
+      "RICE",
+      "SBI"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Сколько человек могут быть Accountable за одну задачу в матрице RACI?",
+    "answer": "Ровно один",
+    "distractors": [
+      "Несколько",
+      "Минимум двое",
+      "Вся команда"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что описывает закон Конвея применительно к структуре команд?",
+    "answer": "Архитектура системы повторяет структуру коммуникаций",
+    "distractors": [
+      "Больше людей — быстрее проект",
+      "Качество растёт с размером команды",
+      "WIP равен throughput"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что такое Definition of Ready (DoR) в отличие от Definition of Done?",
+    "answer": "Критерии готовности задачи к взятию в работу",
+    "distractors": [
+      "Критерии завершённости задачи",
+      "Список багов спринта",
+      "Цель спринта"
+    ],
+    "difficulty": 2
+  }
 ]

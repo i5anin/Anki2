@@ -1,32 +1,742 @@
 [
-  { "question": "Какому типу можно присвоить любое значение, ОТКЛЮЧАЯ проверку типов?", "answer": "any", "distractors": ["unknown", "never", "object"], "difficulty": 1 },
-  { "question": "Какой тип безопаснее any: принимает всё, но требует сужения перед использованием?", "answer": "unknown", "distractors": ["any", "never", "void"], "difficulty": 1 },
-  { "question": "Какой тип означает «значение не может существовать» (например, функция, которая всегда кидает)?", "answer": "never", "distractors": ["void", "undefined", "unknown"], "difficulty": 2 },
-  { "question": "Что вернёт функция с типом возврата void, если она просто завершилась без return?", "answer": "undefined", "distractors": ["null", "void", "never"], "difficulty": 2 },
-  { "question": "Что можно объявить через type, но НЕЛЬЗЯ через interface?", "answer": "union", "distractors": ["методы", "наследование", "опциональные поля"], "difficulty": 2 },
-  { "question": "Какая возможность есть у interface, но отсутствует у type (одноимённые объединяются)?", "answer": "declaration merging", "distractors": ["extends", "generics", "indexed access"], "difficulty": 3 },
-  { "question": "Какой оператор задаёт union-тип (или то, или другое)?", "answer": "|", "distractors": ["&", "?", "||"], "difficulty": 1 },
-  { "question": "Какой оператор задаёт intersection-тип (и то, и другое одновременно)?", "answer": "&", "distractors": ["|", "&&", "+"], "difficulty": 1 },
-  { "question": "Чему равен тип { a: number } & { a: string } по полю a?", "answer": "never", "distractors": ["any", "string | number", "unknown"], "difficulty": 3 },
-  { "question": "Какой оператор-страж проверяет принадлежность объекта классу для сужения типа?", "answer": "instanceof", "distractors": ["typeof", "in", "is"], "difficulty": 2 },
-  { "question": "Какое ключевое слово в сигнатуре делает функцию пользовательским type guard (arg is Type)?", "answer": "is", "distractors": ["as", "in", "typeof"], "difficulty": 2 },
-  { "question": "Какой оператор проверяет наличие свойства в объекте для сужения union?", "answer": "in", "distractors": ["of", "is", "has"], "difficulty": 2 },
-  { "question": "Какое ключевое слово ограничивает параметр-дженерик (T extends ...)?", "answer": "extends", "distractors": ["implements", "is", "keyof"], "difficulty": 1 },
-  { "question": "Какой оператор возвращает union строковых литералов из ключей типа?", "answer": "keyof", "distractors": ["typeof", "valueof", "in"], "difficulty": 2 },
-  { "question": "Какой оператор в позиции типа берёт ТИП из существующей переменной/значения?", "answer": "typeof", "distractors": ["keyof", "instanceof", "as"], "difficulty": 2 },
-  { "question": "Как называется конструкция T[K] — доступ к типу значения по ключу?", "answer": "indexed access", "distractors": ["mapped type", "conditional type", "keyof"], "difficulty": 3 },
-  { "question": "Какое ключевое слово в conditional-типе извлекает тип в ветке true?", "answer": "infer", "distractors": ["extends", "keyof", "typeof"], "difficulty": 3 },
-  { "question": "Какой синтаксис используется для conditional type?", "answer": "T extends U ? X : Y", "distractors": ["T is U ? X : Y", "T ? U : X", "T extends U ? X"], "difficulty": 2 },
-  { "question": "Какая utility делает все свойства типа необязательными?", "answer": "Partial", "distractors": ["Required", "Readonly", "Pick"], "difficulty": 1 },
-  { "question": "Какая utility делает все свойства типа обязательными (убирает ?)?", "answer": "Required", "distractors": ["Partial", "Readonly", "NonNullable"], "difficulty": 2 },
-  { "question": "Какая utility выбирает подмножество свойств по ключам: Pick<T, K>?", "answer": "Pick", "distractors": ["Omit", "Record", "Extract"], "difficulty": 1 },
-  { "question": "Какая utility удаляет указанные свойства из типа: Omit<T, K>?", "answer": "Omit", "distractors": ["Pick", "Exclude", "Partial"], "difficulty": 1 },
-  { "question": "Какая utility строит тип-словарь с заданными ключами и типом значений: Record<K, V>?", "answer": "Record", "distractors": ["Map", "Pick", "Index"], "difficulty": 2 },
-  { "question": "Какая utility делает все свойства неизменяемыми (только для чтения)?", "answer": "Readonly", "distractors": ["Const", "Frozen", "Required"], "difficulty": 1 },
-  { "question": "Какая utility исключает типы из union: Exclude<A, B>?", "answer": "Exclude", "distractors": ["Omit", "Extract", "NonNullable"], "difficulty": 2 },
-  { "question": "Какая utility убирает null и undefined из типа?", "answer": "NonNullable", "distractors": ["Exclude", "Required", "Omit"], "difficulty": 2 },
-  { "question": "Какой strict-флаг включает проверку на null/undefined?", "answer": "strictNullChecks", "distractors": ["noImplicitAny", "strictFunctionTypes", "noUncheckedIndexedAccess"], "difficulty": 2 },
-  { "question": "Какой флаг запрещает неявный тип any у параметров и переменных?", "answer": "noImplicitAny", "distractors": ["strictNullChecks", "strict", "alwaysStrict"], "difficulty": 2 },
-  { "question": "Какой флаг-«зонтик» включает сразу весь набор строгих проверок?", "answer": "strict", "distractors": ["strictAll", "noImplicitAny", "strictNullChecks"], "difficulty": 1 },
-  { "question": "Чему по умолчанию выводится тип в catch (e) в строгом режиме современного TS?", "answer": "unknown", "distractors": ["any", "Error", "never"], "difficulty": 3 }
+  {
+    "question": "Какому типу можно присвоить любое значение, ОТКЛЮЧАЯ проверку типов?",
+    "answer": "any",
+    "distractors": [
+      "unknown",
+      "never",
+      "object"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какой тип безопаснее any: принимает всё, но требует сужения перед использованием?",
+    "answer": "unknown",
+    "distractors": [
+      "any",
+      "never",
+      "void"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какой тип означает «значение не может существовать» (например, функция, которая всегда кидает)?",
+    "answer": "never",
+    "distractors": [
+      "void",
+      "undefined",
+      "unknown"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что вернёт функция с типом возврата void, если она просто завершилась без return?",
+    "answer": "undefined",
+    "distractors": [
+      "null",
+      "void",
+      "never"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что можно объявить через type, но НЕЛЬЗЯ через interface?",
+    "answer": "union",
+    "distractors": [
+      "методы",
+      "наследование",
+      "опциональные поля"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какая возможность есть у interface, но отсутствует у type (одноимённые объединяются)?",
+    "answer": "declaration merging",
+    "distractors": [
+      "extends",
+      "generics",
+      "indexed access"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой оператор задаёт union-тип (или то, или другое)?",
+    "answer": "|",
+    "distractors": [
+      "&",
+      "?",
+      "||"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какой оператор задаёт intersection-тип (и то, и другое одновременно)?",
+    "answer": "&",
+    "distractors": [
+      "|",
+      "&&",
+      "+"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Чему равен тип { a: number } & { a: string } по полю a?",
+    "answer": "never",
+    "distractors": [
+      "any",
+      "string | number",
+      "unknown"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой оператор-страж проверяет принадлежность объекта классу для сужения типа?",
+    "answer": "instanceof",
+    "distractors": [
+      "typeof",
+      "in",
+      "is"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какое ключевое слово в сигнатуре делает функцию пользовательским type guard (arg is Type)?",
+    "answer": "is",
+    "distractors": [
+      "as",
+      "in",
+      "typeof"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой оператор проверяет наличие свойства в объекте для сужения union?",
+    "answer": "in",
+    "distractors": [
+      "of",
+      "is",
+      "has"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какое ключевое слово ограничивает параметр-дженерик (T extends ...)?",
+    "answer": "extends",
+    "distractors": [
+      "implements",
+      "is",
+      "keyof"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какой оператор возвращает union строковых литералов из ключей типа?",
+    "answer": "keyof",
+    "distractors": [
+      "typeof",
+      "valueof",
+      "in"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой оператор в позиции типа берёт ТИП из существующей переменной/значения?",
+    "answer": "typeof",
+    "distractors": [
+      "keyof",
+      "instanceof",
+      "as"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Как называется конструкция T[K] — доступ к типу значения по ключу?",
+    "answer": "indexed access",
+    "distractors": [
+      "mapped type",
+      "conditional type",
+      "keyof"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какое ключевое слово в conditional-типе извлекает тип в ветке true?",
+    "answer": "infer",
+    "distractors": [
+      "extends",
+      "keyof",
+      "typeof"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой синтаксис используется для conditional type?",
+    "answer": "T extends U ? X : Y",
+    "distractors": [
+      "T is U ? X : Y",
+      "T ? U : X",
+      "T extends U ? X"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какая utility делает все свойства типа необязательными?",
+    "answer": "Partial",
+    "distractors": [
+      "Required",
+      "Readonly",
+      "Pick"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какая utility делает все свойства типа обязательными (убирает ?)?",
+    "answer": "Required",
+    "distractors": [
+      "Partial",
+      "Readonly",
+      "NonNullable"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какая utility выбирает подмножество свойств по ключам: Pick<T, K>?",
+    "answer": "Pick",
+    "distractors": [
+      "Omit",
+      "Record",
+      "Extract"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какая utility удаляет указанные свойства из типа: Omit<T, K>?",
+    "answer": "Omit",
+    "distractors": [
+      "Pick",
+      "Exclude",
+      "Partial"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какая utility строит тип-словарь с заданными ключами и типом значений: Record<K, V>?",
+    "answer": "Record",
+    "distractors": [
+      "Map",
+      "Pick",
+      "Index"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какая utility делает все свойства неизменяемыми (только для чтения)?",
+    "answer": "Readonly",
+    "distractors": [
+      "Const",
+      "Frozen",
+      "Required"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какая utility исключает типы из union: Exclude<A, B>?",
+    "answer": "Exclude",
+    "distractors": [
+      "Omit",
+      "Extract",
+      "NonNullable"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какая utility убирает null и undefined из типа?",
+    "answer": "NonNullable",
+    "distractors": [
+      "Exclude",
+      "Required",
+      "Omit"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой strict-флаг включает проверку на null/undefined?",
+    "answer": "strictNullChecks",
+    "distractors": [
+      "noImplicitAny",
+      "strictFunctionTypes",
+      "noUncheckedIndexedAccess"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой флаг запрещает неявный тип any у параметров и переменных?",
+    "answer": "noImplicitAny",
+    "distractors": [
+      "strictNullChecks",
+      "strict",
+      "alwaysStrict"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой флаг-«зонтик» включает сразу весь набор строгих проверок?",
+    "answer": "strict",
+    "distractors": [
+      "strictAll",
+      "noImplicitAny",
+      "strictNullChecks"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Чему по умолчанию выводится тип в catch (e) в строгом режиме современного TS?",
+    "answer": "unknown",
+    "distractors": [
+      "any",
+      "Error",
+      "never"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Можно ли вызвать значение типа unknown как функцию без сужения: u()?",
+    "answer": "Нет, ошибка компиляции",
+    "distractors": [
+      "Да, как при any",
+      "Да, но с warning",
+      "Только если u не null"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой тип является подтипом ВСЕХ типов (нижний тип, bottom type)?",
+    "answer": "never",
+    "distractors": [
+      "unknown",
+      "any",
+      "void"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой тип является супертипом всех типов (top type), но при этом безопасен?",
+    "answer": "unknown",
+    "distractors": [
+      "any",
+      "object",
+      "never"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Чему равен never в union: string | never?",
+    "answer": "string",
+    "distractors": [
+      "never",
+      "string | never",
+      "unknown"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какую структурную особенность TS описывает принцип «утиной типизации» (структурная совместимость)?",
+    "answer": "structural typing",
+    "distractors": [
+      "nominal typing",
+      "duck overloading",
+      "covariance"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Как заставить два структурно одинаковых типа быть несовместимыми (имитация nominal)?",
+    "answer": "branded/opaque типы",
+    "distractors": [
+      "private поля интерфейса",
+      "declare merging",
+      "satisfies"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что выведет тип x: const x = 5 (literal в const)?",
+    "answer": "5",
+    "distractors": [
+      "number",
+      "5 | number",
+      "readonly 5"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой оператор фиксирует литеральные типы и readonly у объекта/массива?",
+    "answer": "as const",
+    "distractors": [
+      "satisfies",
+      "as readonly",
+      "const assertion type"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какое ключевое слово (TS 4.9) проверяет соответствие типу, НЕ расширяя выведенный тип?",
+    "answer": "satisfies",
+    "distractors": [
+      "as const",
+      "implements",
+      "is"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что делает assertion function (asserts x is T) при прохождении?",
+    "answer": "сужает тип x в остатке области",
+    "distractors": [
+      "возвращает boolean",
+      "кидает всегда",
+      "приводит x через as"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой тип возврата ОБЯЗАН быть у функции вида asserts cond?",
+    "answer": "void",
+    "distractors": [
+      "boolean",
+      "never",
+      "this is T"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Как объявить дефолтный тип-параметр дженерика?",
+    "answer": "<T = Default>",
+    "distractors": [
+      "<T extends Default>",
+      "<T: Default>",
+      "<T ?? Default>"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "В <T extends keyof U> чем ограничен T?",
+    "answer": "ключами U",
+    "distractors": [
+      "значениями U",
+      "типом U",
+      "any"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что выведет ReturnType<typeof fn> для fn: () => string?",
+    "answer": "string",
+    "distractors": [
+      "() => string",
+      "void",
+      "typeof fn"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Через какое ключевое слово реализован ReturnType<T> внутри (T extends (...args:any)=>infer R)?",
+    "answer": "infer",
+    "distractors": [
+      "keyof",
+      "typeof",
+      "extends"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что извлекает Parameters<T> из функции?",
+    "answer": "кортеж типов аргументов",
+    "distractors": [
+      "тип возврата",
+      "union аргументов",
+      "число аргументов"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какая utility извлекает тип, к которому резолвится Promise?",
+    "answer": "Awaited",
+    "distractors": [
+      "Resolve",
+      "PromiseType",
+      "Unwrap"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что вернёт Awaited<Promise<Promise<number>>>?",
+    "answer": "number",
+    "distractors": [
+      "Promise<number>",
+      "Promise<Promise<number>>",
+      "unknown"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой модификатор в mapped type ДЕЛАЕТ свойства опциональными?",
+    "answer": "+?",
+    "distractors": [
+      "-?",
+      "?:",
+      "readonly?"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Как в mapped type УБРАТЬ readonly со всех свойств?",
+    "answer": "-readonly",
+    "distractors": [
+      "+readonly",
+      "!readonly",
+      "mutable"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какое ключевое слово переименовывает ключи в mapped type (TS 4.1)?",
+    "answer": "as",
+    "distractors": [
+      "in",
+      "rename",
+      "key"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что произойдёт с union при подстановке в conditional type вида T extends U ? ...?",
+    "answer": "распределение по членам union",
+    "distractors": [
+      "проверка union целиком",
+      "ошибка компиляции",
+      "сведение к never"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Как ОТКЛЮЧИТЬ дистрибутивность conditional type над union?",
+    "answer": "обернуть в кортеж [T] extends [U]",
+    "distractors": [
+      "добавить infer",
+      "использовать &",
+      "as const"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какое поле обычно делают общим литералом в discriminated union для сужения?",
+    "answer": "tag/kind (literal-дискриминант)",
+    "distractors": [
+      "id: number",
+      "any-поле",
+      "необязательное поле"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой приём в default-ветке switch гарантирует exhaustiveness-проверку?",
+    "answer": "assertNever(x: never)",
+    "distractors": [
+      "return null",
+      "throw как any",
+      "x as unknown"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Если в exhaustive switch забыли вариант, какой тип попадёт в never-параметр и вызовет ошибку?",
+    "answer": "оставшийся непокрытый член union",
+    "distractors": [
+      "never",
+      "any",
+      "unknown"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой флаг добавляет undefined к типу при доступе по индексу arr[i]/obj[key]?",
+    "answer": "noUncheckedIndexedAccess",
+    "distractors": [
+      "strictNullChecks",
+      "noImplicitAny",
+      "exactOptionalPropertyTypes"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой флаг различает поле, отсутствующее, и поле со значением undefined?",
+    "answer": "exactOptionalPropertyTypes",
+    "distractors": [
+      "strictNullChecks",
+      "noUncheckedIndexedAccess",
+      "strictPropertyInitialization"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой флаг делает проверку bivariance параметров функций строгой (контравариантной)?",
+    "answer": "strictFunctionTypes",
+    "distractors": [
+      "strictBindCallApply",
+      "strictNullChecks",
+      "noImplicitAny"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Как ведут себя параметры функций по вариантности при strictFunctionTypes?",
+    "answer": "контравариантно",
+    "distractors": [
+      "ковариантно",
+      "инвариантно",
+      "бивариантно"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какова вариантность типа возвращаемого значения функции?",
+    "answer": "ковариантна",
+    "distractors": [
+      "контравариантна",
+      "инвариантна",
+      "бивариантна"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Почему методы (синтаксис method(): T) проверяются бивариантно даже при strictFunctionTypes?",
+    "answer": "для совместимости (исторически, напр. массивы)",
+    "distractors": [
+      "это баг компилятора",
+      "методы всегда контравариантны",
+      "из-за declaration merging"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что вернёт Extract<'a' | 'b' | 'c', 'a' | 'c'>?",
+    "answer": "'a' | 'c'",
+    "distractors": [
+      "'b'",
+      "never",
+      "'a' | 'b' | 'c'"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Чему равен keyof any?",
+    "answer": "string | number | symbol",
+    "distractors": [
+      "string",
+      "any",
+      "never"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой тип у пустого объекта-литерала позволяет присвоить почти всё, кроме null/undefined?",
+    "answer": "{} (пустой тип)",
+    "distractors": [
+      "object",
+      "unknown",
+      "Record<string, never>"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Чем тип object отличается от {} и Object?",
+    "answer": "запрещает примитивы (только non-primitive)",
+    "distractors": [
+      "разрешает только классы",
+      "это синоним {}",
+      "разрешает null"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что делает оператор non-null assertion (postfix !)?",
+    "answer": "убирает null|undefined из типа",
+    "distractors": [
+      "приводит к never",
+      "бросает при null",
+      "делает поле обязательным"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Безопасен ли постфиксный ! во время выполнения (runtime)?",
+    "answer": "Нет, это только подсказка компилятору",
+    "distractors": [
+      "Да, бросает TypeError при null",
+      "Да, заменяет на undefined",
+      "Да, генерирует guard"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой синтаксис type assertion предпочтителен в .tsx вместо <T>x?",
+    "answer": "x as T",
+    "distractors": [
+      "<T>x",
+      "x is T",
+      "T(x)"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что выведет тип const t = [1, 'a'] as const?",
+    "answer": "readonly [1, \"a\"]",
+    "distractors": [
+      "(number | string)[]",
+      "[number, string]",
+      "readonly (number|string)[]"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Как тип Function (с большой буквы) оценивается линтерами TS?",
+    "answer": "небезопасный/нежелательный",
+    "distractors": [
+      "рекомендуемый",
+      "строго типизированный",
+      "эквивалент (...a)=>void"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что вернёт T['length'] для T = readonly [string, number]?",
+    "answer": "2",
+    "distractors": [
+      "number",
+      "1 | 2",
+      "never"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой тип у переменной после const isStr = typeof x === 'string' внутри if(isStr)?",
+    "answer": "не сужается (alias не работает как guard в старых TS)",
+    "distractors": [
+      "string гарантированно",
+      "unknown",
+      "never"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Можно ли расширять (extends) несколько интерфейсов одним interface?",
+    "answer": "Да, через запятую",
+    "distractors": [
+      "Нет, только один",
+      "Только через &",
+      "Только implements"
+    ],
+    "difficulty": 2
+  }
 ]

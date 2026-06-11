@@ -1,18 +1,422 @@
 [
-  { "question": "Какая аббревиатура описывает критерии хорошей пользовательской истории (Independent, Negotiable, Valuable, Estimable, Small, Testable)?", "answer": "INVEST", "distractors": ["SMART", "DEEP", "MoSCoW"], "difficulty": 1 },
-  { "question": "Какая нотация описывает критерии приёмки через шаги Given/When/Then?", "answer": "Gherkin", "distractors": ["Markdown", "BPMN", "PlantUML"], "difficulty": 1 },
-  { "question": "Какое ключевое слово в Gherkin задаёт предусловие (исходный контекст) сценария?", "answer": "Given", "distractors": ["When", "Then", "Scenario"], "difficulty": 1 },
-  { "question": "Какое ключевое слово в Gherkin описывает ожидаемый результат?", "answer": "Then", "distractors": ["When", "Given", "And"], "difficulty": 1 },
-  { "question": "Как называется относительная единица оценки сложности задачи (не время)?", "answer": "Story point", "distractors": ["Человеко-час", "Idea point", "Velocity"], "difficulty": 1 },
-  { "question": "Какой ряд чисел чаще всего используют для покера планирования (story points)?", "answer": "Фибоначчи", "distractors": ["Степени двойки", "Простые числа", "Арифметическая прогрессия"], "difficulty": 2 },
-  { "question": "Как называется метод грубой относительной оценки размерами S/M/L/XL?", "answer": "T-shirt sizing", "distractors": ["PERT", "Planning poker", "Affinity mapping"], "difficulty": 2 },
-  { "question": "В трёхточечной оценке PERT по формуле (O+4M+P)/6 что означает буква M?", "answer": "Most likely (наиболее вероятная)", "distractors": ["Maximum (максимум)", "Mean (среднее)", "Median (медиана)"], "difficulty": 3 },
-  { "question": "Как называется короткое исследование с ограничением по времени для снижения технической неопределённости?", "answer": "Spike", "distractors": ["PoC", "MVP", "Epic"], "difficulty": 2 },
-  { "question": "Какая аббревиатура означает доказательство принципиальной осуществимости идеи?", "answer": "PoC", "distractors": ["MVP", "POV", "RFC"], "difficulty": 2 },
-  { "question": "Как называется документ, фиксирующий принятое архитектурное решение и его контекст?", "answer": "ADR", "distractors": ["RFC", "PRD", "SRS"], "difficulty": 2 },
-  { "question": "Как называется разбиение задачи на тонкие сквозные срезы функциональности, дающие ценность?", "answer": "Вертикальная декомпозиция", "distractors": ["Горизонтальная декомпозиция", "Каскадная декомпозиция", "Спайк-декомпозиция"], "difficulty": 2 },
-  { "question": "Как называется когнитивное искажение, при котором сроки систематически недооцениваются?", "answer": "Planning fallacy", "distractors": ["Парадокс Стёрджена", "Закон Хофштадтера", "Эффект Даннинга-Крюгера"], "difficulty": 3 },
-  { "question": "Как называется резерв времени, закладываемый на покрытие рисков и неопределённости в оценке?", "answer": "Буфер", "distractors": ["Velocity", "Спринт", "Burndown"], "difficulty": 1 },
-  { "question": "Какая техника приоритизации требований делит их на Must/Should/Could/Won't?", "answer": "MoSCoW", "distractors": ["INVEST", "RICE", "Kano"], "difficulty": 2 },
-  { "question": "Что в формуле PERT по (O+4M+P)/6 обозначает буква P?", "answer": "Pessimistic (пессимистичная)", "distractors": ["Probable (вероятная)", "Planned (плановая)", "Primary (основная)"], "difficulty": 3 }
+  {
+    "question": "Какая аббревиатура описывает критерии хорошей пользовательской истории (Independent, Negotiable, Valuable, Estimable, Small, Testable)?",
+    "answer": "INVEST",
+    "distractors": [
+      "SMART",
+      "DEEP",
+      "MoSCoW"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какая нотация описывает критерии приёмки через шаги Given/When/Then?",
+    "answer": "Gherkin",
+    "distractors": [
+      "Markdown",
+      "BPMN",
+      "PlantUML"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какое ключевое слово в Gherkin задаёт предусловие (исходный контекст) сценария?",
+    "answer": "Given",
+    "distractors": [
+      "When",
+      "Then",
+      "Scenario"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какое ключевое слово в Gherkin описывает ожидаемый результат?",
+    "answer": "Then",
+    "distractors": [
+      "When",
+      "Given",
+      "And"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Как называется относительная единица оценки сложности задачи (не время)?",
+    "answer": "Story point",
+    "distractors": [
+      "Человеко-час",
+      "Idea point",
+      "Velocity"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какой ряд чисел чаще всего используют для покера планирования (story points)?",
+    "answer": "Фибоначчи",
+    "distractors": [
+      "Степени двойки",
+      "Простые числа",
+      "Арифметическая прогрессия"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Как называется метод грубой относительной оценки размерами S/M/L/XL?",
+    "answer": "T-shirt sizing",
+    "distractors": [
+      "PERT",
+      "Planning poker",
+      "Affinity mapping"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "В трёхточечной оценке PERT по формуле (O+4M+P)/6 что означает буква M?",
+    "answer": "Most likely (наиболее вероятная)",
+    "distractors": [
+      "Maximum (максимум)",
+      "Mean (среднее)",
+      "Median (медиана)"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Как называется короткое исследование с ограничением по времени для снижения технической неопределённости?",
+    "answer": "Spike",
+    "distractors": [
+      "PoC",
+      "MVP",
+      "Epic"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какая аббревиатура означает доказательство принципиальной осуществимости идеи?",
+    "answer": "PoC",
+    "distractors": [
+      "MVP",
+      "POV",
+      "RFC"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Как называется документ, фиксирующий принятое архитектурное решение и его контекст?",
+    "answer": "ADR",
+    "distractors": [
+      "RFC",
+      "PRD",
+      "SRS"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Как называется разбиение задачи на тонкие сквозные срезы функциональности, дающие ценность?",
+    "answer": "Вертикальная декомпозиция",
+    "distractors": [
+      "Горизонтальная декомпозиция",
+      "Каскадная декомпозиция",
+      "Спайк-декомпозиция"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Как называется когнитивное искажение, при котором сроки систематически недооцениваются?",
+    "answer": "Planning fallacy",
+    "distractors": [
+      "Парадокс Стёрджена",
+      "Закон Хофштадтера",
+      "Эффект Даннинга-Крюгера"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Как называется резерв времени, закладываемый на покрытие рисков и неопределённости в оценке?",
+    "answer": "Буфер",
+    "distractors": [
+      "Velocity",
+      "Спринт",
+      "Burndown"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какая техника приоритизации требований делит их на Must/Should/Could/Won't?",
+    "answer": "MoSCoW",
+    "distractors": [
+      "INVEST",
+      "RICE",
+      "Kano"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что в формуле PERT по (O+4M+P)/6 обозначает буква P?",
+    "answer": "Pessimistic (пессимистичная)",
+    "distractors": [
+      "Probable (вероятная)",
+      "Planned (плановая)",
+      "Primary (основная)"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой тип вопроса (открытый/закрытый) предпочтителен при уточнении неясной постановки задачи, чтобы вытащить максимум контекста?",
+    "answer": "Открытый",
+    "distractors": [
+      "Закрытый (да/нет)",
+      "Наводящий",
+      "Риторический"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Что в Gherkin-сценарии задаётся ключевым словом When?",
+    "answer": "Действие/событие, запускающее поведение",
+    "distractors": [
+      "Предусловие/контекст",
+      "Ожидаемый результат",
+      "Очистка после теста"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какое ключевое слово Gherkin позволяет добавить шаг к предыдущему (Given/When/Then) без повтора ключевого слова?",
+    "answer": "And",
+    "distractors": [
+      "With",
+      "Also",
+      "Plus"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Как в Gherkin запускается сценарий, повторяемый для множества наборов данных из таблицы Examples?",
+    "answer": "Scenario Outline",
+    "distractors": [
+      "Scenario Loop",
+      "Data Table",
+      "Background"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какое ключевое слово Gherkin задаёт общие предусловия для всех сценариев в файле .feature?",
+    "answer": "Background",
+    "distractors": [
+      "Setup",
+      "BeforeEach",
+      "Given All"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "В шаблоне истории «Как <роль>, я хочу <цель>, чтобы <ценность>» какая часть отвечает на вопрос ЗАЧЕМ?",
+    "answer": "чтобы <ценность>",
+    "distractors": [
+      "Как <роль>",
+      "я хочу <цель>",
+      "критерии приёмки"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Почему относительные story points устойчивее человеко-часов при оценке командой?",
+    "answer": "Не зависят от скорости конкретного исполнителя",
+    "distractors": [
+      "Точнее в днях",
+      "Их проще биллить заказчику",
+      "Учитывают отпуска"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Как называется метрика «сколько story points команда закрывает за спринт», используемая для прогноза?",
+    "answer": "Velocity",
+    "distractors": [
+      "Throughput",
+      "Lead time",
+      "Cycle time"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Чему равно стандартное отклонение в PERT по формуле (P − O) / 6, если оптимистичная 2, пессимистичная 14 дней?",
+    "answer": "2 дня",
+    "distractors": [
+      "1 день",
+      "3 дня",
+      "6 дней"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Чему равна ожидаемая оценка PERT при O=2, M=5, P=14 (формула (O+4M+P)/6)?",
+    "answer": "6",
+    "distractors": [
+      "7",
+      "5",
+      "8"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какое распределение вероятностей моделирует трёхточечную оценку PERT?",
+    "answer": "Бета-распределение",
+    "distractors": [
+      "Нормальное",
+      "Равномерное",
+      "Пуассона"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Буква 'I' в INVEST требует, чтобы история была…",
+    "answer": "Independent (независимой)",
+    "distractors": [
+      "Integrated (интегрированной)",
+      "Iterative (итеративной)",
+      "Immutable (неизменной)"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какая буква INVEST нарушается, если историю нельзя оценить из-за слишком большой неопределённости?",
+    "answer": "E — Estimable",
+    "distractors": [
+      "V — Valuable",
+      "S — Small",
+      "T — Testable"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Как называется приём декомпозиции, когда из большой истории выделяют сначала «счастливый путь», а краевые случаи откладывают?",
+    "answer": "По бизнес-правилам / happy path первым",
+    "distractors": [
+      "По слоям архитектуры",
+      "По компонентам UI",
+      "По спринтам"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Почему вертикальный срез предпочтительнее горизонтального (нарезка по слоям) для ранней ценности?",
+    "answer": "Даёт работающую сквозную функцию пользователю",
+    "distractors": [
+      "Меньше кода в сумме",
+      "Не требует тестов",
+      "Удобнее для бэкенда"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Как называется свойство архитектурного решения, показывающее, насколько дёшево его откатить, если оно окажется неверным?",
+    "answer": "Обратимость",
+    "distractors": [
+      "Идемпотентность",
+      "Связность",
+      "Сопряжённость"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Безос делит решения на два типа: легко обратимые «двери в обе стороны» и необратимые. Как называется второй тип?",
+    "answer": "One-way door (дверь в одну сторону)",
+    "distractors": [
+      "Trap door",
+      "Dead end",
+      "Hard gate"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что в ADR обязательно фиксируют помимо самого решения, чтобы будущий читатель понял мотивацию?",
+    "answer": "Контекст и рассмотренные альтернативы",
+    "distractors": [
+      "Только финальный код",
+      "Имена всех разработчиков",
+      "Бюджет проекта"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Чем PoC принципиально отличается от MVP по цели?",
+    "answer": "PoC проверяет осуществимость, MVP — ценность для рынка",
+    "distractors": [
+      "PoC крупнее MVP",
+      "PoC всегда идёт в прод",
+      "Разницы нет"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что обязательно ограничивают в spike, чтобы исследование не превратилось в бесконечное?",
+    "answer": "Время (timebox)",
+    "distractors": [
+      "Число коммитов",
+      "Размер команды",
+      "Объём документации"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Как называется закон «работа занимает всё отведённое на неё время», усугубляющий раздутые оценки?",
+    "answer": "Закон Паркинсона",
+    "distractors": [
+      "Закон Брукса",
+      "Закон Литтла",
+      "Закон Конвея"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой приём борьбы с planning fallacy опирается на статистику похожих прошлых проектов, а не на детали текущего?",
+    "answer": "Reference class forecasting",
+    "distractors": [
+      "Inside view",
+      "Planning poker",
+      "Buffer padding"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Как называется техника «представь, что проект провалился, и объясни почему» для раннего выявления рисков?",
+    "answer": "Pre-mortem",
+    "distractors": [
+      "Post-mortem",
+      "Retrospective",
+      "Risk poker"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Где, согласно методу критической цепи (CCPM), концентрируют общий резерв вместо буферов в каждой задаче?",
+    "answer": "Project buffer в конце цепи",
+    "distractors": [
+      "В каждой задаче поровну",
+      "В начале проекта",
+      "В буфере заказчика"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Две оси матрицы оценки рисков — это вероятность и…",
+    "answer": "Влияние (impact)",
+    "distractors": [
+      "Стоимость отката",
+      "Срок",
+      "Приоритет"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какая стратегия реагирования на риск означает полный отказ от рискованного действия/решения?",
+    "answer": "Избегание (avoid)",
+    "distractors": [
+      "Передача (transfer)",
+      "Снижение (mitigate)",
+      "Принятие (accept)"
+    ],
+    "difficulty": 2
+  }
 ]

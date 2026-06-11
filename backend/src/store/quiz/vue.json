@@ -1,36 +1,802 @@
 [
-  { "question": "Какая функция Composition API создаёт реактивную ссылку на примитив?", "answer": "ref", "distractors": ["reactive", "computed", "toRef"], "difficulty": 1 },
-  { "question": "Что используют для реактивного объекта (не примитива) в Composition API?", "answer": "reactive", "distractors": ["ref", "shallowRef", "readonly"], "difficulty": 1 },
-  { "question": "Как обращаются к значению ref внутри <script setup>?", "answer": ".value", "distractors": [".current", ".get()", "[0]"], "difficulty": 1 },
-  { "question": "Какой механизм лежит в основе реактивности Vue 3?", "answer": "Proxy", "distractors": ["Object.defineProperty", "getter/setter через defineProperty", "dirty checking"], "difficulty": 2 },
-  { "question": "Что использовал для реактивности Vue 2?", "answer": "Object.defineProperty", "distractors": ["Proxy", "Reflect", "MutationObserver"], "difficulty": 2 },
-  { "question": "Какое API создаёт производное кэшируемое значение?", "answer": "computed", "distractors": ["watch", "watchEffect", "reactive"], "difficulty": 1 },
-  { "question": "Какой наблюдатель сам собирает зависимости и сразу запускается?", "answer": "watchEffect", "distractors": ["watch", "computed", "watchPostEffect"], "difficulty": 2 },
-  { "question": "Какой хук-аналог mounted в Composition API?", "answer": "onMounted", "distractors": ["onCreated", "onBeforeMount", "mounted"], "difficulty": 1 },
-  { "question": "Какой хук вызывается перед размонтированием компонента?", "answer": "onBeforeUnmount", "distractors": ["onUnmounted", "onBeforeDestroy", "beforeUnmount"], "difficulty": 2 },
-  { "question": "Есть ли в Composition API аналог хука created?", "answer": "нет", "distractors": ["да, onCreated", "да, onBeforeCreate", "да, setup-hook"], "difficulty": 3 },
-  { "question": "Какой макрос объявляет входные параметры в <script setup>?", "answer": "defineProps", "distractors": ["defineEmits", "defineModel", "props()"], "difficulty": 1 },
-  { "question": "Какой макрос объявляет испускаемые события в <script setup>?", "answer": "defineEmits", "distractors": ["defineProps", "defineExpose", "emits()"], "difficulty": 1 },
-  { "question": "Какое событие по умолчанию слушает v-model на компоненте во Vue 3?", "answer": "update:modelValue", "distractors": ["input", "update:value", "change"], "difficulty": 2 },
-  { "question": "Какое имя prop по умолчанию связывает v-model во Vue 3?", "answer": "modelValue", "distractors": ["value", "model", "modelVal"], "difficulty": 2 },
-  { "question": "Какой макрос (стабилен с 3.4) упрощает двустороннюю привязку в компоненте?", "answer": "defineModel", "distractors": ["defineProps", "defineV-model", "useModel"], "difficulty": 3 },
-  { "question": "Какой элемент определяет место вставки контента слота?", "answer": "slot", "distractors": ["template", "teleport", "component"], "difficulty": 1 },
-  { "question": "Что используют для передачи данных из дочернего компонента в слот?", "answer": "scoped slots", "distractors": ["props", "provide", "named slots"], "difficulty": 2 },
-  { "question": "Какая пара API передаёт данные вглубь дерева без props?", "answer": "provide/inject", "distractors": ["props/emits", "ref/reactive", "expose/use"], "difficulty": 2 },
-  { "question": "Какая директива условно рендерит элемент (не вставляя его в DOM)?", "answer": "v-if", "distractors": ["v-show", "v-for", "v-bind"], "difficulty": 1 },
-  { "question": "Какая директива скрывает элемент через display:none, не удаляя из DOM?", "answer": "v-show", "distractors": ["v-if", "v-hide", "v-cloak"], "difficulty": 1 },
-  { "question": "Какой атрибут обязателен при использовании v-for для производительности?", "answer": "key", "distractors": ["index", "id", "ref"], "difficulty": 1 },
-  { "question": "Какое сокращение у директивы v-bind?", "answer": ":", "distractors": ["@", "#", "."], "difficulty": 1 },
-  { "question": "Какое сокращение у директивы v-on?", "answer": "@", "distractors": [":", "#", "&"], "difficulty": 1 },
-  { "question": "Какой приоритет выше при совместном использовании на одном элементе во Vue 3?", "answer": "v-if", "distractors": ["v-for", "одинаковый", "v-bind"], "difficulty": 3 },
-  { "question": "Какая функция Pinia определяет стор?", "answer": "defineStore", "distractors": ["createStore", "useStore", "defineState"], "difficulty": 1 },
-  { "question": "Чем в Pinia заменили мутации из Vuex?", "answer": "actions", "distractors": ["mutations", "setters", "reducers"], "difficulty": 2 },
-  { "question": "Какой аналог computed в сторе Pinia?", "answer": "getters", "distractors": ["computed", "state", "selectors"], "difficulty": 2 },
-  { "question": "Какой guard vue-router срабатывает перед каждым переходом глобально?", "answer": "beforeEach", "distractors": ["beforeResolve", "beforeEnter", "afterEach"], "difficulty": 2 },
-  { "question": "Какой guard задаётся прямо в объекте маршрута?", "answer": "beforeEnter", "distractors": ["beforeEach", "beforeRouteEnter", "afterEach"], "difficulty": 3 },
-  { "question": "Какой компонент кэширует неактивные динамические компоненты?", "answer": "keep-alive", "distractors": ["Suspense", "Teleport", "Transition"], "difficulty": 2 },
-  { "question": "Какая директива рендерит элемент ровно один раз и кэширует?", "answer": "v-once", "distractors": ["v-memo", "v-pre", "v-cloak"], "difficulty": 2 },
-  { "question": "Какая директива (3.2+) кэширует поддерево по массиву зависимостей?", "answer": "v-memo", "distractors": ["v-once", "v-cache", "v-static"], "difficulty": 3 },
-  { "question": "Какая функция откладывает колбэк до следующего обновления DOM?", "answer": "nextTick", "distractors": ["setTimeout", "requestAnimationFrame", "flushSync"], "difficulty": 2 },
-  { "question": "Какие хуки keep-alive вызываются при активации/деактивации?", "answer": "onActivated/onDeactivated", "distractors": ["onMounted/onUnmounted", "onShow/onHide", "onResume/onPause"], "difficulty": 3 }
+  {
+    "question": "Какая функция Composition API создаёт реактивную ссылку на примитив?",
+    "answer": "ref",
+    "distractors": [
+      "reactive",
+      "computed",
+      "toRef"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Что используют для реактивного объекта (не примитива) в Composition API?",
+    "answer": "reactive",
+    "distractors": [
+      "ref",
+      "shallowRef",
+      "readonly"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Как обращаются к значению ref внутри <script setup>?",
+    "answer": ".value",
+    "distractors": [
+      ".current",
+      ".get()",
+      "[0]"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какой механизм лежит в основе реактивности Vue 3?",
+    "answer": "Proxy",
+    "distractors": [
+      "Object.defineProperty",
+      "getter/setter через defineProperty",
+      "dirty checking"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что использовал для реактивности Vue 2?",
+    "answer": "Object.defineProperty",
+    "distractors": [
+      "Proxy",
+      "Reflect",
+      "MutationObserver"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какое API создаёт производное кэшируемое значение?",
+    "answer": "computed",
+    "distractors": [
+      "watch",
+      "watchEffect",
+      "reactive"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какой наблюдатель сам собирает зависимости и сразу запускается?",
+    "answer": "watchEffect",
+    "distractors": [
+      "watch",
+      "computed",
+      "watchPostEffect"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой хук-аналог mounted в Composition API?",
+    "answer": "onMounted",
+    "distractors": [
+      "onCreated",
+      "onBeforeMount",
+      "mounted"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какой хук вызывается перед размонтированием компонента?",
+    "answer": "onBeforeUnmount",
+    "distractors": [
+      "onUnmounted",
+      "onBeforeDestroy",
+      "beforeUnmount"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Есть ли в Composition API аналог хука created?",
+    "answer": "нет",
+    "distractors": [
+      "да, onCreated",
+      "да, onBeforeCreate",
+      "да, setup-hook"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой макрос объявляет входные параметры в <script setup>?",
+    "answer": "defineProps",
+    "distractors": [
+      "defineEmits",
+      "defineModel",
+      "props()"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какой макрос объявляет испускаемые события в <script setup>?",
+    "answer": "defineEmits",
+    "distractors": [
+      "defineProps",
+      "defineExpose",
+      "emits()"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какое событие по умолчанию слушает v-model на компоненте во Vue 3?",
+    "answer": "update:modelValue",
+    "distractors": [
+      "input",
+      "update:value",
+      "change"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какое имя prop по умолчанию связывает v-model во Vue 3?",
+    "answer": "modelValue",
+    "distractors": [
+      "value",
+      "model",
+      "modelVal"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой макрос (стабилен с 3.4) упрощает двустороннюю привязку в компоненте?",
+    "answer": "defineModel",
+    "distractors": [
+      "defineProps",
+      "defineV-model",
+      "useModel"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой элемент определяет место вставки контента слота?",
+    "answer": "slot",
+    "distractors": [
+      "template",
+      "teleport",
+      "component"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Что используют для передачи данных из дочернего компонента в слот?",
+    "answer": "scoped slots",
+    "distractors": [
+      "props",
+      "provide",
+      "named slots"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какая пара API передаёт данные вглубь дерева без props?",
+    "answer": "provide/inject",
+    "distractors": [
+      "props/emits",
+      "ref/reactive",
+      "expose/use"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какая директива условно рендерит элемент (не вставляя его в DOM)?",
+    "answer": "v-if",
+    "distractors": [
+      "v-show",
+      "v-for",
+      "v-bind"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какая директива скрывает элемент через display:none, не удаляя из DOM?",
+    "answer": "v-show",
+    "distractors": [
+      "v-if",
+      "v-hide",
+      "v-cloak"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какой атрибут обязателен при использовании v-for для производительности?",
+    "answer": "key",
+    "distractors": [
+      "index",
+      "id",
+      "ref"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какое сокращение у директивы v-bind?",
+    "answer": ":",
+    "distractors": [
+      "@",
+      "#",
+      "."
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какое сокращение у директивы v-on?",
+    "answer": "@",
+    "distractors": [
+      ":",
+      "#",
+      "&"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какой приоритет выше при совместном использовании на одном элементе во Vue 3?",
+    "answer": "v-if",
+    "distractors": [
+      "v-for",
+      "одинаковый",
+      "v-bind"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какая функция Pinia определяет стор?",
+    "answer": "defineStore",
+    "distractors": [
+      "createStore",
+      "useStore",
+      "defineState"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Чем в Pinia заменили мутации из Vuex?",
+    "answer": "actions",
+    "distractors": [
+      "mutations",
+      "setters",
+      "reducers"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой аналог computed в сторе Pinia?",
+    "answer": "getters",
+    "distractors": [
+      "computed",
+      "state",
+      "selectors"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой guard vue-router срабатывает перед каждым переходом глобально?",
+    "answer": "beforeEach",
+    "distractors": [
+      "beforeResolve",
+      "beforeEnter",
+      "afterEach"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой guard задаётся прямо в объекте маршрута?",
+    "answer": "beforeEnter",
+    "distractors": [
+      "beforeEach",
+      "beforeRouteEnter",
+      "afterEach"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой компонент кэширует неактивные динамические компоненты?",
+    "answer": "keep-alive",
+    "distractors": [
+      "Suspense",
+      "Teleport",
+      "Transition"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какая директива рендерит элемент ровно один раз и кэширует?",
+    "answer": "v-once",
+    "distractors": [
+      "v-memo",
+      "v-pre",
+      "v-cloak"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какая директива (3.2+) кэширует поддерево по массиву зависимостей?",
+    "answer": "v-memo",
+    "distractors": [
+      "v-once",
+      "v-cache",
+      "v-static"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какая функция откладывает колбэк до следующего обновления DOM?",
+    "answer": "nextTick",
+    "distractors": [
+      "setTimeout",
+      "requestAnimationFrame",
+      "flushSync"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какие хуки keep-alive вызываются при активации/деактивации?",
+    "answer": "onActivated/onDeactivated",
+    "distractors": [
+      "onMounted/onUnmounted",
+      "onShow/onHide",
+      "onResume/onPause"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "В чём ключевое отличие reactive от ref для объектов при деструктуризации?",
+    "answer": "деструктуризация reactive теряет реактивность",
+    "distractors": [
+      "ref теряет реактивность при деструктуризации",
+      "оба сохраняют реактивность",
+      "оба теряют реактивность"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какая утилита сохраняет реактивность при деструктуризации reactive-объекта?",
+    "answer": "toRefs",
+    "distractors": [
+      "toRaw",
+      "unref",
+      "shallowRef"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что вернёт unref(x), если x — обычное число 5?",
+    "answer": "5",
+    "distractors": [
+      "ref(5)",
+      "undefined",
+      "{ value: 5 }"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какая функция создаёт ref на одно свойство reactive-объекта, сохраняя связь?",
+    "answer": "toRef",
+    "distractors": [
+      "toRefs",
+      "ref",
+      "computed"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Реактивен ли ref, переданный внутрь reactive-объекта как свойство (авторазворачивание)?",
+    "answer": "да, авторазворачивается без .value",
+    "distractors": [
+      "нет, нужен .value",
+      "только в шаблоне",
+      "только если shallow"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Разворачивается ли ref автоматически внутри массива или Map в reactive?",
+    "answer": "нет, нужен .value",
+    "distractors": [
+      "да, как и в объекте",
+      "только в массиве",
+      "только в Map"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой watch-вариант нужен, чтобы глубоко отслеживать вложенные изменения reactive-объекта?",
+    "answer": "watch с { deep: true } (или сам reactive-источник)",
+    "distractors": [
+      "watchEffect всегда глубокий",
+      "watch без опций глубокий",
+      "computed с deep"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Когда по умолчанию запускается колбэк watch относительно рендера?",
+    "answer": "до (pre) обновления DOM компонента",
+    "distractors": [
+      "после (post) обновления DOM",
+      "синхронно сразу",
+      "в nextTick"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какая опция watch запускает колбэк после обновления DOM?",
+    "answer": "flush: 'post'",
+    "distractors": [
+      "flush: 'sync'",
+      "immediate: true",
+      "deep: true"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что вернёт computed по умолчанию — readonly или writable ref?",
+    "answer": "readonly",
+    "distractors": [
+      "writable",
+      "обычный объект",
+      "reactive"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Как сделать computed записываемым?",
+    "answer": "передать { get, set }",
+    "distractors": [
+      "добавить опцию writable:true",
+      "обернуть в reactive",
+      "использовать watchEffect"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Чем отличается shallowRef от ref?",
+    "answer": "реактивен только .value целиком, не глубоко",
+    "distractors": [
+      "реактивен глубоко, как ref",
+      "не реактивен вовсе",
+      "только для примитивов"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Как принудительно уведомить об изменении мутируемого значения shallowRef?",
+    "answer": "triggerRef",
+    "distractors": [
+      "nextTick",
+      "markRaw",
+      "toRaw"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какая функция помечает объект, чтобы он никогда не стал reactive?",
+    "answer": "markRaw",
+    "distractors": [
+      "toRaw",
+      "readonly",
+      "shallowReactive"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что возвращает toRaw(proxy)?",
+    "answer": "исходный нереактивный объект",
+    "distractors": [
+      "новый proxy",
+      "клон объекта",
+      "undefined"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что нужно вернуть из setup() (без <script setup>), чтобы данные были доступны в шаблоне?",
+    "answer": "объект с состоянием/методами",
+    "distractors": [
+      "массив зависимостей",
+      "render-функцию обязательно",
+      "ничего, всё доступно"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Доступен ли this внутри setup()?",
+    "answer": "нет (undefined)",
+    "distractors": [
+      "да, как в Options API",
+      "да, но только методы",
+      "да, через bind"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "В каком порядке выполняются хуки родителя и ребёнка при монтировании?",
+    "answer": "родитель beforeMount → ребёнок mounted → родитель mounted",
+    "distractors": [
+      "родитель mounted → ребёнок mounted",
+      "ребёнок целиком → потом родитель",
+      "одновременно"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой макрос делает свойства/методы компонента доступными через ref родителя?",
+    "answer": "defineExpose",
+    "distractors": [
+      "defineProps",
+      "defineEmits",
+      "provide"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "По умолчанию (без defineExpose) что видит родитель через ref на <script setup> компонент?",
+    "answer": "ничего (закрыто)",
+    "distractors": [
+      "все ref и методы",
+      "только props",
+      "весь this"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Как задать дефолт для prop-объекта или массива?",
+    "answer": "через функцию-фабрику default: () => ({})",
+    "distractors": [
+      "default: {}",
+      "default: new Object()",
+      "defaultValue: {}"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Можно ли мутировать prop напрямую внутри компонента?",
+    "answer": "нет, props readonly (one-way)",
+    "distractors": [
+      "да, если объект",
+      "да, через .value",
+      "да, но только в setup"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой аргумент defineModel задаёт несколько v-model по имени?",
+    "answer": "имя модели, напр. defineModel('title')",
+    "distractors": [
+      "второй boolean-аргумент",
+      "массив имён",
+      "опция multiple"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Как передать кастомный модификатор v-model в дочерний компонент (имя prop)?",
+    "answer": "modelModifiers",
+    "distractors": [
+      "modelValueModifiers",
+      "modifiers",
+      "valueModifiers"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой синтаксис задаёт именованный слот в шаблоне-потребителе?",
+    "answer": "<template #name> или v-slot:name",
+    "distractors": [
+      "<slot name=...>",
+      "<template slot-scope>",
+      "<template :name>"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Как обратиться к слотам программно в setup?",
+    "answer": "useSlots()",
+    "distractors": [
+      "useScopedSlots()",
+      "this.$slots",
+      "defineSlots()"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Реактивны ли значения, переданные через provide, если provide-ить ref?",
+    "answer": "да, потребитель видит обновления",
+    "distractors": [
+      "нет, значение копируется",
+      "только при provide reactive",
+      "только в Options API"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой ключ предпочтителен для provide/inject в TS-библиотеке (типобезопасность)?",
+    "answer": "Symbol через InjectionKey",
+    "distractors": [
+      "строка",
+      "число",
+      "сам компонент"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что вернёт inject, если провайдера нет и не задан дефолт?",
+    "answer": "undefined (с предупреждением)",
+    "distractors": [
+      "null",
+      "ошибка",
+      "пустой объект"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "В render-функции какой первый аргумент у h()?",
+    "answer": "тип (тег/компонент)",
+    "distractors": [
+      "props",
+      "children",
+      "ключ"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Как в h() задать слушатель события click?",
+    "answer": "в props: { onClick }",
+    "distractors": [
+      "в props: { '@click' }",
+      "третьим аргументом",
+      "h.on('click')"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Какой плагин/механизм регистрирует глобальные свойства и компоненты через app.use?",
+    "answer": "Vue-плагин с методом install",
+    "distractors": [
+      "mixin",
+      "директива",
+      "provide на корне"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Что компилятор шаблонов помечает patch flags?",
+    "answer": "динамические части vnode для ускорения diff",
+    "distractors": [
+      "статические узлы для удаления",
+      "все узлы поголовно",
+      "только текстовые узлы"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Как называется оптимизация подъёма статических узлов из render-функции?",
+    "answer": "static hoisting",
+    "distractors": [
+      "tree shaking",
+      "block tree",
+      "patch flagging"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Что отслеживает компилятор через 'block tree' для ускорения обхода?",
+    "answer": "только динамические узлы внутри блока",
+    "distractors": [
+      "все DOM-узлы",
+      "статические узлы",
+      "слоты"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Как изменить состояние в setup-сторе Pinia без actions?",
+    "answer": "напрямую присвоить (store.x = ...)",
+    "distractors": [
+      "только через commit",
+      "только через $patch",
+      "нельзя, нужны actions"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой метод Pinia применяет частичное/групповое изменение state?",
+    "answer": "$patch",
+    "distractors": [
+      "$set",
+      "$commit",
+      "$update"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Как сохранить реактивность при деструктуризации стора Pinia?",
+    "answer": "storeToRefs",
+    "distractors": [
+      "toRefs стора",
+      "...store напрямую",
+      "reactive(store)"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Как ленивая загрузка компонента маршрута записывается в vue-router?",
+    "answer": "component: () => import('./X.vue')",
+    "distractors": [
+      "component: lazy('./X.vue')",
+      "component: defineAsync('./X.vue')",
+      "lazyComponent: './X.vue'"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Как объявить динамический сегмент пути в маршруте?",
+    "answer": "path: '/user/:id'",
+    "distractors": [
+      "path: '/user/{id}'",
+      "path: '/user/*id'",
+      "path: '/user/<id>'"
+    ],
+    "difficulty": 1
+  },
+  {
+    "question": "Какой in-component guard vue-router (Composition API) реагирует на смену параметров того же маршрута?",
+    "answer": "onBeforeRouteUpdate",
+    "distractors": [
+      "onBeforeRouteLeave",
+      "beforeEach",
+      "onMounted"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Как отменить навигацию из глобального beforeEach?",
+    "answer": "вернуть false",
+    "distractors": [
+      "вызвать next()",
+      "вернуть null",
+      "бросить undefined"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой синтаксис интерполяции переменной в vue-i18n?",
+    "answer": "{name} в строке + t('key', { name })",
+    "distractors": [
+      "${name}",
+      "%name%",
+      "{{name}}"
+    ],
+    "difficulty": 2
+  },
+  {
+    "question": "Какой метод vue-i18n выбирает форму по числу (множественное число)?",
+    "answer": "tc или t с count (плюрализация |)",
+    "distractors": [
+      "tp",
+      "plural()",
+      "tn"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Каким символом в строке локали разделяют формы плюрализации в vue-i18n?",
+    "answer": "| (вертикальная черта)",
+    "distractors": [
+      ", (запятая)",
+      "; (точка с запятой)",
+      "/ (слэш)"
+    ],
+    "difficulty": 3
+  },
+  {
+    "question": "Чем v-pre отличается от v-once?",
+    "answer": "v-pre пропускает компиляцию выражений вовсе",
+    "distractors": [
+      "v-pre рендерит один раз",
+      "идентичны",
+      "v-pre кэширует по deps"
+    ],
+    "difficulty": 3
+  }
 ]
