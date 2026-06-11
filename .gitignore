@@ -18,4 +18,7 @@ dist-ssr/
 
 # OS / editor
 .DS_Store
-.idea/
+
+# JetBrains — личное игнорим, командные run-конфиги шарим
+.idea/*
+!.idea/runConfigurations/

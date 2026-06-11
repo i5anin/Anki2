@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="🚀 Full Stack (dev)" type="CompoundRunConfigurationType">
+    <toRun name="⚙️ Backend (Nest watch)" type="js.build_tools.npm" />
+    <toRun name="🎨 Frontend (Vite)" type="js.build_tools.npm" />
+    <method v="2" />
+  </configuration>
+</component>
