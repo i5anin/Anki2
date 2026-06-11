@@ -4,6 +4,7 @@ import type { CardTemplate, NoteType } from '../domain/note-type.entity'
 import type { Note, NoteFields } from '../domain/note.entity'
 import type { Card } from '../domain/card.entity'
 import type { ReviewLog } from '../domain/review-log.entity'
+import type { QuizItem } from '../domain/quiz-item.entity'
 import type { TrainerResult, TrainerSkill } from '../domain/trainer-result.entity'
 import type { CardState, Rating } from '../srs'
 
@@ -109,6 +110,10 @@ export interface TrainerResultFilter {
   since?: string
 }
 
+export interface QuizItemFilter {
+  category?: string
+}
+
 /**
  * Абстракция доступа к данным. Две реализации: `SupabaseDataStore` (боевая)
  * и `MemoryDataStore` (демо/офлайн, без ключей). Сервисы зависят только от
@@ -151,4 +156,7 @@ export abstract class DataStore {
   // Результаты тренажёров
   abstract createTrainerResult(input: NewTrainerResult): Promise<TrainerResult>
   abstract listTrainerResults(filter?: TrainerResultFilter): Promise<TrainerResult[]>
+
+  // Банк вопросов блица (только чтение; наполняется сидом)
+  abstract listQuizItems(filter?: QuizItemFilter): Promise<QuizItem[]>
 }

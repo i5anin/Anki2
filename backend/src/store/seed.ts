@@ -2,8 +2,10 @@ import type { Deck } from '../domain/deck.entity'
 import type { NoteType } from '../domain/note-type.entity'
 import type { Note } from '../domain/note.entity'
 import type { Card } from '../domain/card.entity'
+import type { QuizItem } from '../domain/quiz-item.entity'
 import { DEFAULT_DECK_CONFIG } from '../srs'
 import { createInterviewSeedData } from './interview.seed'
+import { createQuizBankSeed } from './quiz-bank.seed'
 
 /**
  * Демонстрационные данные для офлайн-режима (MemoryDataStore). Совпадают с
@@ -134,9 +136,10 @@ export interface SeedData {
   decks: Deck[]
   notes: Note[]
   cards: Card[]
+  quizItems: QuizItem[]
 }
 
-/** Свежая глубокая копия демо-данных (включая колоды «Собеседование»). */
+/** Свежая глубокая копия демо-данных (колоды + банк вопросов блица). */
 export function createSeedData(): SeedData {
   const interview = createInterviewSeedData()
   return structuredClone({
@@ -144,5 +147,6 @@ export function createSeedData(): SeedData {
     decks: [...DECKS, ...interview.decks],
     notes: [...NOTES, ...interview.notes],
     cards: [...CARDS, ...interview.cards],
+    quizItems: createQuizBankSeed(),
   })
 }

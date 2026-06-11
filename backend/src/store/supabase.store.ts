@@ -4,6 +4,7 @@ import type { Card, CardRow } from '../domain/card.entity'
 import type { Deck, DeckRow } from '../domain/deck.entity'
 import type { Note, NoteRow } from '../domain/note.entity'
 import type { NoteType, NoteTypeRow } from '../domain/note-type.entity'
+import type { QuizItem, QuizItemRow } from '../domain/quiz-item.entity'
 import type { ReviewLog, ReviewLogRow } from '../domain/review-log.entity'
 import type { TrainerResult, TrainerResultRow } from '../domain/trainer-result.entity'
 import { mergeDeckConfig } from '../srs'
@@ -20,6 +21,7 @@ import type {
   NotePatch,
   NoteTypeInput,
   NoteTypePatch,
+  QuizItemFilter,
   ReviewLogFilter,
   TrainerResultFilter,
 } from './data-store'
@@ -29,6 +31,7 @@ import {
   rowToDeck,
   rowToNote,
   rowToNoteType,
+  rowToQuizItem,
   rowToReviewLog,
   rowToTrainerResult,
 } from './supabase.mappers'
@@ -52,6 +55,7 @@ const NOTES = 'notes'
 const CARDS = 'cards'
 const REVIEW_LOGS = 'review_logs'
 const TRAINER_RESULTS = 'trainer_results'
+const QUIZ_QUESTIONS = 'quiz_questions'
 
 const now = (): string => new Date().toISOString()
 
@@ -247,5 +251,13 @@ export class SupabaseDataStore extends DataStore {
     if (filter?.trainerId !== undefined) query = query.eq('trainer_id', filter.trainerId)
     if (filter?.since !== undefined) query = query.gte('played_at', filter.since)
     return rows<TrainerResultRow>(await query).map(rowToTrainerResult)
+  }
+
+  // --- Банк вопросов блица ------------------------------------------------------
+
+  async listQuizItems(filter?: QuizItemFilter): Promise<QuizItem[]> {
+    let query = this.db.from(QUIZ_QUESTIONS).select('*')
+    if (filter?.category !== undefined) query = query.eq('category', filter.category)
+    return rows<QuizItemRow>(await query).map(rowToQuizItem)
   }
 }

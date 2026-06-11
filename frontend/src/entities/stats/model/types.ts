@@ -29,3 +29,25 @@ export interface ReviewsByDayPoint {
   date: string
   count: number
 }
+
+/** Корзина гистограммы (распределение). */
+export interface StatsBucket {
+  label: string
+  count: number
+}
+
+/** Время по дню (минуты). */
+export interface DayMinutes {
+  date: string
+  minutes: number
+}
+
+/** Расширенная аналитика (один запрос). */
+export interface StatsInsights {
+  easeDistribution: StatsBucket[]
+  intervalDistribution: StatsBucket[]
+  answerButtons: { again: number; hard: number; good: number; easy: number }
+  reviewsByHour: number[]
+  timeByDay: DayMinutes[]
+  activity: ReviewsByDayPoint[]
+}

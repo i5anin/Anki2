@@ -2,6 +2,7 @@ import { BadRequestException, Controller, Get, Query } from '@nestjs/common'
 
 import { StatsService } from './stats.service'
 import type { DayCount, RetentionBreakdown, StatsOverview } from './stats.service'
+import type { StatsInsights } from './insights'
 
 /** Дефолтное окно для графиков (дни). */
 const DEFAULT_DAYS = 30
@@ -32,6 +33,11 @@ export class StatsController {
     @Query('days') days?: string,
   ): Promise<DayCount[]> {
     return this.stats.reviewsByDay(deckId, this.parseDays(days))
+  }
+
+  @Get('insights')
+  insights(@Query('deckId') deckId?: string): Promise<StatsInsights> {
+    return this.stats.insights(deckId)
   }
 
   /** Разбирает параметр days: положительное целое в пределах [1, MAX_DAYS]. */

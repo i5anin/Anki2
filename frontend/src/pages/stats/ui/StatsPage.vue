@@ -4,6 +4,7 @@ import { computed, onMounted, ref } from 'vue'
 
 import { useDecksStore, type DeckWithCounts } from '@/entities/deck'
 import { StatsDashboard } from '@/widgets/stats-dashboard'
+import { StatsInsights } from '@/widgets/stats-insights'
 
 interface DeckOption {
   label: string
@@ -39,6 +40,9 @@ onMounted(() => {
     </header>
 
     <StatsDashboard :deck-id="selectedDeckId" />
+
+    <h2 class="stats-page__section">Аналитика</h2>
+    <StatsInsights :deck-id="selectedDeckId" />
   </div>
 </template>
 
@@ -68,5 +72,11 @@ onMounted(() => {
 
 .stats-page__deck {
   min-width: 14rem;
+}
+
+.stats-page__section {
+  margin: 0.5rem 0 0;
+  font-size: 1.2rem;
+  font-weight: 700;
 }
 </style>

@@ -3,6 +3,7 @@ import type { Deck } from '../domain/deck.entity'
 import type { Note } from '../domain/note.entity'
 import type { NoteType } from '../domain/note-type.entity'
 import type { ReviewLog } from '../domain/review-log.entity'
+import type { QuizItem } from '../domain/quiz-item.entity'
 import type { TrainerResult } from '../domain/trainer-result.entity'
 import { DataStore } from './data-store'
 import type {
@@ -17,6 +18,7 @@ import type {
   NotePatch,
   NoteTypeInput,
   NoteTypePatch,
+  QuizItemFilter,
   ReviewLogFilter,
   TrainerResultFilter,
 } from './data-store'
@@ -46,6 +48,7 @@ export class MemoryDataStore extends DataStore {
   private readonly cards: Card[]
   private readonly reviewLogs: ReviewLog[]
   private readonly trainerResults: TrainerResult[]
+  private readonly quizItems: QuizItem[]
 
   constructor() {
     super()
@@ -56,6 +59,7 @@ export class MemoryDataStore extends DataStore {
     this.cards = seed.cards
     this.reviewLogs = []
     this.trainerResults = []
+    this.quizItems = seed.quizItems
   }
 
   // Колоды
@@ -232,5 +236,12 @@ export class MemoryDataStore extends DataStore {
       if (filter?.since !== undefined && result.playedAt < filter.since) return false
       return true
     })
+  }
+
+  // Банк вопросов блица
+
+  async listQuizItems(filter?: QuizItemFilter): Promise<QuizItem[]> {
+    if (filter?.category === undefined) return this.quizItems
+    return this.quizItems.filter((item) => item.category === filter.category)
   }
 }

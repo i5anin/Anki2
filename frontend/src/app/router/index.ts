@@ -12,6 +12,16 @@ const routes: RouteRecordRaw[] = [
     component: async () => import('@/pages/study'),
   },
   {
+    path: '/quiz',
+    name: 'quiz-hub',
+    component: async () => import('@/pages/blitz-hub'),
+  },
+  {
+    path: '/quiz/topic/:category',
+    name: 'quiz-topic',
+    component: async () => import('@/pages/quiz'),
+  },
+  {
     path: '/quiz/:deckId',
     name: 'quiz',
     component: async () => import('@/pages/quiz'),

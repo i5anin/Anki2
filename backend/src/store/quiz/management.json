@@ -1,0 +1,18 @@
+[
+  { "question": "Какая роль в Scrum отвечает за приоритеты и содержание бэклога продукта?", "answer": "Product Owner", "distractors": ["Scrum Master", "Tech Lead", "Команда разработки"], "difficulty": 1 },
+  { "question": "Что в Kanban ограничивает число задач в работе одновременно?", "answer": "WIP-лимит", "distractors": ["Velocity", "Спринт-капасити", "Burndown"], "difficulty": 1 },
+  { "question": "По закону Литтла среднее время прохождения = WIP делить на что?", "answer": "Throughput (пропускную способность)", "distractors": ["Velocity", "Длину спринта", "Lead time"], "difficulty": 3 },
+  { "question": "Есть ли в Kanban фиксированные по длине итерации (спринты)?", "answer": "Нет", "distractors": ["Да, 2 недели", "Да, 1 месяц", "Да, но гибкие"], "difficulty": 2 },
+  { "question": "Из каких множителей складывается RICE-скор (Reach, Impact, Confidence)?", "answer": "R×I×C / Effort", "distractors": ["R+I+C−Effort", "(R+I)×C×Effort", "R×I / (C×Effort)"], "difficulty": 2 },
+  { "question": "Что в WSJF делят на длительность работы (Job Duration)?", "answer": "Cost of Delay", "distractors": ["Business Value", "Reach", "Story Points"], "difficulty": 3 },
+  { "question": "Что означает буква M в MoSCoW (категория обязательного)?", "answer": "Must have", "distractors": ["May have", "Most valuable", "Minimum viable"], "difficulty": 1 },
+  { "question": "Какая модель структурирует обратную связь как Situation-Behavior-Impact?", "answer": "SBI", "distractors": ["STAR", "GROW", "SMART"], "difficulty": 2 },
+  { "question": "Какой набор из 4 метрик оценивает эффективность доставки ПО (DORA)?", "answer": "DORA", "distractors": ["Velocity", "SPACE", "OKR"], "difficulty": 2 },
+  { "question": "Можно ли сравнивать velocity (стори-поинты) разных команд между собой?", "answer": "Нет", "distractors": ["Да", "Да, после нормализации", "Только в одном спринте"], "difficulty": 2 },
+  { "question": "Сколько человек в команде по правилу «двух пицц» (примерно)?", "answer": "до ~8", "distractors": ["до ~15", "до ~20", "до ~4"], "difficulty": 2 },
+  { "question": "По формуле n(n−1)/2 сколько каналов связи в команде из 6 человек?", "answer": "15", "distractors": ["12", "30", "21"], "difficulty": 3 },
+  { "question": "Что гласит закон Брукса о добавлении людей в опаздывающий проект?", "answer": "Задерживает его ещё сильнее", "distractors": ["Ускоряет пропорционально", "Не влияет на сроки", "Линейно сокращает срок"], "difficulty": 2 },
+  { "question": "Какая модель управления изменениями описывается шагами Awareness-Desire-Knowledge-Ability-Reinforcement?", "answer": "ADKAR", "distractors": ["Kotter", "PDCA", "RACI"], "difficulty": 3 },
+  { "question": "Как называется риск из-за концентрации критичных знаний у одного человека?", "answer": "Bus factor", "distractors": ["Tech debt", "Single point of contact", "Knowledge silo"], "difficulty": 2 },
+  { "question": "Какое церемония Scrum служит для улучшения процесса по итогам спринта?", "answer": "Ретроспектива", "distractors": ["Daily Standup", "Sprint Review", "Планирование"], "difficulty": 1 }
+]

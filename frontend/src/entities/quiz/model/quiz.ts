@@ -107,3 +107,52 @@ function pickDistractors(answers: string[], correct: string): string[] {
   const restShape = shuffle(others.filter((answer) => shapeOf(answer) !== shape))
   return [...sameShape, ...restShape].slice(0, OPTIONS_PER_QUESTION - 1)
 }
+
+/** Вопрос банка блица (курируемые варианты), как его отдаёт API. */
+export interface QuizItem {
+  id: string
+  category: string
+  question: string
+  answer: string
+  distractors: string[]
+  difficulty: number
+}
+
+/** Тема банка для хаба блица. */
+export interface QuizCategory {
+  slug: string
+  label: string
+  icon: string
+}
+
+export const QUIZ_CATEGORIES: QuizCategory[] = [
+  { slug: 'js', label: 'JavaScript', icon: 'pi pi-code' },
+  { slug: 'ts', label: 'TypeScript', icon: 'pi pi-code' },
+  { slug: 'css', label: 'HTML / CSS', icon: 'pi pi-palette' },
+  { slug: 'vue', label: 'Vue 3', icon: 'pi pi-bolt' },
+  { slug: 'system-design', label: 'Системный дизайн', icon: 'pi pi-sitemap' },
+  { slug: 'infra', label: 'Инфраструктура', icon: 'pi pi-server' },
+  { slug: 'analysis', label: 'Анализ', icon: 'pi pi-search' },
+  { slug: 'management', label: 'Управление', icon: 'pi pi-users' },
+]
+
+/** Подпись темы по слагу (или «Вперемешку» для all). */
+export function categoryLabel(slug: string): string {
+  if (slug === 'all') {
+    return 'Вперемешку'
+  }
+  return QUIZ_CATEGORIES.find((category) => category.slug === slug)?.label ?? slug
+}
+
+/** Строит MCQ-вопросы из банка: правильный ответ + курируемые отвлекающие. */
+export function itemsToQuestions(items: QuizItem[], limit = 12): QuizQuestion[] {
+  return shuffle(items)
+    .slice(0, limit)
+    .map((item) => {
+      const options: QuizOption[] = shuffle([
+        { text: item.answer, correct: true },
+        ...item.distractors.map((text) => ({ text, correct: false })),
+      ])
+      return { cardId: item.id, question: item.question, options }
+    })
+}

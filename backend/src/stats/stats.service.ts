@@ -4,6 +4,7 @@ import { DataStore } from '../store/data-store'
 import type { Card } from '../domain/card.entity'
 import type { ReviewLog } from '../domain/review-log.entity'
 import type { CardState } from '../srs'
+import { computeInsights, type StatsInsights } from './insights'
 
 /** Карточка считается «зрелой», когда интервал review не меньше этого порога (дни). */
 const MATURE_INTERVAL_DAYS = 21
@@ -174,5 +175,10 @@ export class StatsService {
       date: dayKey(windowStart + index * dayMs),
       count,
     }))
+  }
+
+  async insights(deckId?: string): Promise<StatsInsights> {
+    const [cards, logs] = await Promise.all([this.listCards(deckId), this.listLogs(deckId)])
+    return computeInsights(cards, logs, new Date())
   }
 }

@@ -1,0 +1,18 @@
+[
+  { "question": "Какая аббревиатура описывает критерии хорошей пользовательской истории (Independent, Negotiable, Valuable, Estimable, Small, Testable)?", "answer": "INVEST", "distractors": ["SMART", "DEEP", "MoSCoW"], "difficulty": 1 },
+  { "question": "Какая нотация описывает критерии приёмки через шаги Given/When/Then?", "answer": "Gherkin", "distractors": ["Markdown", "BPMN", "PlantUML"], "difficulty": 1 },
+  { "question": "Какое ключевое слово в Gherkin задаёт предусловие (исходный контекст) сценария?", "answer": "Given", "distractors": ["When", "Then", "Scenario"], "difficulty": 1 },
+  { "question": "Какое ключевое слово в Gherkin описывает ожидаемый результат?", "answer": "Then", "distractors": ["When", "Given", "And"], "difficulty": 1 },
+  { "question": "Как называется относительная единица оценки сложности задачи (не время)?", "answer": "Story point", "distractors": ["Человеко-час", "Idea point", "Velocity"], "difficulty": 1 },
+  { "question": "Какой ряд чисел чаще всего используют для покера планирования (story points)?", "answer": "Фибоначчи", "distractors": ["Степени двойки", "Простые числа", "Арифметическая прогрессия"], "difficulty": 2 },
+  { "question": "Как называется метод грубой относительной оценки размерами S/M/L/XL?", "answer": "T-shirt sizing", "distractors": ["PERT", "Planning poker", "Affinity mapping"], "difficulty": 2 },
+  { "question": "В трёхточечной оценке PERT по формуле (O+4M+P)/6 что означает буква M?", "answer": "Most likely (наиболее вероятная)", "distractors": ["Maximum (максимум)", "Mean (среднее)", "Median (медиана)"], "difficulty": 3 },
+  { "question": "Как называется короткое исследование с ограничением по времени для снижения технической неопределённости?", "answer": "Spike", "distractors": ["PoC", "MVP", "Epic"], "difficulty": 2 },
+  { "question": "Какая аббревиатура означает доказательство принципиальной осуществимости идеи?", "answer": "PoC", "distractors": ["MVP", "POV", "RFC"], "difficulty": 2 },
+  { "question": "Как называется документ, фиксирующий принятое архитектурное решение и его контекст?", "answer": "ADR", "distractors": ["RFC", "PRD", "SRS"], "difficulty": 2 },
+  { "question": "Как называется разбиение задачи на тонкие сквозные срезы функциональности, дающие ценность?", "answer": "Вертикальная декомпозиция", "distractors": ["Горизонтальная декомпозиция", "Каскадная декомпозиция", "Спайк-декомпозиция"], "difficulty": 2 },
+  { "question": "Как называется когнитивное искажение, при котором сроки систематически недооцениваются?", "answer": "Planning fallacy", "distractors": ["Парадокс Стёрджена", "Закон Хофштадтера", "Эффект Даннинга-Крюгера"], "difficulty": 3 },
+  { "question": "Как называется резерв времени, закладываемый на покрытие рисков и неопределённости в оценке?", "answer": "Буфер", "distractors": ["Velocity", "Спринт", "Burndown"], "difficulty": 1 },
+  { "question": "Какая техника приоритизации требований делит их на Must/Should/Could/Won't?", "answer": "MoSCoW", "distractors": ["INVEST", "RICE", "Kano"], "difficulty": 2 },
+  { "question": "Что в формуле PERT по (O+4M+P)/6 обозначает буква P?", "answer": "Pessimistic (пессимистичная)", "distractors": ["Probable (вероятная)", "Planned (плановая)", "Primary (основная)"], "difficulty": 3 }
+]

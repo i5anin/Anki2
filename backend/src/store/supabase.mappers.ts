@@ -2,6 +2,7 @@ import type { Card, CardRow } from '../domain/card.entity'
 import type { Deck, DeckRow } from '../domain/deck.entity'
 import type { Note, NoteRow } from '../domain/note.entity'
 import type { NoteType, NoteTypeRow } from '../domain/note-type.entity'
+import type { QuizItem, QuizItemRow } from '../domain/quiz-item.entity'
 import type { ReviewLog, ReviewLogRow } from '../domain/review-log.entity'
 import type { TrainerResult, TrainerResultRow } from '../domain/trainer-result.entity'
 import { mergeDeckConfig } from '../srs'
@@ -78,6 +79,17 @@ export function rowToReviewLog(row: ReviewLogRow): ReviewLog {
     elapsedDays: row.elapsed_days,
     timeTakenMs: row.time_taken_ms,
     reviewedAt: row.reviewed_at,
+  }
+}
+
+export function rowToQuizItem(row: QuizItemRow): QuizItem {
+  return {
+    id: row.id,
+    category: row.category,
+    question: row.question,
+    answer: row.answer,
+    distractors: Array.isArray(row.distractors) ? row.distractors : [],
+    difficulty: row.difficulty,
   }
 }
 

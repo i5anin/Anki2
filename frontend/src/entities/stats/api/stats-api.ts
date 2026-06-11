@@ -4,6 +4,7 @@ import type {
   ForecastPoint,
   RetentionStats,
   ReviewsByDayPoint,
+  StatsInsights,
   StatsOverview,
 } from '../model/types'
 
@@ -46,6 +47,13 @@ export const statsApi = {
   async reviewsByDay(deckId?: string, days = 30): Promise<ReviewsByDayPoint[]> {
     const { data } = await http.get<ReviewsByDayPoint[]>(`${RESOURCE}/reviews-by-day`, {
       params: params(deckId, days),
+    })
+    return data
+  },
+
+  async insights(deckId?: string): Promise<StatsInsights> {
+    const { data } = await http.get<StatsInsights>(`${RESOURCE}/insights`, {
+      params: params(deckId),
     })
     return data
   },

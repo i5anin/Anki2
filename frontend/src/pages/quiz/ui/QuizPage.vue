@@ -2,21 +2,16 @@
 import Button from 'primevue/button'
 import Message from 'primevue/message'
 import ProgressSpinner from 'primevue/progressspinner'
-import { computed, onMounted, ref } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
-import { cardApi } from '@/entities/card'
-import { deckApi } from '@/entities/deck'
-import { buildQuiz } from '@/entities/quiz'
-import { useBlitzQuiz } from '@/features/blitz-quiz'
+import { useBlitzQuiz, useQuizSource } from '@/features/blitz-quiz'
 import { getErrorMessage } from '@/shared/api'
 import { QuizQuestion } from '@/widgets/quiz-question'
 
-const route = useRoute()
 const router = useRouter()
+const { title, studyTarget, load } = useQuizSource()
 
-const deckId = computed(() => String(route.params.deckId))
-const deckName = ref('Колода')
 const isLoading = ref(true)
 const error = ref<string | null>(null)
 const noShort = ref(false)
@@ -38,12 +33,7 @@ const {
 
 onMounted(async () => {
   try {
-    const [deck, cards] = await Promise.all([
-      deckApi.getById(deckId.value),
-      cardApi.getList({ deckId: deckId.value }),
-    ])
-    deckName.value = deck.name
-    const questions = buildQuiz(cards)
+    const questions = await load()
     if (questions.length === 0) {
       noShort.value = true
     } else {
@@ -57,7 +47,9 @@ onMounted(async () => {
 })
 
 function toStudy(): void {
-  void router.push({ name: 'study', params: { deckId: deckId.value } })
+  if (studyTarget.value !== null) {
+    void router.push(studyTarget.value)
+  }
 }
 
 function toDecks(): void {
@@ -76,7 +68,7 @@ function toDecks(): void {
         aria-label="Назад"
         @click="toDecks"
       />
-      <h1 class="quiz-page__title">Блиц · {{ deckName }}</h1>
+      <h1 class="quiz-page__title">Блиц · {{ title }}</h1>
 
       <div v-if="phase === 'playing'" class="quiz-page__hud">
         <span>Вопрос {{ index + 1 }} из {{ total }}</span>
@@ -92,8 +84,8 @@ function toDecks(): void {
 
     <div v-else-if="noShort" class="quiz-page__center quiz-page__empty">
       <i class="pi pi-bolt" />
-      <p>В этой колоде мало коротких вопросов для блица.</p>
-      <Button label="К повторению" icon="pi pi-play" @click="toStudy" />
+      <p>Недостаточно коротких вопросов для блица.</p>
+      <Button v-if="studyTarget" label="К повторению" icon="pi pi-play" @click="toStudy" />
     </div>
 
     <div v-else-if="phase === 'playing' && current" class="quiz-page__center">
@@ -128,7 +120,7 @@ function toDecks(): void {
         <p class="quiz-page__hint">Разминка окончена — теперь закрепи в повторении.</p>
 
         <div class="quiz-page__actions">
-          <Button label="К повторению" icon="pi pi-play" @click="toStudy" />
+          <Button v-if="studyTarget" label="К повторению" icon="pi pi-play" @click="toStudy" />
           <Button
             label="К колодам"
             icon="pi pi-clone"
