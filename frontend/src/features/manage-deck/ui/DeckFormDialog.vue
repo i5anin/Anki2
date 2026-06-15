@@ -6,7 +6,7 @@ import Textarea from 'primevue/textarea'
 import { useToast } from 'primevue/usetoast'
 import { computed, reactive, ref, watch } from 'vue'
 
-import { useDecksStore, type DeckDraft } from '@/entities/deck'
+import { type DeckDraft, useDecksStore } from '@/entities/deck'
 
 import { useManageDeck } from '../model/useManageDeck'
 
@@ -32,7 +32,7 @@ watch(isOpen, (open) => {
 function validate(): boolean {
   const name = draft.name.trim()
   const map: Record<string, string> = {}
-  if (name.length < 1) map.name = 'Введите название колоды'
+  if (name.length === 0) map.name = 'Введите название колоды'
   else if (name.length > 60) map.name = 'Название не длиннее 60 символов'
   errors.value = map
   return Object.keys(map).length === 0

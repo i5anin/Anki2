@@ -1,8 +1,9 @@
-import { computed, ref, type ComputedRef, type Ref } from 'vue'
+import { computed, type ComputedRef, ref, type Ref } from 'vue'
 
 import type { RenderedCard } from '@/entities/card'
 import type { DeckCounts } from '@/entities/deck'
-import { studyApi, type IntervalPreview, type Rating } from '@/entities/study'
+
+import { type IntervalPreview, type Rating, studyApi } from '@/entities/study'
 import { getErrorMessage } from '@/shared/api'
 
 interface SessionStats {
@@ -96,9 +97,9 @@ export function useStudySession(): StudySession {
       queue.value = data.cards
       markShown()
       await loadPreviews()
-    } catch (e) {
-      error.value = getErrorMessage(e)
-      throw e
+    } catch (error_) {
+      error.value = getErrorMessage(error_)
+      throw error_
     } finally {
       isLoading.value = false
     }
@@ -110,10 +111,22 @@ export function useStudySession(): StudySession {
 
   function tally(rating: Rating): void {
     stats.value.reviewed += 1
-    if (rating === 1) stats.value.again += 1
-    else if (rating === 2) stats.value.hard += 1
-    else if (rating === 3) stats.value.good += 1
-    else stats.value.easy += 1
+    switch (rating) {
+    case 1: {
+    stats.value.again += 1
+    break;
+    }
+    case 2: {
+    stats.value.hard += 1
+    break;
+    }
+    case 3: {
+    stats.value.good += 1
+    break;
+    }
+    default: { stats.value.easy += 1
+    }
+    }
   }
 
   async function grade(rating: Rating): Promise<void> {
@@ -129,9 +142,9 @@ export function useStudySession(): StudySession {
       revealed.value = false
       markShown()
       await loadPreviews()
-    } catch (e) {
-      error.value = getErrorMessage(e)
-      throw e
+    } catch (error_) {
+      error.value = getErrorMessage(error_)
+      throw error_
     } finally {
       isGrading.value = false
     }

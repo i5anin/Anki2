@@ -1,5 +1,5 @@
 import { ref, type Ref } from 'vue'
-import { useRoute, type RouteLocationRaw } from 'vue-router'
+import { type RouteLocationRaw, useRoute } from 'vue-router'
 
 import { cardApi } from '@/entities/card'
 import { deckApi } from '@/entities/deck'
@@ -12,7 +12,7 @@ import {
 } from '@/entities/quiz'
 
 /** Тема банка → колода «Собеседование» для перехода «К повторению». */
-const CATEGORY_DECK: Record<string, string> = {
+const CATEGORY_DECK: Record<string, string | undefined> = {
   js: '55555555-5555-5555-5555-555555550001',
   ts: '55555555-5555-5555-5555-555555550002',
   css: '55555555-5555-5555-5555-555555550003',
@@ -58,7 +58,7 @@ export function useQuizSource(): QuizSource {
   async function loadTopic(category: string): Promise<QuizQuestion[]> {
     title.value = categoryLabel(category)
     const deckId = CATEGORY_DECK[category]
-    studyTarget.value = deckId !== undefined ? { name: 'study', params: { deckId } } : null
+    studyTarget.value = deckId === undefined ? null : { name: 'study', params: { deckId } }
     return itemsToQuestions(await quizApi.getQuestions(category))
   }
 

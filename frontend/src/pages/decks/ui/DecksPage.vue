@@ -3,7 +3,7 @@ import Skeleton from 'primevue/skeleton'
 import { onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 
-import { useDecksStore, type DeckWithCounts } from '@/entities/deck'
+import { type DeckWithCounts, useDecksStore } from '@/entities/deck'
 import { useDeleteDeck } from '@/features/delete-deck'
 import { CreateDeckButton, DeckFormDialog, useManageDeck } from '@/features/manage-deck'
 import { DecksGrid } from '@/widgets/decks-grid'

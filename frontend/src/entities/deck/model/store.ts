@@ -3,8 +3,9 @@ import { computed, ref } from 'vue'
 
 import { getErrorMessage } from '@/shared/api'
 
-import { deckApi } from '../api/deck-api'
 import type { DeckDraft, DeckWithCounts } from './types'
+
+import { deckApi } from '../api/deck-api'
 
 export const useDecksStore = defineStore('decks', () => {
   const decks = ref<DeckWithCounts[]>([])
@@ -19,9 +20,9 @@ export const useDecksStore = defineStore('decks', () => {
     error.value = null
     try {
       decks.value = await deckApi.getList()
-    } catch (e) {
-      error.value = getErrorMessage(e)
-      throw e
+    } catch (error_) {
+      error.value = getErrorMessage(error_)
+      throw error_
     } finally {
       isLoading.value = false
     }
@@ -32,9 +33,9 @@ export const useDecksStore = defineStore('decks', () => {
     try {
       await deckApi.create(draft)
       await fetchAll()
-    } catch (e) {
-      error.value = getErrorMessage(e)
-      throw e
+    } catch (error_) {
+      error.value = getErrorMessage(error_)
+      throw error_
     }
   }
 
@@ -43,9 +44,9 @@ export const useDecksStore = defineStore('decks', () => {
     try {
       await deckApi.update(id, draft)
       await fetchAll()
-    } catch (e) {
-      error.value = getErrorMessage(e)
-      throw e
+    } catch (error_) {
+      error.value = getErrorMessage(error_)
+      throw error_
     }
   }
 
@@ -54,9 +55,9 @@ export const useDecksStore = defineStore('decks', () => {
     try {
       await deckApi.remove(id)
       await fetchAll()
-    } catch (e) {
-      error.value = getErrorMessage(e)
-      throw e
+    } catch (error_) {
+      error.value = getErrorMessage(error_)
+      throw error_
     }
   }
 

@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common'
 
 import type { TrainerResult } from '../domain/trainer-result.entity'
+
 import { CreateTrainerResultDto } from './dto/create-trainer-result.dto'
 import { TrainersService } from './trainers.service'
 

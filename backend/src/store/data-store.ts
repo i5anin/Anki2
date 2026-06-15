@@ -1,11 +1,11 @@
-import type { DeckConfig } from '../srs'
+import type { Card } from '../domain/card.entity'
 import type { Deck } from '../domain/deck.entity'
 import type { CardTemplate, NoteType } from '../domain/note-type.entity'
 import type { Note, NoteFields } from '../domain/note.entity'
-import type { Card } from '../domain/card.entity'
-import type { ReviewLog } from '../domain/review-log.entity'
 import type { QuizItem } from '../domain/quiz-item.entity'
+import type { ReviewLog } from '../domain/review-log.entity'
 import type { TrainerResult, TrainerSkill } from '../domain/trainer-result.entity'
+import type { DeckConfig } from '../srs'
 import type { CardState, Rating } from '../srs'
 
 // --- Входные типы (camelCase) ------------------------------------------------

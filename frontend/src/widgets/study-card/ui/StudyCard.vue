@@ -5,6 +5,7 @@ import Tag from 'primevue/tag'
 import { computed, onMounted, onUnmounted } from 'vue'
 
 import type { RenderedCard } from '@/entities/card'
+
 import { type IntervalPreview, type Rating } from '@/entities/study'
 import { MarkdownContent } from '@/shared/ui'
 
@@ -52,7 +53,7 @@ function onKeydown(event: KeyboardEvent): void {
 
   if (props.grading) return
 
-  if (event.key === '1' || event.key === '2' || event.key === '3' || event.key === '4') {
+  if (['1', '2', '3', '4'].includes(event.key)) {
     event.preventDefault()
     emit('grade', Number(event.key) as Rating)
   }
@@ -71,7 +72,7 @@ onUnmounted(() => {
   <div class="study-card">
     <div class="study-card__head">
       <span class="study-card__type">{{ card.noteTypeName }}</span>
-      <div v-if="card.tags.length" class="study-card__tags">
+      <div v-if="card.tags.length > 0" class="study-card__tags">
         <Tag v-for="tag in card.tags" :key="tag" :value="tag" severity="secondary" />
       </div>
     </div>

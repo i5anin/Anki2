@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common'
 
-import { StudyService } from './study.service'
 import { ReviewDto } from './dto/review.dto'
+import { StudyService } from './study.service'
 
 @Controller('study')
 export class StudyController {

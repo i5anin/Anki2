@@ -1,10 +1,11 @@
 import type { Card, CardRow } from '../domain/card.entity'
 import type { Deck, DeckRow } from '../domain/deck.entity'
-import type { Note, NoteRow } from '../domain/note.entity'
 import type { NoteType, NoteTypeRow } from '../domain/note-type.entity'
+import type { Note, NoteRow } from '../domain/note.entity'
 import type { QuizItem, QuizItemRow } from '../domain/quiz-item.entity'
 import type { ReviewLog, ReviewLogRow } from '../domain/review-log.entity'
 import type { TrainerResult, TrainerResultRow } from '../domain/trainer-result.entity'
+
 import { mergeDeckConfig } from '../srs'
 
 /** Мапперы строк БД (snake_case) в доменные сущности (camelCase). */

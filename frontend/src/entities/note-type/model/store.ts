@@ -3,8 +3,9 @@ import { ref } from 'vue'
 
 import { getErrorMessage } from '@/shared/api'
 
-import { noteTypeApi } from '../api/note-type-api'
 import type { NoteType } from './types'
+
+import { noteTypeApi } from '../api/note-type-api'
 
 export const useNoteTypesStore = defineStore('note-types', () => {
   const noteTypes = ref<NoteType[]>([])
@@ -16,9 +17,9 @@ export const useNoteTypesStore = defineStore('note-types', () => {
     error.value = null
     try {
       noteTypes.value = await noteTypeApi.getList()
-    } catch (e) {
-      error.value = getErrorMessage(e)
-      throw e
+    } catch (error_) {
+      error.value = getErrorMessage(error_)
+      throw error_
     } finally {
       isLoading.value = false
     }

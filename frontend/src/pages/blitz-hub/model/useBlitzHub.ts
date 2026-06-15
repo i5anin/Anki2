@@ -1,4 +1,4 @@
-import { computed, onMounted, ref, type ComputedRef, type Ref } from 'vue'
+import { computed, type ComputedRef, onMounted, ref, type Ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 import { QUIZ_CATEGORIES, quizApi, type QuizItem } from '@/entities/quiz'
@@ -55,8 +55,8 @@ export function useBlitzHub(): BlitzHub {
   onMounted(async () => {
     try {
       items.value = await quizApi.getQuestions()
-    } catch (e) {
-      error.value = getErrorMessage(e)
+    } catch (error_) {
+      error.value = getErrorMessage(error_)
     } finally {
       isLoading.value = false
     }

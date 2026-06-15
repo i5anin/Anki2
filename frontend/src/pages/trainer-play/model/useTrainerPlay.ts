@@ -1,12 +1,12 @@
 import { useToast } from 'primevue/usetoast'
-import { computed, ref, type ComputedRef, type Ref } from 'vue'
+import { computed, type ComputedRef, ref, type Ref } from 'vue'
 
 import {
-  trainerApi,
-  useTrainerLevels,
   type LevelChange,
+  trainerApi,
   type TrainerDef,
   type TrainerOutcome,
+  useTrainerLevels,
 } from '@/entities/trainer'
 
 export type PlayPhase = 'playing' | 'finished'

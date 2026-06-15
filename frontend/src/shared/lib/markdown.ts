@@ -54,6 +54,8 @@ function isValidDelim(state: InlineState, pos: number): { canOpen: boolean; canC
 }
 
 /** Инлайн-формула: `$ ... $`. */
+// Токенайзер формул (портирован) — допускаем повышенную когнитивную сложность.
+// eslint-disable-next-line sonarjs/cognitive-complexity
 function mathInline(state: InlineState, silent: boolean): boolean {
   if (state.src[state.pos] !== '$') return false
 
@@ -137,9 +139,9 @@ function mathBlock(state: BlockState, start: number, end: number, silent: boolea
   const token = state.push('math_block', 'math', 0)
   token.block = true
   token.content =
-    (firstLine.trim() !== '' ? `${firstLine}\n` : '') +
+    (firstLine.trim() === '' ? '' : `${firstLine}\n`) +
     state.getLines(start + 1, next, state.tShift[start], true) +
-    (lastLine.trim() !== '' ? lastLine : '')
+    (lastLine.trim() === '' ? '' : lastLine)
   token.markup = '$$'
   token.map = [start, state.line]
   return true

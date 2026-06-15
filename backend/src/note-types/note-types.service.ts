@@ -1,9 +1,10 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 
-import { DataStore } from '../store/data-store'
 import type { NoteType } from '../domain/note-type.entity'
 import type { CreateNoteTypeDto } from './dto/create-note-type.dto'
 import type { UpdateNoteTypeDto } from './dto/update-note-type.dto'
+
+import { DataStore } from '../store/data-store'
 
 @Injectable()
 export class NoteTypesService {

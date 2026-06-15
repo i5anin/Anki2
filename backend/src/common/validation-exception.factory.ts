@@ -1,5 +1,6 @@
-import { HttpException, HttpStatus } from '@nestjs/common'
 import type { ValidationError } from '@nestjs/common'
+
+import { HttpException, HttpStatus } from '@nestjs/common'
 
 /**
  * Преобразует ошибки class-validator в формат, ожидаемый фронтендом:

@@ -3,8 +3,8 @@ import { createHash } from 'node:crypto'
 import type { Card } from '../domain/card.entity'
 import type { Deck } from '../domain/deck.entity'
 import type { Note } from '../domain/note.entity'
-import { mergeDeckConfig } from '../srs'
 
+import { mergeDeckConfig } from '../srs'
 import analysisCards from './interview/analysis.json'
 import blitzCards from './interview/blitz.json'
 import cssCards from './interview/css.json'
@@ -37,15 +37,69 @@ const SPRINT_CONFIG = { newCardsPerDay: 30, maxReviewsPerDay: 300 }
 
 /** Колоды «Собеседование». UUID фиксированы и совпадают с supabase/seed-interview.sql. */
 const INTERVIEW_DECKS: InterviewDeck[] = [
-  { slug: 'blitz', id: '55555555-5555-5555-5555-555555550009', name: 'Блиц · Короткие факты', description: 'Короткие вопросы для разминки-блица (варианты + таймер) перед глубокими колодами', cards: blitzCards },
-  { slug: 'js', id: '55555555-5555-5555-5555-555555550001', name: 'Собеседование · JavaScript', description: 'Подготовка к собеседованию: JavaScript', cards: jsCards },
-  { slug: 'ts', id: '55555555-5555-5555-5555-555555550002', name: 'Собеседование · TypeScript', description: 'Подготовка к собеседованию: TypeScript', cards: tsCards },
-  { slug: 'css', id: '55555555-5555-5555-5555-555555550003', name: 'Собеседование · HTML / CSS', description: 'Подготовка к собеседованию: вёрстка, CSS, браузер', cards: cssCards },
-  { slug: 'vue', id: '55555555-5555-5555-5555-555555550004', name: 'Собеседование · Vue 3', description: 'Подготовка к собеседованию: Vue', cards: vueCards },
-  { slug: 'system-design', id: '55555555-5555-5555-5555-555555550005', name: 'Собеседование · Системный дизайн', description: 'Подготовка к собеседованию: системный дизайн', cards: systemDesignCards },
-  { slug: 'infra', id: '55555555-5555-5555-5555-555555550006', name: 'Собеседование · Инфраструктура и безопасность', description: 'Подготовка: сборка, CI/CD, авторизация, безопасность', cards: infraCards },
-  { slug: 'analysis', id: '55555555-5555-5555-5555-555555550007', name: 'Собеседование · Анализ и проектирование', description: 'Подготовка: анализ, оценка, проектирование', cards: analysisCards },
-  { slug: 'management', id: '55555555-5555-5555-5555-555555550008', name: 'Собеседование · Организация и управление', description: 'Подготовка: лид, команда, интервью', cards: managementCards },
+  {
+    slug: 'blitz',
+    id: '55555555-5555-5555-5555-555555550009',
+    name: 'Блиц · Короткие факты',
+    description: 'Короткие вопросы для разминки-блица (варианты + таймер) перед глубокими колодами',
+    cards: blitzCards,
+  },
+  {
+    slug: 'js',
+    id: '55555555-5555-5555-5555-555555550001',
+    name: 'Собеседование · JavaScript',
+    description: 'Подготовка к собеседованию: JavaScript',
+    cards: jsCards,
+  },
+  {
+    slug: 'ts',
+    id: '55555555-5555-5555-5555-555555550002',
+    name: 'Собеседование · TypeScript',
+    description: 'Подготовка к собеседованию: TypeScript',
+    cards: tsCards,
+  },
+  {
+    slug: 'css',
+    id: '55555555-5555-5555-5555-555555550003',
+    name: 'Собеседование · HTML / CSS',
+    description: 'Подготовка к собеседованию: вёрстка, CSS, браузер',
+    cards: cssCards,
+  },
+  {
+    slug: 'vue',
+    id: '55555555-5555-5555-5555-555555550004',
+    name: 'Собеседование · Vue 3',
+    description: 'Подготовка к собеседованию: Vue',
+    cards: vueCards,
+  },
+  {
+    slug: 'system-design',
+    id: '55555555-5555-5555-5555-555555550005',
+    name: 'Собеседование · Системный дизайн',
+    description: 'Подготовка к собеседованию: системный дизайн',
+    cards: systemDesignCards,
+  },
+  {
+    slug: 'infra',
+    id: '55555555-5555-5555-5555-555555550006',
+    name: 'Собеседование · Инфраструктура и безопасность',
+    description: 'Подготовка: сборка, CI/CD, авторизация, безопасность',
+    cards: infraCards,
+  },
+  {
+    slug: 'analysis',
+    id: '55555555-5555-5555-5555-555555550007',
+    name: 'Собеседование · Анализ и проектирование',
+    description: 'Подготовка: анализ, оценка, проектирование',
+    cards: analysisCards,
+  },
+  {
+    slug: 'management',
+    id: '55555555-5555-5555-5555-555555550008',
+    name: 'Собеседование · Организация и управление',
+    description: 'Подготовка: лид, команда, интервью',
+    cards: managementCards,
+  },
 ]
 
 /** Детерминированный UUID (8-4-4-4-12) — тот же алгоритм, что в build-interview.mjs. */

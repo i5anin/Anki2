@@ -1,5 +1,5 @@
-import { useStorage, type RemovableRef } from '@vueuse/core'
-import { computed, watchEffect, type ComputedRef } from 'vue'
+import { type RemovableRef, useStorage } from '@vueuse/core'
+import { computed, type ComputedRef, watchEffect } from 'vue'
 
 const DARK_CLASS = 'app-dark'
 const STORAGE_KEY = 'anki2:theme'

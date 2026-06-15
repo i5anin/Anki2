@@ -3,7 +3,7 @@ import Badge from 'primevue/badge'
 import Button from 'primevue/button'
 import Message from 'primevue/message'
 import Tag from 'primevue/tag'
-import { onMounted, type Component } from 'vue'
+import { type Component, onMounted } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 import { SKILL_LABELS, SKILL_SEVERITIES, TRAINERS } from '@/entities/trainer'

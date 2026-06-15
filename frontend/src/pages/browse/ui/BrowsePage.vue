@@ -9,10 +9,10 @@ import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 
 import { useDecksStore } from '@/entities/deck'
-import { useNotesStore, type Note } from '@/entities/note'
-import { useNoteTypesStore, type NoteType } from '@/entities/note-type'
-import { AddNoteButton, NoteEditorDialog, useManageNote } from '@/features/manage-note'
+import { type Note, useNotesStore } from '@/entities/note'
+import { type NoteType, useNoteTypesStore } from '@/entities/note-type'
 import { useDeleteNote } from '@/features/delete-note'
+import { AddNoteButton, NoteEditorDialog, useManageNote } from '@/features/manage-note'
 import { formatDateTime } from '@/shared/lib'
 import { MarkdownContent } from '@/shared/ui'
 
@@ -50,7 +50,7 @@ const deckName = computed(
 function frontField(note: Note): string {
   const type = noteTypeMap.value.get(note.noteTypeId)
   const firstField = type?.fields[0]
-  if (firstField !== undefined && note.fields[firstField] !== undefined) {
+  if (firstField !== undefined && firstField in note.fields) {
     return note.fields[firstField]
   }
   return Object.values(note.fields)[0] ?? ''

@@ -1,4 +1,7 @@
 import prettier from 'eslint-config-prettier'
+import perfectionist from 'eslint-plugin-perfectionist'
+import sonarjs from 'eslint-plugin-sonarjs'
+import unicorn from 'eslint-plugin-unicorn'
 import tseslint from 'typescript-eslint'
 
 // ============================================================================
@@ -14,6 +17,17 @@ export default tseslint.config(
 
   ...tseslint.configs.strictTypeChecked,
   ...tseslint.configs.stylisticTypeChecked,
+  unicorn.configs.recommended,
+  sonarjs.configs.recommended,
+
+  {
+    name: 'app/imports',
+    plugins: { perfectionist },
+    rules: {
+      'perfectionist/sort-imports': ['error', { type: 'natural' }],
+      'perfectionist/sort-named-imports': ['error', { type: 'natural' }],
+    },
+  },
 
   {
     name: 'app/lang',
@@ -92,6 +106,22 @@ export default tseslint.config(
       '@typescript-eslint/require-await': 'off',
       // Без noUncheckedIndexedAccess правило ложно срабатывает на защитных проверках.
       '@typescript-eslint/no-unnecessary-condition': 'off',
+
+      // --- Плагины unicorn/sonarjs: глушим шумные/низкоценные правила ----------
+      'unicorn/prevent-abbreviations': 'off',
+      'unicorn/no-null': 'off',
+      'unicorn/no-array-for-each': 'off',
+      'unicorn/no-array-reduce': 'off',
+      'unicorn/no-array-callback-reference': 'off',
+      'unicorn/prefer-top-level-await': 'off',
+      'unicorn/filename-case': 'off',
+      'unicorn/no-useless-undefined': 'off',
+      'unicorn/prefer-module': 'off',
+      'sonarjs/no-duplicate-string': 'off',
+      // Security-хотспоты (advisory), а не баги: sha1 — для ДЕТЕРМИНИРОВАННЫХ UUID
+      // сидов (не безопасность); regex — по контролируемому контенту карточек.
+      'sonarjs/hashing': 'off',
+      'sonarjs/slow-regex': 'off',
     },
   },
 

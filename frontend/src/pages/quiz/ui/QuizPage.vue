@@ -42,8 +42,8 @@ async function begin(): Promise<void> {
     } else {
       start(questions)
     }
-  } catch (e) {
-    error.value = getErrorMessage(e)
+  } catch (error_) {
+    error.value = getErrorMessage(error_)
   } finally {
     isLoading.value = false
   }

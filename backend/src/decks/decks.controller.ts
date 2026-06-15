@@ -1,9 +1,10 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post } from '@nestjs/common'
 
+import type { Deck, DeckWithCounts } from '../domain/deck.entity'
+
 import { DecksService } from './decks.service'
 import { CreateDeckDto } from './dto/create-deck.dto'
 import { UpdateDeckDto } from './dto/update-deck.dto'
-import type { Deck, DeckWithCounts } from '../domain/deck.entity'
 
 @Controller('decks')
 export class DecksController {

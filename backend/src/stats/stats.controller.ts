@@ -1,8 +1,9 @@
 import { BadRequestException, Controller, Get, Query } from '@nestjs/common'
 
-import { StatsService } from './stats.service'
-import type { DayCount, RetentionBreakdown, StatsOverview } from './stats.service'
 import type { StatsInsights } from './insights'
+import type { DayCount, RetentionBreakdown, StatsOverview } from './stats.service'
+
+import { StatsService } from './stats.service'
 
 /** Дефолтное окно для графиков (дни). */
 const DEFAULT_DAYS = 30

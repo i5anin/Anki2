@@ -1,10 +1,11 @@
 import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common'
 
-import { generateCards } from '../rendering'
-import { DataStore } from '../store/data-store'
 import type { Note } from '../domain/note.entity'
 import type { CreateNoteDto } from './dto/create-note.dto'
 import type { UpdateNoteDto } from './dto/update-note.dto'
+
+import { generateCards } from '../rendering'
+import { DataStore } from '../store/data-store'
 
 @Injectable()
 export class NotesService {

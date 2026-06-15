@@ -43,9 +43,9 @@ export function selectQueue(
 
   const learning = active
     .filter((c) => (c.state === 'learning' || c.state === 'relearning') && isDue(c))
-    .sort(byDue)
-  const reviews = active.filter((c) => c.state === 'review' && isDue(c)).sort(byDue)
-  const news = active.filter((c) => c.state === 'new').sort(byCreation)
+    .toSorted(byDue)
+  const reviews = active.filter((c) => c.state === 'review' && isDue(c)).toSorted(byDue)
+  const news = active.filter((c) => c.state === 'new').toSorted(byCreation)
 
   const { newDone, reviewsDone } = doneToday(logsToday, now)
   const reviewLimit = Math.max(0, config.maxReviewsPerDay - reviewsDone)

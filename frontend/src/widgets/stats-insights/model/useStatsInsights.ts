@@ -1,10 +1,11 @@
-import { onMounted, ref, watch, type Ref } from 'vue'
+import { onMounted, ref, type Ref, watch } from 'vue'
+
+import type { ChartPayload } from '@/widgets/stat-chart'
 
 import { deckApi, type DeckWithCounts } from '@/entities/deck'
 import { statsApi, type StatsInsights } from '@/entities/stats'
 import { getErrorMessage } from '@/shared/api'
 import { formatDate } from '@/shared/lib'
-import type { ChartPayload } from '@/widgets/stat-chart'
 
 const PALETTE = {
   indigo: '#6366f1',
@@ -113,8 +114,8 @@ export function useStatsInsights(getDeckId: () => string | undefined): StatsInsi
       activity.value = bars(ins.activity.map((point) => formatDate(point.date)), ins.activity.map((point) => point.count), PALETTE.green)
       decks.value = buildDecks(deckList)
       ready.value = true
-    } catch (e) {
-      error.value = getErrorMessage(e)
+    } catch (error_) {
+      error.value = getErrorMessage(error_)
     }
   }
 

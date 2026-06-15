@@ -1,6 +1,6 @@
-import { computed, ref, type ComputedRef, type Ref } from 'vue'
+import { computed, type ComputedRef, ref, type Ref } from 'vue'
 
-import { TRAINERS, trainerApi, type TrainerDef, type TrainerResult } from '@/entities/trainer'
+import { trainerApi, type TrainerDef, type TrainerResult, TRAINERS } from '@/entities/trainer'
 import { getErrorMessage } from '@/shared/api'
 
 /** Чип сводки наверху хаба тренажёров. */
@@ -41,8 +41,8 @@ export function useTrainersSummary(): TrainersSummary {
   async function load(): Promise<void> {
     try {
       results.value = await trainerApi.getResults()
-    } catch (e) {
-      error.value = getErrorMessage(e)
+    } catch (error_) {
+      error.value = getErrorMessage(error_)
     } finally {
       isLoading.value = false
     }
@@ -91,12 +91,12 @@ export function useTrainersSummary(): TrainersSummary {
 
   function bestLabel(trainerId: string): string {
     const entry = aggregates.value.get(trainerId)
-    return entry !== undefined ? String(entry.best) : '—'
+    return entry === undefined ? '—' : String(entry.best)
   }
 
   function sessionsLabel(trainerId: string): string {
     const entry = aggregates.value.get(trainerId)
-    return entry !== undefined ? String(entry.sessions) : '—'
+    return entry === undefined ? '—' : String(entry.sessions)
   }
 
   return { results, isLoading, error, summary, dailyTrainers, load, bestLabel, sessionsLabel }

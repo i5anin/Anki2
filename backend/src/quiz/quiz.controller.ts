@@ -1,6 +1,7 @@
 import { Controller, Get, Query } from '@nestjs/common'
 
 import type { QuizItem } from '../domain/quiz-item.entity'
+
 import { QuizService } from './quiz.service'
 
 @Controller('quiz')

@@ -74,11 +74,11 @@ const MUTATORS: Mutator[] = [
   },
   (line) => {
     const at = line.lastIndexOf("'")
-    return at >= 0 ? dropCharAt(line, at) : null
+    return at === -1 ? null : dropCharAt(line, at)
   },
   (line) => {
     const at = line.indexOf("'")
-    return at >= 0 ? `${line.slice(0, at)}"${line.slice(at + 1)}` : null
+    return at === -1 ? null : `${line.slice(0, at)}"${line.slice(at + 1)}`
   },
 ]
 

@@ -3,8 +3,9 @@ import { ref } from 'vue'
 
 import { getErrorMessage } from '@/shared/api'
 
-import { noteApi } from '../api/note-api'
 import type { Note, NoteDraft } from './types'
+
+import { noteApi } from '../api/note-api'
 
 export const useNotesStore = defineStore('notes', () => {
   const notes = ref<Note[]>([])
@@ -18,9 +19,9 @@ export const useNotesStore = defineStore('notes', () => {
     error.value = null
     try {
       notes.value = await noteApi.getList(deck)
-    } catch (e) {
-      error.value = getErrorMessage(e)
-      throw e
+    } catch (error_) {
+      error.value = getErrorMessage(error_)
+      throw error_
     } finally {
       isLoading.value = false
     }
@@ -35,9 +36,9 @@ export const useNotesStore = defineStore('notes', () => {
     try {
       await noteApi.create(draft)
       await reload()
-    } catch (e) {
-      error.value = getErrorMessage(e)
-      throw e
+    } catch (error_) {
+      error.value = getErrorMessage(error_)
+      throw error_
     }
   }
 
@@ -46,9 +47,9 @@ export const useNotesStore = defineStore('notes', () => {
     try {
       await noteApi.update(id, draft)
       await reload()
-    } catch (e) {
-      error.value = getErrorMessage(e)
-      throw e
+    } catch (error_) {
+      error.value = getErrorMessage(error_)
+      throw error_
     }
   }
 
@@ -57,9 +58,9 @@ export const useNotesStore = defineStore('notes', () => {
     try {
       await noteApi.remove(id)
       await reload()
-    } catch (e) {
-      error.value = getErrorMessage(e)
-      throw e
+    } catch (error_) {
+      error.value = getErrorMessage(error_)
+      throw error_
     }
   }
 

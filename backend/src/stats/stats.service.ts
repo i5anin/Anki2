@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common'
 
-import { DataStore } from '../store/data-store'
 import type { Card } from '../domain/card.entity'
 import type { ReviewLog } from '../domain/review-log.entity'
 import type { CardState } from '../srs'
+
+import { DataStore } from '../store/data-store'
 import { computeInsights, type StatsInsights } from './insights'
 
 /** Карточка считается «зрелой», когда интервал review не меньше этого порога (дни). */
@@ -115,11 +116,11 @@ export class StatsService {
     const startMs = startOfToday(now)
     const dayMs = 24 * 60 * 60 * 1000
 
-    const counts = new Array<number>(days).fill(0)
-    const scheduled: CardState[] = ['review', 'relearning']
+    const counts = Array.from({ length: days }, () => 0)
+    const scheduled = new Set<CardState>(['review', 'relearning'])
 
     for (const card of cards) {
-      if (!scheduled.includes(card.state)) continue
+      if (!scheduled.has(card.state)) continue
       const dueMs = new Date(card.due).getTime()
       const offset = Math.floor((dueMs - startMs) / dayMs)
       const index = Math.min(Math.max(offset, 0), days - 1)
@@ -145,10 +146,23 @@ export class StatsService {
     }
 
     for (const log of matureLogs) {
-      if (log.rating === 1) breakdown.again += 1
-      else if (log.rating === 2) breakdown.hard += 1
-      else if (log.rating === 3) breakdown.good += 1
-      else breakdown.easy += 1
+      switch (log.rating) {
+        case 1: {
+          breakdown.again += 1
+          break
+        }
+        case 2: {
+          breakdown.hard += 1
+          break
+        }
+        case 3: {
+          breakdown.good += 1
+          break
+        }
+        default: {
+          breakdown.easy += 1
+        }
+      }
     }
 
     return breakdown
@@ -161,7 +175,7 @@ export class StatsService {
     const dayMs = 24 * 60 * 60 * 1000
     const windowStart = startMs - (days - 1) * dayMs
 
-    const counts = new Array<number>(days).fill(0)
+    const counts = Array.from({ length: days }, () => 0)
 
     for (const log of logs) {
       const reviewedMs = new Date(log.reviewedAt).getTime()

@@ -7,6 +7,7 @@ import type {
   ScheduleContext,
   SchedulingState,
 } from './types'
+
 import { formatInterval } from './format'
 
 const MS_MIN = 60_000
@@ -162,24 +163,26 @@ export function schedule(
   const stateBefore: CardState = state.state
   const easeBefore = state.easeFactor
   const intervalBefore = state.intervalDays
-  const elapsedDays = state.lastReviewedAt
-    ? Math.max(0, daysBetween(state.lastReviewedAt, now))
-    : 0
+  const elapsedDays = state.lastReviewedAt ? Math.max(0, daysBetween(state.lastReviewedAt, now)) : 0
 
   let next: SchedulingState
   switch (state.state) {
     case 'new':
-    case 'learning':
+    case 'learning': {
       next = scheduleLearning(state, rating, config, now, 'learning')
       break
-    case 'relearning':
+    }
+    case 'relearning': {
       next = scheduleLearning(state, rating, config, now, 'relearning')
       break
-    case 'review':
+    }
+    case 'review': {
       next = scheduleReview(state, rating, config, now)
       break
-    default:
+    }
+    default: {
       throw new Error(`Неизвестное состояние карточки: ${String(state.state)}`)
+    }
   }
 
   next.reps = state.reps + 1

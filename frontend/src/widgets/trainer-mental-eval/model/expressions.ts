@@ -53,7 +53,7 @@ function numberOptions(answer: number, candidates: number[]): string[] {
     }
     extra += 1
   }
-  return unique.slice(0, 3).map((value) => String(value))
+  return unique.slice(0, 3).map(String)
 }
 
 // --- Арифметика с приоритетом (любой уровень) -------------------------------
@@ -252,7 +252,9 @@ function genMapFilterChain(): ExpressionTask {
 
 function genSpreadString(): ExpressionTask {
   const word = pickOne(['abc', 'vue', 'node', 'front', 'jsx'])
-  const answer = Array.from(word).length
+  // Слова ASCII — спред строки безопасен (правило бережёт от поломки emoji/графем).
+  // eslint-disable-next-line @typescript-eslint/no-misused-spread
+  const answer = [...word].length
   return {
     code: `[...'${word}'].length`,
     answer: String(answer),

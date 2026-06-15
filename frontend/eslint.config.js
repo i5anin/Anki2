@@ -1,7 +1,10 @@
-import { globalIgnores } from 'eslint/config'
-import pluginVue from 'eslint-plugin-vue'
-import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
 import skipFormatting from '@vue/eslint-config-prettier/skip-formatting'
+import { defineConfigWithVueTs, vueTsConfigs } from '@vue/eslint-config-typescript'
+import perfectionist from 'eslint-plugin-perfectionist'
+import sonarjs from 'eslint-plugin-sonarjs'
+import unicorn from 'eslint-plugin-unicorn'
+import pluginVue from 'eslint-plugin-vue'
+import { globalIgnores } from 'eslint/config'
 
 // ============================================================================
 // Жёсткий ESLint 10 (flat config) для фронтенда.
@@ -20,6 +23,17 @@ export default defineConfigWithVueTs(
   pluginVue.configs['flat/recommended'],
   vueTsConfigs.strictTypeChecked,
   vueTsConfigs.stylisticTypeChecked,
+  unicorn.configs.recommended,
+  sonarjs.configs.recommended,
+
+  {
+    name: 'app/imports',
+    plugins: { perfectionist },
+    rules: {
+      'perfectionist/sort-imports': ['error', { type: 'natural' }],
+      'perfectionist/sort-named-imports': ['error', { type: 'natural' }],
+    },
+  },
 
   // Включаем типобезопасный анализ (projectService) для .ts и .vue.
   {
@@ -101,6 +115,26 @@ export default defineConfigWithVueTs(
       // проверках доступа по индексу (массивы/Record) и вынуждает убирать нужную
       // рантайм-защиту. Безопасность типов закрывают strict-boolean-expressions и др.
       '@typescript-eslint/no-unnecessary-condition': 'off',
+
+      // --- Плагины unicorn/sonarjs: глушим шумные/низкоценные правила ----------
+      'unicorn/prevent-abbreviations': 'off',
+      'unicorn/no-null': 'off',
+      'unicorn/no-array-for-each': 'off',
+      'unicorn/no-array-reduce': 'off',
+      'unicorn/no-array-callback-reference': 'off',
+      'unicorn/prefer-top-level-await': 'off',
+      'unicorn/filename-case': 'off',
+      'unicorn/no-useless-undefined': 'off',
+      'unicorn/prefer-global-this': 'off',
+      'unicorn/consistent-function-scoping': 'off',
+      'sonarjs/no-duplicate-string': 'off',
+      // Security-хотспоты (advisory), не баги: regex по контролируемому контенту;
+      // Math.random — для перемешивания карточек/игр, а не криптографии.
+      'sonarjs/hashing': 'off',
+      'sonarjs/slow-regex': 'off',
+      'sonarjs/pseudo-random': 'off',
+      // charCodeAt для ASCII-разделителей формул — codePointAt здесь избыточен.
+      'unicorn/prefer-code-point': 'off',
 
       // --- Vue — только Composition API, строгая разметка ----------------------
       'vue/component-api-style': ['error', ['script-setup']],

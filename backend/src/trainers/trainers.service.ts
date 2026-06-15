@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common'
 
 import type { TrainerResult } from '../domain/trainer-result.entity'
-import { DataStore, type TrainerResultFilter } from '../store/data-store'
 import type { CreateTrainerResultDto } from './dto/create-trainer-result.dto'
+
+import { DataStore, type TrainerResultFilter } from '../store/data-store'
 
 @Injectable()
 export class TrainersService {

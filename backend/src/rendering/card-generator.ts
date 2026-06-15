@@ -19,7 +19,7 @@ export function generateCards(fields: NoteFields, noteType: NoteType): Generated
       nums.add(Number(match[1]))
     }
     if (nums.size === 0) return [{ templateIndex: 0 }]
-    return [...nums].sort((a, b) => a - b).map((num) => ({ templateIndex: num - 1 }))
+    return [...nums].toSorted((a, b) => a - b).map((num) => ({ templateIndex: num - 1 }))
   }
 
   if (noteType.templates.length === 0) return [{ templateIndex: 0 }]

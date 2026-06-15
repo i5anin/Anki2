@@ -2,7 +2,7 @@
 import Select from 'primevue/select'
 import { computed, onMounted, ref } from 'vue'
 
-import { useDecksStore, type DeckWithCounts } from '@/entities/deck'
+import { type DeckWithCounts, useDecksStore } from '@/entities/deck'
 import { StatsDashboard } from '@/widgets/stats-dashboard'
 import { StatsInsights } from '@/widgets/stats-insights'
 

@@ -1,10 +1,10 @@
 import { storeToRefs } from 'pinia'
 import { useToast } from 'primevue/usetoast'
-import { computed, reactive, ref, watch, type ComputedRef, type Ref } from 'vue'
+import { computed, type ComputedRef, reactive, ref, type Ref, watch } from 'vue'
 
-import { useDecksStore, type DeckWithCounts } from '@/entities/deck'
-import { useNotesStore, type NoteDraft } from '@/entities/note'
-import { useNoteTypesStore, type NoteType } from '@/entities/note-type'
+import { type DeckWithCounts, useDecksStore } from '@/entities/deck'
+import { type NoteDraft, useNotesStore } from '@/entities/note'
+import { type NoteType, useNoteTypesStore } from '@/entities/note-type'
 
 import { useManageNote } from './useManageNote'
 
@@ -110,7 +110,7 @@ export function useNoteForm(): NoteFormApi {
     return names
       .map((name) => {
         const value = form.fields[name]?.trim() ?? ''
-        return value !== '' ? `**${name}**\n\n${value}` : ''
+        return value === '' ? '' : `**${name}**\n\n${value}`
       })
       .filter((chunk) => chunk !== '')
       .join('\n\n---\n\n')
@@ -124,8 +124,8 @@ export function useNoteForm(): NoteFormApi {
     if (form.deckId === '') {
       map.deckId = 'Выберите колоду'
     }
-    const firstField = fieldNames.value[0]
-    if (firstField !== undefined) {
+    if (fieldNames.value.length > 0) {
+      const firstField = fieldNames.value[0]
       const value = form.fields[firstField]?.trim() ?? ''
       if (value === '') {
         map.fields = `Поле «${firstField}» не должно быть пустым`

@@ -1,4 +1,4 @@
-import { computed, onMounted, onUnmounted, ref, type ComputedRef, type Ref } from 'vue'
+import { computed, type ComputedRef, onMounted, onUnmounted, ref, type Ref } from 'vue'
 
 import type { TrainerOutcome } from '@/entities/trainer'
 

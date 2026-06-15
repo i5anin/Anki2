@@ -1,6 +1,7 @@
+import type { ScheduleContext, SchedulingState } from './types'
+
 import { DEFAULT_DECK_CONFIG } from './config'
 import { previewIntervals, schedule } from './scheduler'
-import type { ScheduleContext, SchedulingState } from './types'
 
 const NOW = new Date('2026-01-01T00:00:00.000Z')
 const ctx: ScheduleContext = { now: NOW, config: DEFAULT_DECK_CONFIG }

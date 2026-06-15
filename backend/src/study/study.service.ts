@@ -1,13 +1,14 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 
-import { DataStore } from '../store/data-store'
-import { previewIntervals, schedule } from '../srs'
-import { toRenderedCard } from '../rendering'
-import { countDeck, selectQueue } from './queue'
 import type { Card, RenderedCard } from '../domain/card.entity'
 import type { DeckCounts } from '../domain/deck.entity'
 import type { IntervalPreview, SchedulingState } from '../srs'
 import type { ReviewDto } from './dto/review.dto'
+
+import { toRenderedCard } from '../rendering'
+import { previewIntervals, schedule } from '../srs'
+import { DataStore } from '../store/data-store'
+import { countDeck, selectQueue } from './queue'
 
 /** Шапка очереди: краткие данные колоды. */
 export interface QueueDeck {

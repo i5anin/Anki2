@@ -1,9 +1,10 @@
 import { Body, Controller, Delete, Get, HttpCode, Param, Patch, Post, Query } from '@nestjs/common'
 
-import { NotesService } from './notes.service'
+import type { Note } from '../domain/note.entity'
+
 import { CreateNoteDto } from './dto/create-note.dto'
 import { UpdateNoteDto } from './dto/update-note.dto'
-import type { Note } from '../domain/note.entity'
+import { NotesService } from './notes.service'
 
 @Controller('notes')
 export class NotesController {

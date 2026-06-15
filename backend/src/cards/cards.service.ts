@@ -1,12 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 
-import { toRenderedCard } from '../rendering'
-import { DataStore } from '../store/data-store'
 import type { Card, RenderedCard } from '../domain/card.entity'
 import type { NoteType } from '../domain/note-type.entity'
 import type { Note } from '../domain/note.entity'
 import type { CardFilter } from '../store/data-store'
 import type { UpdateCardDto } from './dto/update-card.dto'
+
+import { toRenderedCard } from '../rendering'
+import { DataStore } from '../store/data-store'
 
 @Injectable()
 export class CardsService {

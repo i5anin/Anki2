@@ -1,4 +1,4 @@
-import { computed, onMounted, onUnmounted, ref, type ComputedRef, type Ref } from 'vue'
+import { computed, type ComputedRef, onMounted, onUnmounted, ref, type Ref } from 'vue'
 
 import type { TrainerOutcome } from '@/entities/trainer'
 
@@ -6,7 +6,7 @@ import { createEvalRound, type EvalRound } from './expressions'
 
 const BASE_ROUNDS = 6
 const LEVEL_ROUNDS_CAP = 6
-const LIMIT_BASE_MS = 12000
+const LIMIT_BASE_MS = 12_000
 const LIMIT_STEP_MS = 500
 const LIMIT_MIN_MS = 6000
 const TICK_MS = 50

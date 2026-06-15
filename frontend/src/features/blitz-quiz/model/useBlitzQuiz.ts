@@ -1,4 +1,4 @@
-import { computed, onUnmounted, ref, type ComputedRef, type Ref } from 'vue'
+import { computed, type ComputedRef, onUnmounted, ref, type Ref } from 'vue'
 
 import type { QuizQuestion } from '@/entities/quiz'
 

@@ -1,7 +1,7 @@
 import { useConfirm } from 'primevue/useconfirm'
 import { useToast } from 'primevue/usetoast'
 
-import { useDecksStore, type DeckWithCounts } from '@/entities/deck'
+import { type DeckWithCounts, useDecksStore } from '@/entities/deck'
 
 /** Подтверждение и выполнение удаления колоды. */
 export function useDeleteDeck(): { confirmDelete: (deck: DeckWithCounts) => void } {

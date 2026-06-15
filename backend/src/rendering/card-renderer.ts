@@ -18,7 +18,7 @@ interface ClozeOptions {
  * остальные пропуски всегда показывают свой текст (для контекста).
  */
 function renderCloze(text: string, opts: ClozeOptions): string {
-  return text.replace(
+  return text.replaceAll(
     /\{\{c(\d+)::(.*?)(?:::(.*?))?\}\}/g,
     (_match, numStr: string, answer: string, hint?: string) => {
       const num = Number(numStr)
@@ -44,12 +44,12 @@ function applyTemplate(
   let out = template
 
   if (cloze) {
-    out = out.replace(/\{\{cloze:([^}]+)\}\}/g, (_m, raw: string) =>
+    out = out.replaceAll(/\{\{cloze:([^}]+)\}\}/g, (_m, raw: string) =>
       renderCloze(fields[raw.trim()] ?? '', cloze),
     )
   }
 
-  out = out.replace(/\{\{([^}]+)\}\}/g, (_m, raw: string) => {
+  out = out.replaceAll(/\{\{([^}]+)\}\}/g, (_m, raw: string) => {
     const name = raw.trim()
     if (name === 'FrontSide') return frontSide
     if (name.startsWith('cloze:')) return '' // уже обработано выше

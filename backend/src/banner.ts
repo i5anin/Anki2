@@ -1,14 +1,14 @@
 const C = {
-  reset: '\x1b[0m',
-  bold: '\x1b[1m',
-  dim: '\x1b[2m',
-  red: '\x1b[31m',
-  green: '\x1b[32m',
-  yellow: '\x1b[33m',
-  blue: '\x1b[34m',
-  magenta: '\x1b[35m',
-  cyan: '\x1b[36m',
-  gray: '\x1b[90m',
+  reset: '\u001B[0m',
+  bold: '\u001B[1m',
+  dim: '\u001B[2m',
+  red: '\u001B[31m',
+  green: '\u001B[32m',
+  yellow: '\u001B[33m',
+  blue: '\u001B[34m',
+  magenta: '\u001B[35m',
+  cyan: '\u001B[36m',
+  gray: '\u001B[90m',
 }
 
 interface BannerInfo {
@@ -29,14 +29,18 @@ const ENDPOINTS = [
 /** Печатает аккуратный цветной баннер при запуске сервера. */
 export function printBanner(info: BannerInfo): void {
   const rule = `  ${C.gray}${'─'.repeat(56)}${C.reset}`
-  const lines: string[] = ['']
+  const lines: string[] = [
+    '',
+    `  ${C.bold}${C.magenta}◆  ANKI2${C.reset}  ${C.dim}·  REST API (NestJS + Supabase)${C.reset}`,
+    rule,
+    `  ${C.cyan}▸ API${C.reset}        ${C.bold}${info.url}${C.reset}`,
+    `  ${C.cyan}▸ Swagger${C.reset}    ${C.bold}${info.docs}${C.reset}`,
+  ]
 
-  lines.push(`  ${C.bold}${C.magenta}◆  ANKI2${C.reset}  ${C.dim}·  REST API (NestJS + Supabase)${C.reset}`)
-  lines.push(rule)
-  lines.push(`  ${C.cyan}▸ API${C.reset}        ${C.bold}${info.url}${C.reset}`)
-  lines.push(`  ${C.cyan}▸ Swagger${C.reset}    ${C.bold}${info.docs}${C.reset}`)
   if (info.usingSupabase) {
-    lines.push(`  ${C.cyan}▸ Хранилище${C.reset}  ${C.green}Supabase${C.reset} ${C.dim}${info.supabaseUrl}${C.reset}`)
+    lines.push(
+      `  ${C.cyan}▸ Хранилище${C.reset}  ${C.green}Supabase${C.reset} ${C.dim}${info.supabaseUrl}${C.reset}`,
+    )
   } else {
     lines.push(
       `  ${C.cyan}▸ Хранилище${C.reset}  ${C.yellow}in-memory (демо)${C.reset} ${C.dim}— задайте SUPABASE_SERVICE_ROLE_KEY${C.reset}`,
@@ -47,9 +51,7 @@ export function printBanner(info: BannerInfo): void {
     const verb = `${e.color}${C.bold}${e.verb.padEnd(6)}${C.reset}`
     lines.push(`    ${verb}${C.bold}${e.path.padEnd(22)}${C.reset}${C.gray}— ${e.desc}${C.reset}`)
   }
-  lines.push(rule)
-  lines.push(`  ${C.dim}Остановить:${C.reset} ${C.bold}CTRL+C${C.reset}`)
-  lines.push('')
+  lines.push(rule, `  ${C.dim}Остановить:${C.reset} ${C.bold}CTRL+C${C.reset}`, '')
 
   console.log(lines.join('\n'))
 }

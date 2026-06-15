@@ -43,8 +43,8 @@ function startOfToday(now: Date): number {
 
 /** Индекс корзины: первый порог, которому value не превышает; иначе последняя. */
 function bucketIndex(value: number, edges: number[]): number {
-  for (let i = 0; i < edges.length; i += 1) {
-    if (value <= edges[i]) {
+  for (const [i, edge] of edges.entries()) {
+    if (value <= edge) {
       return i
     }
   }
@@ -62,7 +62,7 @@ function easeDistribution(cards: Card[]): Bucket[] {
   ]
   for (const card of cards) {
     if (card.state !== 'review' && card.state !== 'relearning') continue
-    buckets[bucketIndex(card.easeFactor, [2.0, 2.3, 2.5, 2.7])].count += 1
+    buckets[bucketIndex(card.easeFactor, [2, 2.3, 2.5, 2.7])].count += 1
   }
   return buckets
 }
@@ -84,19 +84,37 @@ function intervalDistribution(cards: Card[]): Bucket[] {
   return buckets
 }
 
-function answerButtons(logs: ReviewLog[]): { again: number; hard: number; good: number; easy: number } {
+function answerButtons(logs: ReviewLog[]): {
+  again: number
+  hard: number
+  good: number
+  easy: number
+} {
   const out = { again: 0, hard: 0, good: 0, easy: 0 }
   for (const log of logs) {
-    if (log.rating === 1) out.again += 1
-    else if (log.rating === 2) out.hard += 1
-    else if (log.rating === 3) out.good += 1
-    else out.easy += 1
+    switch (log.rating) {
+      case 1: {
+        out.again += 1
+        break
+      }
+      case 2: {
+        out.hard += 1
+        break
+      }
+      case 3: {
+        out.good += 1
+        break
+      }
+      default: {
+        out.easy += 1
+      }
+    }
   }
   return out
 }
 
 function reviewsByHour(logs: ReviewLog[]): number[] {
-  const hours = new Array<number>(24).fill(0)
+  const hours = Array.from({ length: 24 }, () => 0)
   for (const log of logs) {
     hours[new Date(log.reviewedAt).getHours()] += 1
   }
@@ -121,7 +139,7 @@ function timeByDay(logs: ReviewLog[], now: Date, days: number): DayMinutes[] {
   const map = bucketByDay(logs, now, days)
   return [...map.entries()].map(([date, dayLogs]) => {
     const ms = dayLogs.reduce((sum, log) => sum + log.timeTakenMs, 0)
-    return { date, minutes: Math.round((ms / 60000) * 10) / 10 }
+    return { date, minutes: Math.round((ms / 60_000) * 10) / 10 }
   })
 }
 

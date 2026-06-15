@@ -2,11 +2,10 @@ import { randomUUID } from 'node:crypto'
 
 import type { Card } from '../domain/card.entity'
 import type { Deck } from '../domain/deck.entity'
-import type { Note } from '../domain/note.entity'
 import type { NoteType } from '../domain/note-type.entity'
+import type { Note } from '../domain/note.entity'
 import type { ReviewLog } from '../domain/review-log.entity'
 import type { TrainerResult } from '../domain/trainer-result.entity'
-import { DEFAULT_DECK_CONFIG, mergeDeckConfig } from '../srs'
 import type {
   CardPatch,
   DeckInput,
@@ -19,6 +18,8 @@ import type {
   NoteTypeInput,
   NoteTypePatch,
 } from './data-store'
+
+import { DEFAULT_DECK_CONFIG, mergeDeckConfig } from '../srs'
 
 /** Фабрики сущностей и применение патчей для in-memory хранилища. */
 

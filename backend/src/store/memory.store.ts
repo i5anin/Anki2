@@ -1,11 +1,10 @@
 import type { Card } from '../domain/card.entity'
 import type { Deck } from '../domain/deck.entity'
-import type { Note } from '../domain/note.entity'
 import type { NoteType } from '../domain/note-type.entity'
-import type { ReviewLog } from '../domain/review-log.entity'
+import type { Note } from '../domain/note.entity'
 import type { QuizItem } from '../domain/quiz-item.entity'
+import type { ReviewLog } from '../domain/review-log.entity'
 import type { TrainerResult } from '../domain/trainer-result.entity'
-import { DataStore } from './data-store'
 import type {
   CardFilter,
   CardPatch,
@@ -22,6 +21,8 @@ import type {
   ReviewLogFilter,
   TrainerResultFilter,
 } from './data-store'
+
+import { DataStore } from './data-store'
 import {
   applyCardPatch,
   applyDeckPatch,
@@ -211,9 +212,9 @@ export class MemoryDataStore extends DataStore {
 
   async listReviewLogs(filter?: ReviewLogFilter): Promise<ReviewLog[]> {
     const deckCardIds =
-      filter?.deckId !== undefined
-        ? new Set(this.cards.filter((card) => card.deckId === filter.deckId).map((card) => card.id))
-        : null
+      filter?.deckId === undefined
+        ? null
+        : new Set(this.cards.filter((card) => card.deckId === filter.deckId).map((card) => card.id))
     return this.reviewLogs.filter((log) => {
       if (filter?.cardId !== undefined && log.cardId !== filter.cardId) return false
       if (deckCardIds && !deckCardIds.has(log.cardId)) return false

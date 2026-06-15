@@ -1,10 +1,10 @@
-import { computed, onMounted, ref, watch, type ComputedRef, type Ref } from 'vue'
+import { computed, type ComputedRef, onMounted, ref, type Ref, watch } from 'vue'
 
 import {
-  statsApi,
   type ForecastPoint,
   type RetentionStats,
   type ReviewsByDayPoint,
+  statsApi,
   type StatsOverview,
 } from '@/entities/stats'
 import { getErrorMessage } from '@/shared/api'
@@ -141,8 +141,8 @@ export function useStatsData(getDeckId: () => string | undefined): StatsData {
       retentionData.value = buildRetention(retentionResult)
       reviewsData.value = buildReviews(reviewsList)
       ready.value = true
-    } catch (e) {
-      error.value = getErrorMessage(e)
+    } catch (error_) {
+      error.value = getErrorMessage(error_)
     }
   }
 

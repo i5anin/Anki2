@@ -18,10 +18,10 @@ const OPTIONS_PER_QUESTION = 4
 /** Убирает разметку Markdown для компактного отображения варианта/вопроса. */
 function stripMarkdown(source: string): string {
   return source
-    .replace(/```[\s\S]*?```/g, ' ')
-    .replace(/[*_`#>]/g, '')
-    .replace(/!?\[([^\]]*)\]\([^)]*\)/g, '$1')
-    .replace(/\s+/g, ' ')
+    .replaceAll(/```[\s\S]*?```/g, ' ')
+    .replaceAll(/[*_`#>]/g, '')
+    .replaceAll(/!?\[([^\]]*)\]\([^)]*\)/g, '$1')
+    .replaceAll(/\s+/g, ' ')
     .trim()
 }
 

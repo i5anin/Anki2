@@ -1,4 +1,3 @@
-import { mergeDeckConfig } from '../srs'
 import type {
   CardPatch,
   DeckInput,
@@ -7,10 +6,12 @@ import type {
   NewReviewLog,
   NewTrainerResult,
   NoteInput,
+  NotePatch,
   NoteTypeInput,
   NoteTypePatch,
-  NotePatch,
 } from './data-store'
+
+import { mergeDeckConfig } from '../srs'
 
 /** Построители insert/update-строк (snake_case) для Supabase-хранилища. */
 

@@ -1,6 +1,7 @@
 import type { Card, RenderedCard } from '../domain/card.entity'
 import type { NoteType } from '../domain/note-type.entity'
 import type { Note } from '../domain/note.entity'
+
 import { renderCard } from './card-renderer'
 
 /** Собирает карточку с отрисованным Markdown и контекстом заметки. */

@@ -3,8 +3,8 @@ import { ConfigService } from '@nestjs/config'
 
 import { DataStore } from './data-store'
 import { MemoryDataStore } from './memory.store'
-import { SupabaseDataStore } from './supabase.store'
 import { SupabaseService } from './supabase.service'
+import { SupabaseDataStore } from './supabase.store'
 
 /**
  * Глобальный модуль данных. Если задан SUPABASE_SERVICE_ROLE_KEY — работаем

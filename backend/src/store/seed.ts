@@ -1,8 +1,9 @@
+import type { Card } from '../domain/card.entity'
 import type { Deck } from '../domain/deck.entity'
 import type { NoteType } from '../domain/note-type.entity'
 import type { Note } from '../domain/note.entity'
-import type { Card } from '../domain/card.entity'
 import type { QuizItem } from '../domain/quiz-item.entity'
+
 import { DEFAULT_DECK_CONFIG } from '../srs'
 import { createInterviewSeedData } from './interview.seed'
 import { createQuizBankSeed } from './quiz-bank.seed'

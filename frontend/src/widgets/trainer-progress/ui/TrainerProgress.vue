@@ -4,9 +4,9 @@ import { computed } from 'vue'
 
 import {
   SKILL_LABELS,
-  TRAINERS,
   type TrainerDef,
   type TrainerResult,
+  TRAINERS,
   type TrainerSkill,
 } from '@/entities/trainer'
 
@@ -60,7 +60,7 @@ function buildDataset(trainer: TrainerDef, index: number, days: Date[]): Record<
     label: trainer.name,
     data: days.map((date) => {
       const bucket = byDay.get(dayKey(date))
-      return bucket !== undefined ? Math.round(bucket.sum / bucket.count) : null
+      return bucket === undefined ? null : Math.round(bucket.sum / bucket.count)
     }),
     borderColor: color,
     backgroundColor: color,

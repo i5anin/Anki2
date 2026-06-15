@@ -1,10 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 
-import { DataStore } from '../store/data-store'
-import { countDeck } from '../study/queue'
 import type { Deck, DeckWithCounts } from '../domain/deck.entity'
 import type { CreateDeckDto } from './dto/create-deck.dto'
 import type { UpdateDeckDto } from './dto/update-deck.dto'
+
+import { DataStore } from '../store/data-store'
+import { countDeck } from '../study/queue'
 
 /** Начало сегодняшних суток (локальное время) в ISO. */
 function startOfTodayIso(now: Date): string {
