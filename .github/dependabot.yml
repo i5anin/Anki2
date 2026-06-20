@@ -1,0 +1,26 @@
+version: 2
+
+updates:
+  - package-ecosystem: npm
+    directory: /backend
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      nestjs:
+        patterns: ["@nestjs/*"]
+      dev-tools:
+        patterns: ["eslint*", "prettier*", "typescript*", "ts-jest", "jest*", "@types/*"]
+
+  - package-ecosystem: npm
+    directory: /frontend
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      vue:
+        patterns: ["vue", "@vue/*", "vite*", "pinia*"]
+      primevue:
+        patterns: ["primevue*", "primeicons*"]
