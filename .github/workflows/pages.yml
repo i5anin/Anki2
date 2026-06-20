@@ -1,0 +1,92 @@
+name: Pages — Swagger UI
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Build & deploy Swagger UI
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: backend/package-lock.json
+
+      - name: Install backend dependencies
+        working-directory: backend
+        run: npm ci
+
+      - name: Generate OpenAPI spec
+        working-directory: backend
+        env:
+          SUPABASE_URL: ''
+          SUPABASE_SERVICE_ROLE_KEY: ''
+        run: |
+          mkdir -p ../docs
+          npm run spec:generate
+
+      - name: Download Swagger UI
+        run: |
+          SWAGGER_VERSION=$(npm view swagger-ui-dist version)
+          npm pack swagger-ui-dist@$SWAGGER_VERSION --pack-destination /tmp
+          tar -xzf /tmp/swagger-ui-dist-*.tgz -C /tmp
+          cp /tmp/package/swagger-ui-bundle.js docs/
+          cp /tmp/package/swagger-ui-standalone-preset.js docs/
+          cp /tmp/package/swagger-ui.css docs/
+          cp /tmp/package/favicon-32x32.png docs/
+
+      - name: Create index.html
+        run: |
+          cat > docs/index.html << 'EOF'
+          <!DOCTYPE html>
+          <html lang="ru">
+          <head>
+            <meta charset="UTF-8">
+            <title>Anki2 API Docs</title>
+            <link rel="stylesheet" href="swagger-ui.css">
+            <link rel="icon" href="favicon-32x32.png">
+          </head>
+          <body>
+            <div id="swagger-ui"></div>
+            <script src="swagger-ui-bundle.js"></script>
+            <script src="swagger-ui-standalone-preset.js"></script>
+            <script>
+              SwaggerUIBundle({
+                url: './openapi.json',
+                dom_id: '#swagger-ui',
+                presets: [SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset],
+                layout: 'StandaloneLayout',
+                deepLinking: true,
+              })
+            </script>
+          </body>
+          </html>
+          EOF
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - uses: actions/deploy-pages@v4
+        id: deployment

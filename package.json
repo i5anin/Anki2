@@ -1,0 +1,6 @@
+{
+  "name": "anki2",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Anki2 — интервальное повторение (NestJS + Vue 3 + Supabase)"
+}

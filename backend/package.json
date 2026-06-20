@@ -18,7 +18,8 @@
     "lint:fix": "eslint . --fix",
     "format": "prettier --write \"src/**/*.ts\"",
     "format:check": "prettier --check \"src/**/*.ts\"",
-    "test": "jest"
+    "test": "jest",
+    "spec:generate": "ts-node scripts/generate-spec.ts"
   },
   "dependencies": {
     "@nestjs/common": "^11.1.24",
