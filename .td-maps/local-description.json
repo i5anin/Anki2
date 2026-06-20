@@ -1,0 +1,52 @@
+{
+  "name": "project local mappings",
+  "version": "1.0.0",
+  "description": "Current project path and file mapping configuration",
+  "author": "Local",
+  "builtinMappingsEnabled": true,
+  "language": "ru",
+  "mappings": {
+    "files": {
+      "vercel.json": "деплой Vercel",
+      "supabase/schema.sql": "схема БД",
+
+      "backend/src/main.ts": "точка входа NestJS",
+      "backend/src/app.module.ts": "корневой модуль",
+      "backend/src/srs/scheduler.ts": "SM-2 алгоритм",
+      "backend/src/srs/scheduler.spec.ts": "тесты SRS",
+      "backend/src/rendering/card-renderer.ts": "рендер карточки",
+      "backend/src/rendering/card-generator.ts": "генерация карточек",
+      "backend/src/stats/insights.ts": "расчёт статистики",
+      "backend/.env.example": "переменные окружения",
+
+      "frontend/src/main.ts": "точка входа Vue 3",
+      "frontend/src/app/App.vue": "корневой компонент",
+      "frontend/vite.config.ts": "конфиг Vite",
+      "frontend/.env.example": "переменные окружения"
+    },
+    "packages": {
+      "backend": "NestJS API",
+      "frontend": "Vue 3 SPA",
+      "supabase": "миграции БД",
+      "docs": "документация"
+    },
+    "fileMatch": {
+      "backend/src/*/controller.ts": "контроллер",
+      "backend/src/*/service.ts": "сервис",
+      "backend/src/*/module.ts": "модуль",
+      "backend/src/*/dto/*.ts": "DTO",
+      "backend/src/domain/*.ts": "сущность",
+
+      "frontend/src/entities/*/api/*.ts": "API сущности",
+      "frontend/src/entities/*/model/*.ts": "модель / стор",
+      "frontend/src/features/*/ui/*.vue": "фича",
+      "frontend/src/pages/*.vue": "страница",
+      "frontend/src/widgets/*/ui/*.vue": "виджет",
+      "frontend/src/shared/ui/*.vue": "UI компонент",
+      "frontend/src/shared/api/*.ts": "HTTP клиент"
+    },
+    "packageMatch": {},
+    "filesTextColor": {},
+    "packagesTextColor": {}
+  }
+}
